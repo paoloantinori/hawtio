@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final transient Logger LOG = LoggerFactory.getLogger(LoginServlet.class);
     private static final int DEFAULT_SESSION_TIMEOUT = 1800;
-    private static final String KNOWN_PRINCIPALS[] = {"UserPrincipal", "JAASPrincipal", "SimplePrincipal"};
+    private static final String KNOWN_PRINCIPALS[] = {"UserPrincipal", "JAASPrincipal", "SimplePrincipal", "KeycloakPrincipal"};
 
     protected Converters converters = new Converters();
     protected JsonConvertOptions options = JsonConvertOptions.DEFAULT;

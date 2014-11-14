@@ -317,6 +317,12 @@ module Core {
     Core.preLogoutTasks.execute();
   }
 
+  export function executePostLogoutTasks(onComplete: () => void) {
+    log.debug("Executing post logout tasks");
+    Core.postLogoutTasks.onComplete(onComplete);
+    Core.postLogoutTasks.execute();
+  }
+
   /**
    * Queries available server-side MBean to check if can call optimized jolokia.list() operation
    * @param jolokia
@@ -334,7 +340,6 @@ module Core {
       jolokiaStatus.listMethod = LIST_CANT_DETERMINE;
     }
   }
-
   /**
    * log out the current user
    * @for Core
@@ -377,10 +382,19 @@ module Core {
             }
             localStorage.removeItem('activemqUserName');
             localStorage.removeItem('activemqPassword');
-            if (successCB && angular.isFunction(successCB)) {
-              successCB();
-            }
-            Core.$apply($scope);
+
+            Core.executePostLogoutTasks(() => {
+              log.debug("Executing logout callback after successfully executed postLogoutTasks");
+              userDetails.username = null;
+              userDetails.password = null;
+              userDetails.loginDetails = null;
+              userDetails.rememberMe = false;
+              delete localStorage['userDetails'];
+              if (successCB && angular.isFunction(successCB)) {
+                successCB();
+              }
+              Core.$apply($scope);
+            });
           },
           error: (xhr, textStatus, error) => {
             userDetails.username = null;
@@ -398,25 +412,33 @@ module Core {
             }
             localStorage.removeItem('activemqUserName');
             localStorage.removeItem('activemqPassword');
-            // TODO, more feedback
-            switch (xhr.status) {
-              case 401:
-                log.debug('Failed to log out, ', error);
-                break;
-              case 403:
-                log.debug('Failed to log out, ', error);
-                break;
-              case 0:
-                // this may happen during onbeforeunload -> logout, when XHR is cancelled
-                break;
-              default:
-                log.debug('Failed to log out, ', error);
-                break;
-            }
-            if (errorCB && angular.isFunction(errorCB)) {
-              errorCB();
-            }
-            Core.$apply($scope);
+
+            Core.executePostLogoutTasks(() => {
+              userDetails.username = null;
+              userDetails.password = null;
+              userDetails.loginDetails = null;
+              userDetails.rememberMe = false;
+              delete localStorage['userDetails'];
+              // TODO, more feedback
+              switch (xhr.status) {
+                case 401:
+                  log.debug('Failed to log out, ', error);
+                  break;
+                case 403:
+                  log.debug('Failed to log out, ', error);
+                  break;
+                case 0:
+                  // this may happen during onbeforeunload -> logout, when XHR is cancelled
+                  break;
+                default:
+                  log.debug('Failed to log out, ', error);
+                  break;
+              }
+              if (errorCB && angular.isFunction(errorCB)) {
+                errorCB();
+              }
+              Core.$apply($scope);
+            });
           }
         });
       });
@@ -1279,6 +1301,13 @@ module Core {
     return connectUrl;
   }
 
+  export function checkInjectorLoaded() {
+    // TODO sometimes the injector is not yet initialised; so lets try initialise it here just in case
+    if (!Core.injector) {
+      Core.injector = angular.element(document.documentElement).injector();
+    }
+  }
+
   export function getRecentConnections(localStorage) {
     if (Core.isBlank(localStorage['recentConnections'])) {
       Core.clearConnections();
@@ -1332,6 +1361,19 @@ module Core {
       password: options.password,
       loginDetails: {}
     };
+    putKeycloakToken(newWindow);
+  }
+
+  // Put info about keycloak access token to new window, so keycloak is initialized from here without need to go again through keycloak login flow
+  function putKeycloakToken(newWindow) {
+    var keycloakContext: KeycloakContext = <Core.KeycloakContext> Core.injector.get('keycloakContext');
+    if (keycloakContext.enabled) {
+      var tokenInfo = {
+        token: keycloakContext.keycloak.token,
+        refreshToken: keycloakContext.keycloak.refreshToken
+      };
+      newWindow['keycloakToken'] = tokenInfo;
+    }
   }
 
   /**

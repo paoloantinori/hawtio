@@ -15,6 +15,14 @@ module Core {
   }
 
   /**
+   * Info related to keycloak integration
+   */
+  export interface KeycloakContext {
+    enabled: boolean;
+    keycloak: KeycloakModule.IKeycloak;
+  }
+
+  /**
    * Typescript interface that represents the options needed to connect to another JVM
    */
   export interface ConnectToServerOptions {
