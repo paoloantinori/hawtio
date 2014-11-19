@@ -358,6 +358,15 @@ module Fabric {
       // remove possibly dodgy values if they are blank
       json = Fabric.sanitizeJson(json);
 
+      if ( ! json.jvmOpts || json.jvmOpts === "" ) {
+          var defaultJvmOpts = jolokia.getAttribute(managerMBean, 'DefaultJvmOptions');
+          if(defaultJvmOpts !== ""){
+            json.jvmOpts = defaultJvmOpts;
+          }
+      }
+
+
+
       if ( json.number === 1 ) {
         delete json.number;
       }
@@ -373,6 +382,10 @@ module Fabric {
       var createJson = angular.toJson(json);
 
       log.debug("createContainers json:\n" + createJson);
+
+
+
+      
 
       setTimeout(() => {
         jolokia.execute(managerMBean, 'createContainers(java.util.Map)', createJson, {
