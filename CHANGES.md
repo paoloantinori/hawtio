@@ -1,6 +1,26 @@
 
 ### Change Log
 
+#### 1.4.38 ... 
+
+* Camel tracer and debugger now shows message bodies that are stream/file based
+* Camel message browser now shows the java types of the headers and body
+* Various bug fixes
+
+#### 1.4.37
+
+* Ported the [API console to work on Kubernetes](https://github.com/hawtio/hawtio/issues/1743) so that the APIs tab appears on the Kubernetes console if you run hawtio inside Kubernetes and are running the [API Registry service](https://github.com/fabric8io/quickstarts/tree/master/apps/api-registry)
+* Adds [Service wiring for Kubernetes](https://github.com/hawtio/hawtio/blob/master/docs/Services.md) so that its easy to dynamically link nav bars, buttons and menus to remote services running inside Kubernetes (e.g. to link nicely to Kibana, Grafana etc).
+* Various [bug fixes](https://github.com/hawtio/hawtio/issues?q=milestone%3A1.4.37+is%3Aclosed)
+
+
+#### 1.4.36 ... 1.4.32
+
+* Bug fixes
+* Allow to configure `TomcatAuthenticationContainerDiscovery` classes to control how hawtio authenticates on Apache Tomcat
+* Excluded some not needed JARs as dependencies
+* Various improvements and fixes needed for fabric8 v2
+
 #### 1.4.31
 
 * Added hawtio-custom-app module to create a version of the hawtio-default war with a subset of the javascript code normally included in hawtio.
