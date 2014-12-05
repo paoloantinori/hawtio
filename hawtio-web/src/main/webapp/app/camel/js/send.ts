@@ -3,7 +3,7 @@ module Camel {
 
    var DELIVERY_PERSISTENT = "2";
 
-  _module.controller("Camel.SendMessageController", ["$route", "$scope", "$element", "$timeout", "workspace", "jolokia", "localStorage", "$location", "activeMQMessage", ($route, $scope, $element, $timeout, workspace:Workspace, jolokia, localStorage, $location, activeMQMessage) => {
+  _module.controller("Camel.SendMessageController", ["$route", "$scope", "$element", "$timeout", "workspace", "jolokia", "localStorage", "$location", "activeMQMessage", "userDetails", ($route, $scope, $element, $timeout, workspace:Workspace, jolokia, localStorage, $location, activeMQMessage, userDetails) => {
     var log:Logging.Logger = Logger.get("Camel");
 
     log.info("Loaded page!");
@@ -26,7 +26,7 @@ module Camel {
     Core.reloadWhenParametersChange($route, $scope, $location);
 
     $scope.checkCredentials = () => {
-      $scope.noCredentials = (Core.isBlank(localStorage['activemqUserName']) || Core.isBlank(localStorage['activemqPassword']));
+      $scope.noCredentials = (Core.isBlank(userDetails.username) || Core.isBlank(userDetails.password)) && (Core.isBlank(localStorage['activemqUserName']) || Core.isBlank(localStorage['activemqPassword']));
     }
 
     if ($location.path().has('activemq')) {
@@ -188,8 +188,8 @@ module Camel {
               log.debug("Parsed context and endpoint: ", target);
             }
           } else {
-            var user = localStorage["activemqUserName"];
-            var pwd = localStorage["activemqPassword"];
+            var user = localStorage["activemqUserName"] || userDetails.username;
+            var pwd = localStorage["activemqPassword"] || userDetails.password;
 
             // AMQ is sending non persistent by default, so make sure we tell to sent persistent by default
             if (!headers) {
