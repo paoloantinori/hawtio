@@ -4451,3 +4451,9 @@ td > .zebra-list > li {
   padding: 2px;
 }
 
+/* ENTESB-2249: fixing bootstrap forms with tooltips */
+.form-horizontal input + div + .help-block,
+.form-horizontal select + div + .help-block,
+.form-horizontal textarea + div + .help-block {
+  margin-top: 10px;
+}
