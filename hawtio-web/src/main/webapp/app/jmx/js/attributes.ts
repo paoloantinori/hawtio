@@ -100,7 +100,7 @@ module Jmx {
     };
 
     $scope.$watch(function($scope) {
-      return $scope.gridOptions.selectedItems.map(item => item.key);
+      return $scope.gridOptions.selectedItems.map(item => item);
     }, (newValue, oldValue) => {
       if (newValue !== oldValue) {
         log.debug("Selected items: ", newValue);
