@@ -79,7 +79,32 @@ var RHAccess = (function(RHAccess) {
    *     plugin.  This is just a matter of adding to the workspace's
    *     topLevelTabs array.
    */
-  RHAccess.module.run(function(workspace, viewRegistry, layoutFull, NavBarViewCustomLinks, $location, RHAccessSharedProperties) {
+  RHAccess.module.run(function(workspace, viewRegistry, layoutFull, NavBarViewCustomLinks, $location, RHAccessSharedProperties,  $http, userDetails, locationChangeStartTasks) {
+     locationChangeStartTasks.addTask('PreAuth', function ($event, newUrl, oldUrl)  {
+     
+     if(newUrl.indexOf("/rhaccess_plugin") > 0)  {
+
+        var authHeader = Core.getBasicAuthHeader(userDetails.username, userDetails.password);
+
+        var url = "/rhaccess-web/auth/login/";
+
+        var _request = {};
+        _request.method = "POST";
+        _request.url = url;
+        _headers = {};
+        _headers['Authorization'] = authHeader;
+        _request.headers = _headers;
+        $http(_request).success(function(data, status, headers, config) {
+          RHAccess.log.debug("got back response: ", status);
+      }).
+      error(function(data, status, headers, config) {
+        RHAccess.log.warn("Failed to log into terminal: ", status);
+      });
+     }
+
+
+     
+    });
 
     RHAccess.log.info(RHAccess.pluginName, " loaded");
 
@@ -191,6 +216,7 @@ var RHAccess = (function(RHAccess) {
         $location.url(destination);
       }
     });
+
   });
 
     RHAccess.module.service('RHAccessSharedProperties', function() {
