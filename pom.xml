@@ -73,7 +73,7 @@
 
     <!-- fabric8 -->
     <fabric-test-version>${fabric-version}</fabric-test-version>
-    <fabric-version>1.2.0.Beta4</fabric-version>
+    <fabric-version>[1.2,1.3)</fabric-version>
 
     <activemq-version>5.10.0</activemq-version>
     <activemq-leveldb-artifactid>activemq-leveldb-store</activemq-leveldb-artifactid>
