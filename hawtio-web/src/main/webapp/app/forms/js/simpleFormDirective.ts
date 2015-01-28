@@ -321,6 +321,12 @@ module Forms {
         if (property.hidden) {
           return;
         }
+
+        // special for expression
+        if (property.kind === "expression") {
+          propSchema = Forms.lookupDefinition("expression", fullSchema);
+        }
+
         var nestedProperties = null;
         if (!propSchema && "object" === propTypeName && property.properties) {
           // if we've no type name but have nested properties on an object type use those
