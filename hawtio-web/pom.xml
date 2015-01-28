@@ -662,7 +662,6 @@
             <phase>generate-sources</phase>
             <goals>
               <goal>generate-json-schema</goal>
-
               <goal>generate-camel-model</goal>
             </goals>
           </execution>
@@ -689,6 +688,11 @@
             <artifactId>hawtio-dozer-schemagen</artifactId>
             <version>${project.version}</version>
           </dependency>
+          <!--<dependency>-->
+            <!--<groupId>org.apache.camel</groupId>-->
+            <!--<artifactId>camel-catalog</artifactId>-->
+            <!--<version>${camel-version}</version>-->
+          <!--</dependency>-->
         </dependencies>
       </plugin>
 
