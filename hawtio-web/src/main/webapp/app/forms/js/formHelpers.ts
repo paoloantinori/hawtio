@@ -242,7 +242,6 @@ module Forms {
     }
 
     var show = config.showhelp || "true";
-
     if (!Core.isBlank(help)) {
       return angular.element('<span class="help-block">' + help + '</span>');
     } else {
