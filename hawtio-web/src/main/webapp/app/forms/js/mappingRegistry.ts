@@ -63,7 +63,7 @@ module Forms {
       } catch (e) {
         // ignore missing read only function
       }
-      var title = property.tooltip || property.label;
+      var title = property.title ||  property.tooltip || property.label;
       if (title) {
         input.attr('title', title);
       }
@@ -149,24 +149,22 @@ module Forms {
       input.attr('title', label);
     }
 
-
-    // TODO check for id in the schema["required"] array too!
-    // as required can be specified either via either of these approaches
-/*
-    var schema = {
-      required: ["foo", "bar"],
-      properties: {
-        something: {
-          required: true,
-          type: "string"
-        }
+    try {
+      if (config.isReadOnly()) {
+        input.attr('readonly', 'true');
       }
+      // for checkbox in read-only mode, need to be disabled otherwise ppl can change the values in the selectbox
+      if (input[0].localName === "select" || (input[0].localName === "input" && input.attr("type") === "checkbox")) {
+        input.attr('disabled', 'true');
+      }
+    } catch (e) {
+      // ignore missing read only function
     }
-*/
     if (property.required) {
       // don't mark checkboxes as required
-      if (input[0].localName === "input" && input.attr("type") === "checkbox") {
+      if (input[0].localName === "select" || (input[0].localName === "input" && input.attr("type") === "checkbox")) {
         // lets not set required on a checkbox, it doesn't make any sense ;)
+        input.removeAttr('required')
       } else {
         input.attr('required', 'true');
       }
