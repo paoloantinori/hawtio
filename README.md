@@ -30,6 +30,3 @@ Check out our [huboard](https://huboard.com/hawtio/hawtio#/) for prioritizing is
 
 
 
-
-
-
