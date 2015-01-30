@@ -1,128 +1,3 @@
-<<<<<<< HEAD
-var _apacheCamelModel = {
-  "definitions": {
-    "endpoint": {
-      "title": "Endpoint",
-      "type": "object",
-      "extends": {
-        "type": "org.apache.camel.model.OptionalIdentifiedDefinition"
-      },
-      "group": "Endpoints",
-      "description": "Represents a camel endpoint which is used to consume messages or send messages to some kind of middleware or technology",
-      "icon": "endpoint24.png",
-      "properties": {
-        "uri": {
-          "type": "string"
-        },
-        "ref": {
-          "type": "string"
-        }
-      }
-    },
-    "from": {
-      "title": "From",
-      "type": "object",
-      "extends": {
-        "type": "endpoint"
-      },
-      "description": "Consumes from an endpoint",
-      "tooltip": "Consumes from an endpoint",
-      "icon": "endpoint24.png"
-    },
-    "to": {
-      "title": "To",
-      "type": "object",
-      "extends": {
-        "type": "endpoint"
-      },
-      "description": "Sends messages to an endpoint",
-      "tooltip": "Sends messages to an endpoint",
-      "icon": "endpoint24.png"
-    },
-    "route": {
-      "type": "object",
-      "extends": {
-        "type": "org.apache.camel.model.OptionalIdentifiedDefinition"
-      },
-      "title": "Route",
-      "group": "Miscellaneous",
-      "description": "Route",
-      "tooltip": "Route",
-      "icon": "route24.png",
-      "acceptInput": true,
-      "acceptOutput": true,
-      "properties": {
-        "autoStartup": {
-          "type": "string",
-          "description": "Auto Startup",
-          "tooltip": "Auto Startup",
-          "optional": true,
-          "title": "Auto Startup"
-        },
-        "delayer": {
-          "type": "string",
-          "description": "Delayer",
-          "tooltip": "Delayer",
-          "optional": true,
-          "title": "Delayer"
-        },
-        "errorHandlerRef": {
-          "type": "string",
-          "description": "Error Handler Ref",
-          "tooltip": "Error Handler Ref",
-          "optional": true,
-          "title": "Error Handler Ref"
-        },
-        "group": {
-          "type": "string",
-          "description": "Group",
-          "tooltip": "Group",
-          "optional": true,
-          "title": "Group"
-        },
-        "handleFault": {
-          "type": "string",
-          "description": "Handle Fault",
-          "tooltip": "Handle Fault",
-          "optional": true,
-          "title": "Handle Fault"
-        },
-        "messageHistory": {
-          "type": "string",
-          "description": "Message History",
-          "tooltip": "Message History",
-          "optional": true,
-          "title": "Message History"
-        },
-        "routePolicyRef": {
-          "type": "string",
-          "description": "Route Policy Ref",
-          "tooltip": "Route Policy Ref",
-          "optional": true,
-          "title": "Route Policy Ref"
-        },
-        "streamCache": {
-          "type": "string",
-          "description": "Stream Cache",
-          "tooltip": "Stream Cache",
-          "optional": true,
-          "title": "Stream Cache"
-        },
-        "trace": {
-          "type": "string",
-          "description": "Trace",
-          "tooltip": "Trace",
-          "optional": true,
-          "title": "Trace"
-        }
-      }
-    },
-    "org.apache.camel.model.OptionalIdentifiedDefinition": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-=======
 var _apacheCamelModelVersion = '2.15-SNAPSHOT';
 
 var _apacheCamelModel ={
@@ -140,23 +15,6 @@ var _apacheCamelModel ={
           "title": "Expression",
           "description": "The expression",
           "required": true
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
-        },
-        "inheritErrorHandler": {
-          "type": "java.lang.Boolean"
-        }
-      }
-    },
-    "org.apache.camel.model.language.ExpressionDefinition": {
-      "description": "A Camel expression",
-      "tooltip": "Pick an expression language and enter an expression",
-      "type": "object",
-      "properties": {
-        "expression": {
-          "type": "string",
-          "description": "The expression",
-          "tooltip": "Enter the expression in your chosen language syntax",
-          "title": "Expression"
         },
         "language": {
           "kind": "element",
@@ -180,19 +38,6 @@ var _apacheCamelModel ={
       "properties": {
         "correlationExpression": {
           "kind": "expression",
-<<<<<<< HEAD
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Correlation Expression",
-          "tooltip": "Correlation Expression",
-          "title": "Correlation Expression"
-        },
-        "completionPredicate": {
-          "kind": "expression",
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Completion Predicate",
-          "tooltip": "Completion Predicate",
-          "title": "Completion Predicate"
-=======
           "type": "object",
           "description": "The expression used to calculate the correlation key to use for aggregation. The Exchange which has the same correlation key is aggregated together. If the correlation key could not be evaluated an Exception is thrown. You can disable this by using the ignoreBadCorrelationKeys option.",
           "title": "Correlation Expression",
@@ -204,30 +49,16 @@ var _apacheCamelModel ={
           "description": "Sets the predicate used to determine if the aggregation is completed",
           "title": "Completion Predicate",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
-        "completionTimeout": {
+        "completionTimeoutExpression": {
           "kind": "expression",
-<<<<<<< HEAD
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Completion Timeout Expression",
-          "tooltip": "Completion Timeout Expression",
-          "title": "Completion Timeout Expression"
-=======
           "type": "object",
           "description": "Sets the completion timeout which would cause the aggregate to consider the group as complete and send out the aggregated exchange.",
           "title": "Completion Timeout",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
-        "completionSize": {
+        "completionSizeExpression": {
           "kind": "expression",
-<<<<<<< HEAD
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Completion Size Expression",
-          "tooltip": "Completion Size Expression",
-          "title": "Completion Size Expression"
-=======
           "type": "object",
           "description": "Sets the completion size which is the number of aggregated exchanges which would cause the aggregate to consider the group as complete and send out the aggregated exchange.",
           "title": "Completion Size",
@@ -255,7 +86,6 @@ var _apacheCamelModel ={
           "description": "Turns on using optimistic locking which requires the aggregationRepository being used is supporting this by implementing org.apache.camel.spi.OptimisticLockingAggregationRepository.",
           "title": "Optimistic Locking",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "executorServiceRef": {
           "kind": "attribute",
@@ -293,25 +123,19 @@ var _apacheCamelModel ={
           "required": false
         },
         "strategyMethodAllowNull": {
-<<<<<<< HEAD
-          "type": "bool",
-          "description": "Strategy Method Allow Null",
-          "tooltip": "Strategy Method Allow Null",
-          "title": "Strategy Method Allow Null"
-        },
-        "completionSize": {
-          "type": "number",
-          "description": "Completion Size",
-          "tooltip": "Completion Size",
-          "title": "Completion Size"
-=======
           "kind": "attribute",
           "type": "boolean",
           "defaultValue": "false",
           "description": "If this option is false then the aggregate method is not used for the very first aggregation. If this option is true then null values is used as the oldExchange (at the very first aggregation) when using POJOs as the AggregationStrategy.",
           "title": "Strategy Method Allow Null",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
+        },
+        "completionSize": {
+          "kind": "attribute",
+          "type": "integer",
+          "description": "Sets the completion size which is the number of aggregated exchanges which would cause the aggregate to consider the group as complete and send out the aggregated exchange.",
+          "title": "Completion Size",
+          "required": false
         },
         "completionInterval": {
           "kind": "attribute",
@@ -320,49 +144,14 @@ var _apacheCamelModel ={
           "title": "Completion Interval",
           "required": false
         },
+        "completionTimeout": {
+          "kind": "attribute",
+          "type": "integer",
+          "description": "Sets the completion timeout which would cause the aggregate to consider the group as complete and send out the aggregated exchange.",
+          "title": "Completion Timeout",
+          "required": false
+        },
         "completionFromBatchConsumer": {
-<<<<<<< HEAD
-          "type": "bool",
-          "description": "Completion From Batch Consumer",
-          "tooltip": "Completion From Batch Consumer",
-          "title": "Completion From Batch Consumer"
-        },
-        "groupExchanges": {
-          "type": "bool",
-          "description": "Group Exchanges",
-          "tooltip": "Group Exchanges",
-          "title": "Group Exchanges"
-        },
-        "eagerCheckCompletion": {
-          "type": "bool",
-          "description": "Eager Check Completion",
-          "tooltip": "Eager Check Completion",
-          "title": "Eager Check Completion"
-        },
-        "ignoreInvalidCorrelationKeys": {
-          "type": "bool",
-          "description": "Ignore Invalid Correlation Keys",
-          "tooltip": "Ignore Invalid Correlation Keys",
-          "title": "Ignore Invalid Correlation Keys"
-        },
-        "closeCorrelationKeyOnCompletion": {
-          "type": "number",
-          "description": "Close Correlation Key On Completion",
-          "tooltip": "Close Correlation Key On Completion",
-          "title": "Close Correlation Key On Completion"
-        },
-        "discardOnCompletionTimeout": {
-          "type": "bool",
-          "description": "Discard On Completion Timeout",
-          "tooltip": "Discard On Completion Timeout",
-          "title": "Discard On Completion Timeout"
-        },
-        "forceCompletionOnStop": {
-          "type": "bool",
-          "description": "Force Completion On Stop",
-          "tooltip": "Force Completion On Stop",
-          "title": "Force Completion On Stop"
-=======
           "kind": "attribute",
           "type": "boolean",
           "defaultValue": "false",
@@ -430,7 +219,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -461,11 +249,6 @@ var _apacheCamelModel ={
         "afterFinallyUri": {
           "kind": "attribute",
           "type": "string",
-<<<<<<< HEAD
-          "description": "After Finally Uri",
-          "tooltip": "After Finally Uri",
-          "title": "After Finally Uri"
-=======
           "description": "Endpoint to call in AOP after finally. The difference between after and afterFinally is that afterFinally is invoked from a finally block so it will always be invoked no matter what eg also in case of an exception occur.",
           "title": "After Finally Uri",
           "required": false
@@ -535,7 +318,6 @@ var _apacheCamelModel ={
           "description": "Whether to ignore invalid exchanges",
           "title": "Ignore Invalid Exchanges",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -571,36 +353,6 @@ var _apacheCamelModel ={
           "required": false
         },
         "cache": {
-<<<<<<< HEAD
-          "type": "bool",
-          "description": "Cache",
-          "tooltip": "Cache",
-          "title": "Cache"
-        }
-      }
-    },
-    "catch": {
-      "type": "object",
-      "extends": {
-        "type": "org.apache.camel.model.OptionalIdentifiedDefinition"
-      },
-      "title": "Catch",
-      "group": "Control Flow",
-      "description": "Catch",
-      "tooltip": "Catch",
-      "icon": "generic24.png",
-      "acceptInput": true,
-      "acceptOutput": true,
-      "properties": {
-        "exceptions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Exceptions",
-          "tooltip": "Exceptions",
-          "title": "Exceptions"
-=======
           "kind": "attribute",
           "type": "boolean",
           "defaultValue": "false",
@@ -615,7 +367,6 @@ var _apacheCamelModel ={
           "description": "Whether the message body is an array type.",
           "title": "Multi Parameter Array",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "id": {
           "kind": "attribute",
@@ -676,14 +427,6 @@ var _apacheCamelModel ={
       "acceptOutput": "false",
       "nextSiblingAddedAsChild": "false",
       "properties": {
-<<<<<<< HEAD
-        "expression": {
-          "kind": "expression",
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Expression",
-          "tooltip": "Expression",
-          "title": "Expression"
-=======
         "exception": {
           "kind": "element",
           "type": "array",
@@ -704,7 +447,6 @@ var _apacheCamelModel ={
           "description": "Number of previous failed messages to use as threshold to move state from closed to half-open or open state",
           "title": "Threshold",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "id": {
           "kind": "attribute",
@@ -824,19 +566,6 @@ var _apacheCamelModel ={
           "title": "Executor Service Ref",
           "required": false
         },
-<<<<<<< HEAD
-        "eager": {
-          "type": "bool",
-          "description": "Eager",
-          "tooltip": "Eager",
-          "title": "Eager"
-        },
-        "skipDuplicate": {
-          "type": "bool",
-          "description": "Skip Duplicate",
-          "tooltip": "Skip Duplicate",
-          "title": "Skip Duplicate"
-=======
         "asyncDelayed": {
           "kind": "attribute",
           "type": "boolean",
@@ -859,7 +588,6 @@ var _apacheCamelModel ={
           "description": "Expression to define how long time to wait (in millis)",
           "title": "Expression",
           "required": true
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "id": {
           "kind": "attribute",
@@ -941,13 +669,6 @@ var _apacheCamelModel ={
       "acceptOutput": "true",
       "nextSiblingAddedAsChild": "false",
       "properties": {
-<<<<<<< HEAD
-        "uri": {
-          "type": "string",
-          "description": "Uri",
-          "tooltip": "Uri",
-          "title": "Uri"
-=======
         "exception": {
           "kind": "element",
           "type": "array",
@@ -982,7 +703,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -1056,13 +776,6 @@ var _apacheCamelModel ={
           "title": "Uri Delimiter",
           "required": false
         },
-<<<<<<< HEAD
-        "skipSendToOriginalEndpoint": {
-          "type": "bool",
-          "description": "Skip Send To Original Endpoint",
-          "tooltip": "Skip Send To Original Endpoint",
-          "title": "Skip Send To Original Endpoint"
-=======
         "ignoreInvalidEndpoints": {
           "kind": "attribute",
           "type": "boolean",
@@ -1520,7 +1233,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -1542,20 +1254,6 @@ var _apacheCamelModel ={
           "required": false
         },
         "loadBalancerType": {
-<<<<<<< HEAD
-          "type": [
-            "org.apache.camel.model.loadbalancer.FailoverLoadBalancerDefinition",
-            "org.apache.camel.model.loadbalancer.RandomLoadBalancerDefinition",
-            "org.apache.camel.model.loadbalancer.CustomLoadBalancerDefinition",
-            "org.apache.camel.model.loadbalancer.RoundRobinLoadBalancerDefinition",
-            "org.apache.camel.model.loadbalancer.StickyLoadBalancerDefinition",
-            "org.apache.camel.model.loadbalancer.TopicLoadBalancerDefinition",
-            "org.apache.camel.model.loadbalancer.WeightedLoadBalancerDefinition"
-          ],
-          "description": "Load Balancer Type",
-          "tooltip": "Load Balancer Type",
-          "title": "Load Balancer Type"
-=======
           "kind": "element",
           "type": "object",
           "description": "The load balancer to be used",
@@ -1583,7 +1281,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -1623,15 +1320,16 @@ var _apacheCamelModel ={
         "marker": {
           "kind": "attribute",
           "type": "string",
-<<<<<<< HEAD
-          "description": "Marker",
-          "tooltip": "Marker",
-          "title": "Marker"
-=======
+          "description": "To use slf4j marker",
+          "title": "Marker",
+          "required": false
+        },
+        "loggerRef": {
+          "kind": "attribute",
+          "type": "string",
           "description": "To refer to a custom logger instance to lookup from the registry.",
           "title": "Logger Ref",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "id": {
           "kind": "attribute",
@@ -1659,14 +1357,6 @@ var _apacheCamelModel ={
       "acceptOutput": "true",
       "nextSiblingAddedAsChild": "false",
       "properties": {
-<<<<<<< HEAD
-        "expression": {
-          "kind": "expression",
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Expression",
-          "tooltip": "Expression",
-          "title": "Expression"
-=======
         "copy": {
           "kind": "attribute",
           "type": "boolean",
@@ -1681,7 +1371,6 @@ var _apacheCamelModel ={
           "description": "Expression to define how many times we should loop. Notice the expression is only evaluated once and should return a number as how many times to loop. A value of zero or negative means no looping. The loop is like a for-loop fashion if you want a while loop then the dynamic router may be a better choice.",
           "title": "Expression",
           "required": true
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "id": {
           "kind": "attribute",
@@ -1749,8 +1438,6 @@ var _apacheCamelModel ={
       "acceptOutput": "true",
       "nextSiblingAddedAsChild": "false",
       "properties": {
-<<<<<<< HEAD
-=======
         "parallelProcessing": {
           "kind": "attribute",
           "type": "boolean",
@@ -1759,7 +1446,6 @@ var _apacheCamelModel ={
           "title": "Parallel Processing",
           "required": false
         },
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         "strategyRef": {
           "kind": "attribute",
           "type": "string",
@@ -1770,11 +1456,6 @@ var _apacheCamelModel ={
         "strategyMethodName": {
           "kind": "attribute",
           "type": "string",
-<<<<<<< HEAD
-          "description": "Strategy Method Name",
-          "tooltip": "Strategy Method Name",
-          "title": "Strategy Method Name"
-=======
           "description": "This option can be used to explicit declare the method name to use when using POJOs as the AggregationStrategy.",
           "title": "Strategy Method Name",
           "required": false
@@ -1786,7 +1467,6 @@ var _apacheCamelModel ={
           "description": "If this option is false then the aggregate method is not used if there was no data to enrich. If this option is true then null values is used as the oldExchange (when no data to enrich) when using POJOs as the AggregationStrategy",
           "title": "Strategy Method Allow Null",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "executorServiceRef": {
           "kind": "attribute",
@@ -1796,18 +1476,6 @@ var _apacheCamelModel ={
           "required": false
         },
         "streaming": {
-<<<<<<< HEAD
-          "type": "bool",
-          "description": "Streaming",
-          "tooltip": "Streaming",
-          "title": "Streaming"
-        },
-        "stopOnException": {
-          "type": "bool",
-          "description": "Stop On Exception",
-          "tooltip": "Stop On Exception",
-          "title": "Stop On Exception"
-=======
           "kind": "attribute",
           "type": "boolean",
           "defaultValue": "false",
@@ -1822,7 +1490,6 @@ var _apacheCamelModel ={
           "description": "Will now stop further processing if an exception or failure occurred during processing of an org.apache.camel.Exchange and the caused exception will be thrown. Will also stop if processing the exchange failed (has a fault message) or an exception was thrown and handled by the error handler (such as using onException). In all situations the multicast will stop further processing. This is the same behavior as in pipeline which is used by the routing engine. The default behavior is to not stop but continue processing till the end",
           "title": "Stop On Exception",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "timeout": {
           "kind": "attribute",
@@ -1840,12 +1507,6 @@ var _apacheCamelModel ={
           "required": false
         },
         "shareUnitOfWork": {
-<<<<<<< HEAD
-          "type": "bool",
-          "description": "Share Unit Of Work",
-          "tooltip": "Share Unit Of Work",
-          "title": "Share Unit Of Work"
-=======
           "kind": "attribute",
           "type": "boolean",
           "defaultValue": "false",
@@ -1874,7 +1535,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -1898,24 +1558,6 @@ var _apacheCamelModel ={
           "required": false
         },
         "onCompleteOnly": {
-<<<<<<< HEAD
-          "type": "bool",
-          "description": "On Complete Only",
-          "tooltip": "On Complete Only",
-          "title": "On Complete Only"
-        },
-        "onFailureOnly": {
-          "type": "bool",
-          "description": "On Failure Only",
-          "tooltip": "On Failure Only",
-          "title": "On Failure Only"
-        },
-        "useOriginalMessagePolicy": {
-          "type": "bool",
-          "description": "Use Original Message Policy",
-          "tooltip": "Use Original Message Policy",
-          "title": "Use Original Message Policy"
-=======
           "kind": "attribute",
           "type": "boolean",
           "defaultValue": "false",
@@ -1974,7 +1616,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -2004,12 +1645,6 @@ var _apacheCamelModel ={
         },
         "retryWhile": {
           "kind": "expression",
-<<<<<<< HEAD
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Retry While",
-          "tooltip": "Retry While",
-          "title": "Retry While"
-=======
           "type": "object",
           "description": "Sets the retry while predicate. Will continue retrying until predicate returns false.",
           "title": "Retry While",
@@ -2021,7 +1656,6 @@ var _apacheCamelModel ={
           "description": "Set the RedeliveryPolicy to be used.",
           "title": "Redelivery Policy",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "redeliveryPolicyRef": {
           "kind": "attribute",
@@ -2032,19 +1666,6 @@ var _apacheCamelModel ={
         },
         "handled": {
           "kind": "expression",
-<<<<<<< HEAD
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Handled",
-          "tooltip": "Handled",
-          "title": "Handled"
-        },
-        "continued": {
-          "kind": "expression",
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Continued",
-          "tooltip": "Continued",
-          "title": "Continued"
-=======
           "type": "object",
           "description": "Sets whether the exchange should be marked as handled or not.",
           "title": "Handled",
@@ -2056,28 +1677,10 @@ var _apacheCamelModel ={
           "description": "Sets whether the exchange should handle and continue routing from the point of failure. If this option is enabled then its considered handled as well.",
           "title": "Continued",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "onRedeliveryRef": {
           "kind": "attribute",
           "type": "string",
-<<<<<<< HEAD
-          "description": "On Redelivery Ref",
-          "tooltip": "On Redelivery Ref",
-          "title": "On Redelivery Ref"
-        },
-        "redeliveryPolicy": {
-          "type": "org.apache.camel.model.RedeliveryPolicyDefinition",
-          "description": "Redelivery Policy",
-          "tooltip": "Redelivery Policy",
-          "title": "Redelivery Policy"
-        },
-        "useOriginalMessagePolicy": {
-          "type": "bool",
-          "description": "Use Original Message Policy",
-          "tooltip": "Use Original Message Policy",
-          "title": "Use Original Message Policy"
-=======
           "description": "Sets a reference to a processor that should be processed before a redelivery attempt. Can be used to change the org.apache.camel.Exchange before its being redelivered.",
           "title": "On Redelivery Ref",
           "required": false
@@ -2154,7 +1757,6 @@ var _apacheCamelModel ={
           "description": "Enables random backoff",
           "title": "Random Back Off",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -2315,19 +1917,13 @@ var _apacheCamelModel ={
           "title": "Strategy Ref",
           "required": false
         },
-<<<<<<< HEAD
-        "timeout": {
-          "type": "number",
-          "description": "Timeout",
-          "tooltip": "Timeout",
-          "title": "Timeout"
+        "strategyMethodName": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "This option can be used to explicit declare the method name to use when using POJOs as the AggregationStrategy.",
+          "title": "Strategy Method Name",
+          "required": false
         },
-        "aggregationStrategyMethodAllowNull": {
-          "type": "bool",
-          "description": "Aggregation Strategy Method Allow Null",
-          "tooltip": "Aggregation Strategy Method Allow Null",
-          "title": "Aggregation Strategy Method Allow Null"
-=======
         "strategyMethodAllowNull": {
           "kind": "attribute",
           "type": "boolean",
@@ -2357,7 +1953,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -2372,8 +1967,6 @@ var _apacheCamelModel ={
       "nextSiblingAddedAsChild": "true",
       "properties": {
         "ref": {
-<<<<<<< HEAD
-=======
           "kind": "attribute",
           "type": "string",
           "description": "Reference to the Processor to lookup in the registry to use.",
@@ -2427,7 +2020,6 @@ var _apacheCamelModel ={
       "properties": {
         "id": {
           "kind": "attribute",
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
           "type": "string",
           "description": "Sets the value of the id property.",
           "title": "Id",
@@ -2448,11 +2040,6 @@ var _apacheCamelModel ={
         "delimiter": {
           "kind": "attribute",
           "type": "string",
-<<<<<<< HEAD
-          "description": "Delimiter",
-          "tooltip": "Delimiter",
-          "title": "Delimiter"
-=======
           "description": "Delimiter used if the Expression returned multiple endpoints. Can be turned off using the value false. The default value is",
           "title": "Delimiter",
           "required": false
@@ -2464,7 +2051,6 @@ var _apacheCamelModel ={
           "description": "If enabled then sending messages to the recipients occurs concurrently. Note the caller thread will still wait until all messages has been fully processed before it continues. Its only the sending and processing the replies from the recipients which happens concurrently.",
           "title": "Parallel Processing",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "strategyRef": {
           "kind": "attribute",
@@ -2476,11 +2062,6 @@ var _apacheCamelModel ={
         "strategyMethodName": {
           "kind": "attribute",
           "type": "string",
-<<<<<<< HEAD
-          "description": "Strategy Method Name",
-          "tooltip": "Strategy Method Name",
-          "title": "Strategy Method Name"
-=======
           "description": "This option can be used to explicit declare the method name to use when using POJOs as the AggregationStrategy.",
           "title": "Strategy Method Name",
           "required": false
@@ -2492,7 +2073,6 @@ var _apacheCamelModel ={
           "description": "If this option is false then the aggregate method is not used if there was no data to enrich. If this option is true then null values is used as the oldExchange (when no data to enrich) when using POJOs as the AggregationStrategy",
           "title": "Strategy Method Allow Null",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "executorServiceRef": {
           "kind": "attribute",
@@ -2502,36 +2082,6 @@ var _apacheCamelModel ={
           "required": false
         },
         "stopOnException": {
-<<<<<<< HEAD
-          "type": "bool",
-          "description": "Stop On Exception",
-          "tooltip": "Stop On Exception",
-          "title": "Stop On Exception"
-        },
-        "ignoreInvalidEndpoints": {
-          "type": "bool",
-          "description": "Ignore Invalid Endpoints",
-          "tooltip": "Ignore Invalid Endpoints",
-          "title": "Ignore Invalid Endpoints"
-        },
-        "streaming": {
-          "type": "bool",
-          "description": "Streaming",
-          "tooltip": "Streaming",
-          "title": "Streaming"
-        },
-        "timeout": {
-          "type": "number",
-          "description": "Timeout",
-          "tooltip": "Timeout",
-          "title": "Timeout"
-        },
-        "shareUnitOfWork": {
-          "type": "bool",
-          "description": "Share Unit Of Work",
-          "tooltip": "Share Unit Of Work",
-          "title": "Share Unit Of Work"
-=======
           "kind": "attribute",
           "type": "boolean",
           "defaultValue": "false",
@@ -2781,7 +2331,6 @@ var _apacheCamelModel ={
           "description": "Sets the reference of the instance of org.apache.camel.spi.ExchangeFormatter to generate the log message from exchange.",
           "title": "Exchange Formatter Ref",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -2950,21 +2499,6 @@ var _apacheCamelModel ={
         },
         "expression": {
           "kind": "expression",
-<<<<<<< HEAD
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Expression",
-          "tooltip": "Expression",
-          "title": "Expression"
-        },
-        "resequencerConfig": {
-          "type": [
-            "org.apache.camel.model.config.BatchResequencerConfig",
-            "org.apache.camel.model.config.StreamResequencerConfig"
-          ],
-          "description": "Resequencer Config",
-          "tooltip": "Resequencer Config",
-          "title": "Resequencer Config"
-=======
           "type": "object",
           "description": "Expression to use for re-ordering the messages such as a header with a sequence number",
           "title": "Expression",
@@ -2983,7 +2517,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -2998,18 +2531,6 @@ var _apacheCamelModel ={
       "nextSiblingAddedAsChild": "true",
       "properties": {
         "markRollbackOnly": {
-<<<<<<< HEAD
-          "type": "bool",
-          "description": "Mark Rollback Only",
-          "tooltip": "Mark Rollback Only",
-          "title": "Mark Rollback Only"
-        },
-        "markRollbackOnlyLast": {
-          "type": "bool",
-          "description": "Mark Rollback Only Last",
-          "tooltip": "Mark Rollback Only Last",
-          "title": "Mark Rollback Only Last"
-=======
           "kind": "attribute",
           "type": "boolean",
           "defaultValue": "false",
@@ -3045,7 +2566,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -3078,13 +2598,6 @@ var _apacheCamelModel ={
       "acceptOutput": "true",
       "nextSiblingAddedAsChild": "false",
       "properties": {
-<<<<<<< HEAD
-        "samplePeriod": {
-          "type": "number",
-          "description": "Sample Period",
-          "tooltip": "Sample Period",
-          "title": "Sample Period"
-=======
         "group": {
           "kind": "attribute",
           "type": "string",
@@ -3142,7 +2655,6 @@ var _apacheCamelModel ={
           "description": "To configure the ordering of the routes being started",
           "title": "Startup Order",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "errorHandlerRef": {
           "kind": "attribute",
@@ -3263,25 +2775,6 @@ var _apacheCamelModel ={
     },
     "routingSlip": {
       "type": "object",
-<<<<<<< HEAD
-      "extends": {
-        "type": "org.apache.camel.model.OptionalIdentifiedDefinition"
-      },
-      "title": "Set Header",
-      "group": "Transformation",
-      "description": "Set Header",
-      "tooltip": "Set Header",
-      "icon": "transform24.png",
-      "nextSiblingAddedAsChild": true,
-      "properties": {
-        "expression": {
-          "kind": "expression",
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Expression",
-          "tooltip": "Expression",
-          "title": "Expression"
-        },
-=======
       "title": "Routing Slip",
       "group": "eip,endpoint,routing",
       "icon": "routingSlip24.png",
@@ -3496,15 +2989,9 @@ var _apacheCamelModel ={
       "acceptOutput": "false",
       "nextSiblingAddedAsChild": "true",
       "properties": {
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         "headerName": {
           "kind": "attribute",
           "type": "string",
-<<<<<<< HEAD
-          "description": "Header Name",
-          "tooltip": "Header Name",
-          "title": "Header Name"
-=======
           "description": "Name of message header to set a new value",
           "title": "Header Name",
           "required": true
@@ -3529,7 +3016,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -3552,17 +3038,10 @@ var _apacheCamelModel ={
         },
         "expression": {
           "kind": "expression",
-<<<<<<< HEAD
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Expression",
-          "tooltip": "Expression",
-          "title": "Expression"
-=======
           "type": "object",
           "description": "Expression to return the value of the header",
           "title": "Expression",
           "required": true
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "id": {
           "kind": "attribute",
@@ -3599,17 +3078,10 @@ var _apacheCamelModel ={
         },
         "expression": {
           "kind": "expression",
-<<<<<<< HEAD
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Expression",
-          "tooltip": "Expression",
-          "title": "Expression"
-=======
           "type": "object",
           "description": "Expression to return the value of the message exchange property",
           "title": "Expression",
           "required": true
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "id": {
           "kind": "attribute",
@@ -3646,17 +3118,10 @@ var _apacheCamelModel ={
         },
         "expression": {
           "kind": "expression",
-<<<<<<< HEAD
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Expression",
-          "tooltip": "Expression",
-          "title": "Expression"
-=======
           "type": "object",
           "description": "Optional expression to sort by something else than the message body",
           "title": "Expression",
           "required": true
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "id": {
           "kind": "attribute",
@@ -3684,14 +3149,6 @@ var _apacheCamelModel ={
       "acceptOutput": "true",
       "nextSiblingAddedAsChild": "false",
       "properties": {
-<<<<<<< HEAD
-        "expression": {
-          "kind": "expression",
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Expression",
-          "tooltip": "Expression",
-          "title": "Expression"
-=======
         "parallelProcessing": {
           "kind": "attribute",
           "type": "boolean",
@@ -3699,7 +3156,6 @@ var _apacheCamelModel ={
           "description": "If enabled then processing each splitted messages occurs concurrently. Note the caller thread will still wait until all messages has been fully processed before it continues. Its only processing the sub messages from the splitter which happens concurrently.",
           "title": "Parallel Processing",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "strategyRef": {
           "kind": "attribute",
@@ -3711,11 +3167,6 @@ var _apacheCamelModel ={
         "strategyMethodName": {
           "kind": "attribute",
           "type": "string",
-<<<<<<< HEAD
-          "description": "Strategy Method Name",
-          "tooltip": "Strategy Method Name",
-          "title": "Strategy Method Name"
-=======
           "description": "This option can be used to explicit declare the method name to use when using POJOs as the AggregationStrategy.",
           "title": "Strategy Method Name",
           "required": false
@@ -3727,16 +3178,10 @@ var _apacheCamelModel ={
           "description": "If this option is false then the aggregate method is not used if there was no data to enrich. If this option is true then null values is used as the oldExchange (when no data to enrich) when using POJOs as the AggregationStrategy",
           "title": "Strategy Method Allow Null",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "executorServiceRef": {
           "kind": "attribute",
           "type": "string",
-<<<<<<< HEAD
-          "description": "Executor Service Ref",
-          "tooltip": "Executor Service Ref",
-          "title": "Executor Service Ref"
-=======
           "description": "Refers to a custom Thread Pool to be used for parallel processing. Notice if you set this option then parallel processing is automatic implied and you do not have to enable that option as well.",
           "title": "Executor Service Ref",
           "required": false
@@ -3764,7 +3209,6 @@ var _apacheCamelModel ={
           "description": "Sets a total timeout specified in millis when using parallel processing. If the Splitter hasn't been able to split and process all the sub messages within the given timeframe then the timeout triggers and the Splitter breaks out and continues. Notice if you provide a TimeoutAwareAggregationStrategy then the timeout method is invoked before breaking out. If the timeout is reached with running tasks still remaining certain tasks for which it is difficult for Camel to shut down in a graceful manner may continue to run. So use this option with a bit of care.",
           "title": "Timeout",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "onPrepareRef": {
           "kind": "attribute",
@@ -3773,19 +3217,6 @@ var _apacheCamelModel ={
           "title": "On Prepare Ref",
           "required": false
         },
-<<<<<<< HEAD
-        "parallelProcessing": {
-          "type": "bool",
-          "description": "Parallel Processing",
-          "tooltip": "Parallel Processing",
-          "title": "Parallel Processing"
-        },
-        "strategyMethodAllowNull": {
-          "type": "bool",
-          "description": "Strategy Method Allow Null",
-          "tooltip": "Strategy Method Allow Null",
-          "title": "Strategy Method Allow Null"
-=======
         "shareUnitOfWork": {
           "kind": "attribute",
           "type": "boolean",
@@ -3894,7 +3325,6 @@ var _apacheCamelModel ={
           "description": "Sets the capacity of the resequencer's inbound queue.",
           "title": "Capacity",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "timeout": {
           "kind": "attribute",
@@ -3904,13 +3334,6 @@ var _apacheCamelModel ={
           "title": "Timeout",
           "required": false
         },
-<<<<<<< HEAD
-        "stopOnException": {
-          "type": "bool",
-          "description": "Stop On Exception",
-          "tooltip": "Stop On Exception",
-          "title": "Stop On Exception"
-=======
         "ignoreInvalidExchanges": {
           "kind": "attribute",
           "type": "boolean",
@@ -3918,7 +3341,6 @@ var _apacheCamelModel ={
           "description": "Whether to ignore invalid exchanges",
           "title": "Ignore Invalid Exchanges",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "comparatorRef": {
           "kind": "attribute",
@@ -3927,13 +3349,6 @@ var _apacheCamelModel ={
           "title": "Comparator Ref",
           "required": false
         },
-<<<<<<< HEAD
-        "shareUnitOfWork": {
-          "type": "bool",
-          "description": "Share Unit Of Work",
-          "tooltip": "Share Unit Of Work",
-          "title": "Share Unit Of Work"
-=======
         "rejectOld": {
           "kind": "attribute",
           "type": "boolean",
@@ -3941,7 +3356,6 @@ var _apacheCamelModel ={
           "description": "If true throws an exception when messages older than the last delivered message are processed",
           "title": "Reject Old",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -3950,10 +3364,6 @@ var _apacheCamelModel ={
       "title": "Thread Pool Profile",
       "group": "configuration",
       "icon": "generic24.png",
-<<<<<<< HEAD
-      "nextSiblingAddedAsChild": true,
-      "properties": {}
-=======
       "description": "To configure thread pools",
       "acceptInput": "false",
       "acceptOutput": "false",
@@ -4025,7 +3435,6 @@ var _apacheCamelModel ={
           "required": false
         }
       }
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
     },
     "threads": {
       "type": "object",
@@ -4045,18 +3454,6 @@ var _apacheCamelModel ={
           "required": false
         },
         "poolSize": {
-<<<<<<< HEAD
-          "type": "number",
-          "description": "Pool Size",
-          "tooltip": "Pool Size",
-          "title": "Pool Size"
-        },
-        "maxPoolSize": {
-          "type": "number",
-          "description": "Max Pool Size",
-          "tooltip": "Max Pool Size",
-          "title": "Max Pool Size"
-=======
           "kind": "attribute",
           "type": "integer",
           "description": "Sets the core pool size",
@@ -4069,7 +3466,6 @@ var _apacheCamelModel ={
           "description": "Sets the maximum pool size",
           "title": "Max Pool Size",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "keepAliveTime": {
           "kind": "attribute",
@@ -4087,12 +3483,6 @@ var _apacheCamelModel ={
           "required": false
         },
         "maxQueueSize": {
-<<<<<<< HEAD
-          "type": "number",
-          "description": "Max Queue Size",
-          "tooltip": "Max Queue Size",
-          "title": "Max Queue Size"
-=======
           "kind": "attribute",
           "type": "integer",
           "description": "Sets the maximum number of tasks in the work queue. Use -1 or Integer.MAX_VALUE for an unbounded queue",
@@ -4114,7 +3504,6 @@ var _apacheCamelModel ={
           "description": "Sets the thread name to use.",
           "title": "Thread Name",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "rejectedPolicy": {
           "kind": "attribute",
@@ -4125,12 +3514,6 @@ var _apacheCamelModel ={
           "required": false
         },
         "callerRunsWhenRejected": {
-<<<<<<< HEAD
-          "type": "bool",
-          "description": "Caller Runs When Rejected",
-          "tooltip": "Caller Runs When Rejected",
-          "title": "Caller Runs When Rejected"
-=======
           "kind": "attribute",
           "type": "boolean",
           "defaultValue": "true",
@@ -4151,7 +3534,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -4181,18 +3563,6 @@ var _apacheCamelModel ={
           "required": false
         },
         "asyncDelayed": {
-<<<<<<< HEAD
-          "type": "bool",
-          "description": "Async Delayed",
-          "tooltip": "Async Delayed",
-          "title": "Async Delayed"
-        },
-        "callerRunsWhenRejected": {
-          "type": "bool",
-          "description": "Caller Runs When Rejected",
-          "tooltip": "Caller Runs When Rejected",
-          "title": "Caller Runs When Rejected"
-=======
           "kind": "attribute",
           "type": "boolean",
           "defaultValue": "false",
@@ -4236,7 +3606,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -4283,14 +3652,6 @@ var _apacheCamelModel ={
       "acceptOutput": "false",
       "nextSiblingAddedAsChild": "true",
       "properties": {
-        "pattern": {
-          "kind": "attribute",
-          "type": "string",
-          "enum": [ "InOnly", "InOptionalOut", "InOut", "OutIn", "OutOnly", "OutOptionalIn", "RobustInOnly", "RobustOutOnly" ],
-          "description": "Sets the optional ExchangePattern used to invoke this endpoint",
-          "title": "Pattern",
-          "required": false
-        },
         "uri": {
           "kind": "attribute",
           "type": "string",
@@ -4303,6 +3664,14 @@ var _apacheCamelModel ={
           "type": "string",
           "description": "Sets the reference of the endpoint to send to.",
           "title": "Ref",
+          "required": false
+        },
+        "pattern": {
+          "kind": "attribute",
+          "type": "string",
+          "enum": [ "InOnly", "InOptionalOut", "InOut", "OutIn", "OutOnly", "OutOptionalIn", "RobustInOnly", "RobustOutOnly" ],
+          "description": "Sets the optional ExchangePattern used to invoke this endpoint",
+          "title": "Pattern",
           "required": false
         },
         "id": {
@@ -4385,12 +3754,6 @@ var _apacheCamelModel ={
       "properties": {
         "expression": {
           "kind": "expression",
-<<<<<<< HEAD
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Expression",
-          "tooltip": "Expression",
-          "title": "Expression"
-=======
           "type": "object",
           "description": "Expression to return the transformed message body (the new message body to use)",
           "title": "Expression",
@@ -4409,7 +3772,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -4465,12 +3827,6 @@ var _apacheCamelModel ={
       "properties": {
         "expression": {
           "kind": "expression",
-<<<<<<< HEAD
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Expression",
-          "tooltip": "Expression",
-          "title": "Expression"
-=======
           "type": "object",
           "description": "Expression to use for validation as a predicate. The expression should return either true or false. If returning false the message is invalid and an exception is thrown.",
           "title": "Expression",
@@ -4489,7 +3845,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -4498,17 +3853,6 @@ var _apacheCamelModel ={
       "title": "Weighted",
       "group": "configuration,loadbalance",
       "icon": "generic24.png",
-<<<<<<< HEAD
-      "acceptInput": true,
-      "acceptOutput": true,
-      "properties": {
-        "expression": {
-          "kind": "expression",
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "Expression",
-          "tooltip": "Expression",
-          "title": "Expression"
-=======
       "description": "Weighted load balancer",
       "acceptInput": "false",
       "acceptOutput": "false",
@@ -4609,7 +3953,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -4646,35 +3989,14 @@ var _apacheCamelModel ={
         },
         "body": {
           "kind": "expression",
-<<<<<<< HEAD
-          "type": "org.apache.camel.model.language.ExpressionDefinition",
-          "description": "New Exchange Expression",
-          "tooltip": "New Exchange Expression",
-          "title": "New Exchange Expression"
-        },
-        "setHeader": {
-          "type": "array",
-          "items": {
-            "type": "setHeader"
-          },
-          "description": "Headers",
-          "tooltip": "Headers",
-          "title": "Headers"
-=======
           "type": "object",
           "description": "Expression used for creating a new body as the message to use for wire tapping",
           "title": "Body",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "executorServiceRef": {
           "kind": "attribute",
           "type": "string",
-<<<<<<< HEAD
-          "description": "Executor Service Ref",
-          "tooltip": "Executor Service Ref",
-          "title": "Executor Service Ref"
-=======
           "description": "Uses a custom thread pool",
           "title": "Executor Service Ref",
           "required": false
@@ -4686,7 +4008,6 @@ var _apacheCamelModel ={
           "description": "Uses a copy of the original exchange",
           "title": "Copy",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "onPrepareRef": {
           "kind": "attribute",
@@ -4740,46 +4061,20 @@ var _apacheCamelModel ={
         "consumes": {
           "kind": "attribute",
           "type": "string",
-<<<<<<< HEAD
-          "description": "Unmarshall Type Name",
-          "tooltip": "Unmarshall Type Name",
-          "optional": true,
-          "title": "Unmarshall Type Name"
-        }
-      }
-    },
-    "org.apache.camel.model.dataformat.SerializationDataFormat": {
-      "type": "object",
-      "description": "org.apache.camel.model.dataformat.Serialization Data Format",
-      "tooltip": "org.apache.camel.model.dataformat.Serialization Data Format",
-      "properties": {}
-    },
-    "org.apache.camel.model.language.Expression": {
-      "type": "object",
-      "description": "org.apache.camel.model.language.Expression",
-      "tooltip": "org.apache.camel.model.language.Expression",
-      "properties": {
-        "expression": {
+          "description": "To define the content type what the REST service consumes (accept as input) such as application/xml or application/json. This option will override what may be configured on a parent level",
+          "title": "Consumes",
+          "required": false
+        },
+        "produces": {
+          "kind": "attribute",
           "type": "string",
           "description": "To define the content type what the REST service produces (uses for output) such as application/xml or application/json This option will override what may be configured on a parent level",
           "title": "Produces",
           "required": false
         },
-        "trim": {
-          "type": "bool",
-          "description": "Trim",
-          "tooltip": "Trim",
-          "title": "Trim"
-        }
-      }
-    },
-    "org.apache.camel.model.dataformat.BindyDataFormat": {
-      "type": "object",
-      "description": "org.apache.camel.model.dataformat.Bindy Data Format",
-      "tooltip": "org.apache.camel.model.dataformat.Bindy Data Format",
-      "properties": {
-        "classType": {
-=======
+        "bindingMode": {
+          "kind": "attribute",
+          "type": "string",
           "defaultValue": "auto",
           "enum": [ "auto", "json", "json_xml", "off", "xml" ],
           "description": "Sets the binding mode to use. This option will override what may be configured on a parent level The default value is auto",
@@ -4804,7 +4099,6 @@ var _apacheCamelModel ={
         },
         "type": {
           "kind": "attribute",
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
           "type": "string",
           "description": "Sets the class name to use for binding from input to POJO for the incoming data This option will override what may be configured on a parent level",
           "title": "Type",
@@ -4871,19 +4165,22 @@ var _apacheCamelModel ={
           "title": "Consumes",
           "required": false
         },
-<<<<<<< HEAD
-        "autogenColumns": {
-          "type": "bool",
-          "description": "Autogen Columns",
-          "tooltip": "Autogen Columns",
-          "title": "Autogen Columns"
+        "produces": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "To define the content type what the REST service produces (uses for output) such as application/xml or application/json This option will override what may be configured on a parent level",
+          "title": "Produces",
+          "required": false
         },
-        "skipFirstLine": {
-          "type": "bool",
-          "description": "Skip First Line",
-          "tooltip": "Skip First Line",
-          "title": "Skip First Line"
-=======
+        "bindingMode": {
+          "kind": "attribute",
+          "type": "string",
+          "defaultValue": "auto",
+          "enum": [ "auto", "json", "json_xml", "off", "xml" ],
+          "description": "Sets the binding mode to use. This option will override what may be configured on a parent level The default value is auto",
+          "title": "Binding Mode",
+          "required": false
+        },
         "skipBindingOnErrorCode": {
           "kind": "attribute",
           "type": "boolean",
@@ -4934,7 +4231,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -4965,17 +4261,20 @@ var _apacheCamelModel ={
         "consumes": {
           "kind": "attribute",
           "type": "string",
-<<<<<<< HEAD
-          "description": "Unmarshal Type Name",
-          "tooltip": "Unmarshal Type Name",
-          "title": "Unmarshal Type Name"
+          "description": "To define the content type what the REST service consumes (accept as input) such as application/xml or application/json. This option will override what may be configured on a parent level",
+          "title": "Consumes",
+          "required": false
         },
-        "prettyPrint": {
-          "type": "bool",
-          "description": "Pretty Print",
-          "tooltip": "Pretty Print",
-          "title": "Pretty Print"
-=======
+        "produces": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "To define the content type what the REST service produces (uses for output) such as application/xml or application/json This option will override what may be configured on a parent level",
+          "title": "Produces",
+          "required": false
+        },
+        "bindingMode": {
+          "kind": "attribute",
+          "type": "string",
           "defaultValue": "auto",
           "enum": [ "auto", "json", "json_xml", "off", "xml" ],
           "description": "Sets the binding mode to use. This option will override what may be configured on a parent level The default value is auto",
@@ -4997,7 +4296,6 @@ var _apacheCamelModel ={
           "description": "Whether to enable CORS headers in the HTTP response. This option will override what may be configured on a parent level The default value is false.",
           "title": "Enable C O R S",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "type": {
           "kind": "attribute",
@@ -5077,17 +4375,6 @@ var _apacheCamelModel ={
         "bindingMode": {
           "kind": "attribute",
           "type": "string",
-<<<<<<< HEAD
-          "description": "Recipient Key Alias",
-          "tooltip": "Recipient Key Alias",
-          "title": "Recipient Key Alias"
-        },
-        "keyOrTrustStoreParametersId": {
-          "type": "string",
-          "description": "Key Or Trust Store Parameters Id",
-          "tooltip": "Key Or Trust Store Parameters Id",
-          "title": "Key Or Trust Store Parameters Id"
-=======
           "defaultValue": "auto",
           "enum": [ "auto", "json", "json_xml", "off", "xml" ],
           "description": "Sets the binding mode to use. This option will override what may be configured on a parent level The default value is auto",
@@ -5109,7 +4396,6 @@ var _apacheCamelModel ={
           "description": "Whether to enable CORS headers in the HTTP response. This option will override what may be configured on a parent level The default value is false.",
           "title": "Enable C O R S",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "type": {
           "kind": "attribute",
@@ -5189,24 +4475,6 @@ var _apacheCamelModel ={
         "bindingMode": {
           "kind": "attribute",
           "type": "string",
-<<<<<<< HEAD
-          "description": "Namespace Prefix Ref",
-          "tooltip": "Namespace Prefix Ref",
-          "title": "Namespace Prefix Ref"
-        }
-      }
-    },
-    "org.apache.camel.model.dataformat.XmlRpcDataFormat": {
-      "type": "object",
-      "description": "org.apache.camel.model.dataformat.Xml Rpc Data Format",
-      "tooltip": "org.apache.camel.model.dataformat.Xml Rpc Data Format",
-      "properties": {
-        "request": {
-          "type": "bool",
-          "description": "Request",
-          "tooltip": "Request",
-          "title": "Request"
-=======
           "defaultValue": "auto",
           "enum": [ "auto", "json", "json_xml", "off", "xml" ],
           "description": "Sets the binding mode to use. This option will override what may be configured on a parent level The default value is auto",
@@ -5263,7 +4531,6 @@ var _apacheCamelModel ={
           "description": "Sets the description of this node",
           "title": "Description",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -5298,19 +4565,15 @@ var _apacheCamelModel ={
           "title": "Produces",
           "required": false
         },
-<<<<<<< HEAD
-        "ignoreUnidentifiedRecords": {
-          "type": "bool",
-          "description": "Ignore Unidentified Records",
-          "tooltip": "Ignore Unidentified Records",
-          "title": "Ignore Unidentified Records"
+        "bindingMode": {
+          "kind": "attribute",
+          "type": "string",
+          "defaultValue": "auto",
+          "enum": [ "auto", "json", "json_xml", "off", "xml" ],
+          "description": "Sets the binding mode to use. This option will override what may be configured on a parent level The default value is auto",
+          "title": "Binding Mode",
+          "required": false
         },
-        "ignoreUnexpectedRecords": {
-          "type": "bool",
-          "description": "Ignore Unexpected Records",
-          "tooltip": "Ignore Unexpected Records",
-          "title": "Ignore Unexpected Records"
-=======
         "skipBindingOnErrorCode": {
           "kind": "attribute",
           "type": "boolean",
@@ -5326,7 +4589,6 @@ var _apacheCamelModel ={
           "description": "Whether to enable CORS headers in the HTTP response. This option will override what may be configured on a parent level The default value is false.",
           "title": "Enable C O R S",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "id": {
           "kind": "attribute",
@@ -5368,19 +4630,29 @@ var _apacheCamelModel ={
           "title": "Produces",
           "required": false
         },
-<<<<<<< HEAD
-        "validation": {
-          "type": "bool",
-          "description": "Validation",
-          "tooltip": "Validation",
-          "title": "Validation"
+        "bindingMode": {
+          "kind": "attribute",
+          "type": "string",
+          "defaultValue": "auto",
+          "enum": [ "auto", "json", "json_xml", "off", "xml" ],
+          "description": "Sets the binding mode to use. The default value is auto",
+          "title": "Binding Mode",
+          "required": false
         },
-        "packages": {
-          "type": "array",
-          "description": "Packages",
-          "tooltip": "Packages",
-          "title": "Packages"
-=======
+        "type": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the class name to use for binding from input to POJO for the incoming data",
+          "title": "Type",
+          "required": false
+        },
+        "outType": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the class name to use for binding from POJO to output for the outgoing data",
+          "title": "Out Type",
+          "required": false
+        },
         "skipBindingOnErrorCode": {
           "kind": "attribute",
           "type": "boolean",
@@ -5396,7 +4668,6 @@ var _apacheCamelModel ={
           "description": "Whether to enable CORS headers in the HTTP response. The default value is false.",
           "title": "Enable C O R S",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "id": {
           "kind": "attribute",
@@ -5459,65 +4730,6 @@ var _apacheCamelModel ={
           "title": "Context Path",
           "required": false
         },
-<<<<<<< HEAD
-        "layoutHeight": {
-          "type": "number",
-          "description": "Layout Height",
-          "tooltip": "Layout Height",
-          "title": "Layout Height"
-        }
-      }
-    },
-    "org.apache.camel.model.dataformat.XMLBeansDataFormat": {
-      "type": "object",
-      "description": "org.apache.camel.model.dataformat.XMLBeans Data Format",
-      "tooltip": "org.apache.camel.model.dataformat.XMLBeans Data Format",
-      "properties": {
-        "prettyPrint": {
-          "type": "bool",
-          "description": "Pretty Print",
-          "tooltip": "Pretty Print",
-          "title": "Pretty Print"
-        }
-      }
-    },
-    "org.apache.camel.model.dataformat.RssDataFormat": {
-      "type": "object",
-      "description": "org.apache.camel.model.dataformat.Rss Data Format",
-      "tooltip": "org.apache.camel.model.dataformat.Rss Data Format",
-      "properties": {}
-    },
-    "java.lang.String": {
-      "type": "object",
-      "description": "java.lang.String",
-      "tooltip": "java.lang.String",
-      "properties": {}
-    },
-    "org.apache.camel.model.dataformat.ZipFileDataFormat": {
-      "type": "object",
-      "description": "org.apache.camel.model.dataformat.Zip File Data Format",
-      "tooltip": "org.apache.camel.model.dataformat.Zip File Data Format",
-      "properties": {
-        "usingIterator": {
-          "type": "bool",
-          "description": "Using Iterator",
-          "tooltip": "Using Iterator",
-          "title": "Using Iterator"
-        }
-      }
-    },
-    "org.apache.camel.model.dataformat.XStreamDataFormat": {
-      "type": "object",
-      "description": "org.apache.camel.model.dataformat.XStream Data Format",
-      "tooltip": "org.apache.camel.model.dataformat.XStream Data Format",
-      "properties": {
-        "converters": {
-          "type": "array",
-          "description": "Converters",
-          "tooltip": "Converters",
-          "optional": true,
-          "title": "Converters"
-=======
         "hostNameResolver": {
           "kind": "attribute",
           "type": "string",
@@ -5550,7 +4762,6 @@ var _apacheCamelModel ={
           "description": "Whether to enable CORS headers in the HTTP response. The default value is false.",
           "title": "Enable C O R S",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "jsonDataFormat": {
           "kind": "attribute",
@@ -5603,9 +4814,6 @@ var _apacheCamelModel ={
         }
       }
     },
-<<<<<<< HEAD
-    "org.apache.camel.model.dataformat.CryptoDataFormat": {
-=======
     "restContextRef": {
       "type": "object",
       "title": "Rest Context Ref",
@@ -5626,7 +4834,6 @@ var _apacheCamelModel ={
       }
     },
     "restProperty": {
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
       "type": "object",
       "title": "Rest Property",
       "group": "rest",
@@ -5725,19 +4932,6 @@ var _apacheCamelModel ={
           "title": "Binding Mode",
           "required": false
         },
-<<<<<<< HEAD
-        "forceTopLevelObject": {
-          "type": "bool",
-          "description": "Force Top Level Object",
-          "tooltip": "Force Top Level Object",
-          "title": "Force Top Level Object"
-        },
-        "namespaceLenient": {
-          "type": "bool",
-          "description": "Namespace Lenient",
-          "tooltip": "Namespace Lenient",
-          "title": "Namespace Lenient"
-=======
         "skipBindingOnErrorCode": {
           "kind": "attribute",
           "type": "boolean",
@@ -5753,7 +4947,6 @@ var _apacheCamelModel ={
           "description": "Whether to enable CORS headers in the HTTP response. This option will override what may be configured on a parent level The default value is false.",
           "title": "Enable C O R S",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "type": {
           "kind": "attribute",
@@ -5824,9 +5017,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "Barcode data format",
       "properties": {
-<<<<<<< HEAD
-        "distributionRatio": {
-=======
         "width": {
           "kind": "attribute",
           "type": "integer",
@@ -5843,7 +5033,6 @@ var _apacheCamelModel ={
         },
         "imageType": {
           "kind": "attribute",
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
           "type": "string",
           "description": "Image type of the barcode such as png",
           "title": "Image Type",
@@ -5872,13 +5061,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "Base64 data format",
       "properties": {
-<<<<<<< HEAD
-        "elementTypeName": {
-          "type": "string",
-          "description": "Element Type Name",
-          "tooltip": "Element Type Name",
-          "title": "Element Type Name"
-=======
         "lineLength": {
           "kind": "attribute",
           "type": "integer",
@@ -5902,7 +5084,6 @@ var _apacheCamelModel ={
           "description": "Instead of emitting '' and '/' we emit '-' and '_' respectively. urlSafe is only applied to encode operations. Decoding seamlessly handles both modes. Is by default false.",
           "title": "Url Safe",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "id": {
           "kind": "attribute",
@@ -5934,25 +5115,6 @@ var _apacheCamelModel ={
           "title": "Stream Name",
           "required": true
         },
-<<<<<<< HEAD
-        "timeout": {
-          "type": "number",
-          "description": "Timeout",
-          "tooltip": "Timeout",
-          "title": "Timeout"
-        },
-        "ignoreInvalidExchanges": {
-          "type": "bool",
-          "description": "Ignore Invalid Exchanges",
-          "tooltip": "Ignore Invalid Exchanges",
-          "title": "Ignore Invalid Exchanges"
-        },
-        "rejectOld": {
-          "type": "bool",
-          "description": "Reject Old",
-          "tooltip": "Reject Old",
-          "title": "Reject Old"
-=======
         "ignoreUnidentifiedRecords": {
           "kind": "attribute",
           "type": "boolean",
@@ -5990,7 +5152,6 @@ var _apacheCamelModel ={
           "description": "Sets the value of the id property.",
           "title": "Id",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -6046,9 +5207,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "Castor data format",
       "properties": {
-<<<<<<< HEAD
-        "lineSeparator": {
-=======
         "mappingFile": {
           "kind": "attribute",
           "type": "string",
@@ -6066,7 +5224,6 @@ var _apacheCamelModel ={
         },
         "encoding": {
           "kind": "attribute",
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
           "type": "string",
           "defaultValue": "UTF-8",
           "description": "Encoding to use when marshalling an Object to XML. Is by default UTF-8",
@@ -6125,9 +5282,20 @@ var _apacheCamelModel ={
           "title": "Key Ref",
           "required": false
         },
-<<<<<<< HEAD
-        "provider": {
-=======
+        "initVectorRef": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Refers to a byte array containing the Initialization Vector that will be used to initialize the Cipher.",
+          "title": "Init Vector Ref",
+          "required": false
+        },
+        "algorithmParameterRef": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "A JCE AlgorithmParameterSpec used to initialize the Cipher. Will lookup the type using the given name as a java.security.spec.AlgorithmParameterSpec type.",
+          "title": "Algorithm Parameter Ref",
+          "required": false
+        },
         "buffersize": {
           "kind": "attribute",
           "type": "integer",
@@ -6137,26 +5305,12 @@ var _apacheCamelModel ={
         },
         "macAlgorithm": {
           "kind": "attribute",
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
           "type": "string",
           "defaultValue": "HmacSHA1",
           "description": "The JCE algorithm name indicating the Message Authentication algorithm.",
           "title": "Mac Algorithm",
           "required": false
         },
-<<<<<<< HEAD
-        "armored": {
-          "type": "bool",
-          "description": "Armored",
-          "tooltip": "Armored",
-          "title": "Armored"
-        },
-        "integrity": {
-          "type": "bool",
-          "description": "Integrity",
-          "tooltip": "Integrity",
-          "title": "Integrity"
-=======
         "shouldAppendHMAC": {
           "kind": "attribute",
           "type": "boolean",
@@ -6179,7 +5333,6 @@ var _apacheCamelModel ={
           "description": "Sets the value of the id property.",
           "title": "Id",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         }
       }
     },
@@ -6200,11 +5353,6 @@ var _apacheCamelModel ={
         "formatName": {
           "kind": "attribute",
           "type": "string",
-<<<<<<< HEAD
-          "description": "Schema",
-          "tooltip": "Schema",
-          "title": "Schema"
-=======
           "description": "The name of the format to use the default value is CSVFormat.DEFAULT",
           "title": "Format Name",
           "required": false
@@ -6216,7 +5364,6 @@ var _apacheCamelModel ={
           "description": "Disables the comment marker of the reference format.",
           "title": "Comment Marker Disabled",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "commentMarker": {
           "kind": "attribute",
@@ -6232,13 +5379,6 @@ var _apacheCamelModel ={
           "title": "Delimiter",
           "required": false
         },
-<<<<<<< HEAD
-        "partNamespace": {
-          "type": "string",
-          "description": "Part Namespace",
-          "tooltip": "Part Namespace",
-          "title": "Part Namespace"
-=======
         "escapeDisabled": {
           "kind": "attribute",
           "type": "boolean",
@@ -6261,7 +5401,6 @@ var _apacheCamelModel ={
           "description": "Use for disabling headers",
           "title": "Header Disabled",
           "required": false
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
         },
         "header": {
           "kind": "element",
@@ -6270,37 +5409,6 @@ var _apacheCamelModel ={
           "title": "Header",
           "required": false
         },
-<<<<<<< HEAD
-        "xmlStreamWriterWrapper": {
-          "type": "string",
-          "description": "Xml Stream Writer Wrapper",
-          "tooltip": "Xml Stream Writer Wrapper",
-          "title": "Xml Stream Writer Wrapper"
-        },
-        "prettyPrint": {
-          "type": "bool",
-          "description": "Pretty Print",
-          "tooltip": "Pretty Print",
-          "title": "Pretty Print"
-        },
-        "ignoreJAXBElement": {
-          "type": "bool",
-          "description": "Ignore JAXBElement",
-          "tooltip": "Ignore JAXBElement",
-          "title": "Ignore JAXBElement"
-        },
-        "filterNonXmlChars": {
-          "type": "bool",
-          "description": "Filter Non Xml Chars",
-          "tooltip": "Filter Non Xml Chars",
-          "title": "Filter Non Xml Chars"
-        },
-        "fragment": {
-          "type": "bool",
-          "description": "Fragment",
-          "tooltip": "Fragment",
-          "title": "Fragment"
-=======
         "allowMissingColumnNames": {
           "kind": "attribute",
           "type": "boolean",
@@ -7926,13 +7034,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "For expressions and predicates using a constant",
       "properties": {
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -7946,6 +7047,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -7957,13 +7065,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "For EL expressions and predicates",
       "properties": {
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -7977,6 +7078,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -7988,13 +7096,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "A useful base class for an expression",
       "properties": {
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8008,6 +7109,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8019,13 +7127,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "For Groovy expressions and predicates",
       "properties": {
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8039,6 +7140,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8050,13 +7158,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "An expression which extracts the named header",
       "properties": {
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8070,6 +7171,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8081,13 +7189,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "For JavaScript expressions and predicates",
       "properties": {
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8101,6 +7202,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8119,13 +7227,6 @@ var _apacheCamelModel ={
           "title": "Result Type",
           "required": false
         },
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8139,6 +7240,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8158,13 +7266,6 @@ var _apacheCamelModel ={
           "title": "Lenient",
           "required": false
         },
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8178,6 +7279,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8196,13 +7304,6 @@ var _apacheCamelModel ={
           "title": "Language",
           "required": true
         },
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8216,6 +7317,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8255,13 +7363,6 @@ var _apacheCamelModel ={
           "title": "Bean Type",
           "required": false
         },
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8275,6 +7376,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8286,13 +7394,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "For MVEL expressions and predicates",
       "properties": {
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8306,6 +7407,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8317,13 +7425,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "For OGNL expressions and predicates",
       "properties": {
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8337,6 +7438,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8348,13 +7456,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "For PHP expressions and predicates",
       "properties": {
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8369,7 +7470,17 @@ var _apacheCamelModel ={
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
           "required": false
+<<<<<<< HEAD
 >>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
+=======
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
+          "required": false
+>>>>>>> 28b092a... #1858: Fixed camelModel to work around name clash from Apache Camel aggregate eip.
         }
       }
     },
@@ -8380,6 +7491,7 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "An expression which extracts the named exchange property",
       "properties": {
+<<<<<<< HEAD
 <<<<<<< HEAD
         "compressionLevel": {
           "type": "number",
@@ -8394,6 +7506,8 @@ var _apacheCamelModel ={
           "title": "Id",
           "required": false
         },
+=======
+>>>>>>> 28b092a... #1858: Fixed camelModel to work around name clash from Apache Camel aggregate eip.
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8408,29 +7522,27 @@ var _apacheCamelModel ={
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
           "required": false
+<<<<<<< HEAD
 >>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
+=======
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
+          "required": false
+>>>>>>> 28b092a... #1858: Fixed camelModel to work around name clash from Apache Camel aggregate eip.
         }
       }
     },
     "python": {
       "type": "object",
-<<<<<<< HEAD
-      "description": "org.apache.camel.model.dataformat.Flatpack Data Format",
-      "tooltip": "org.apache.camel.model.dataformat.Flatpack Data Format",
-      "properties": {}
-=======
       "title": "Python",
       "group": "language",
       "icon": "generic24.png",
       "description": "For Python expressions and predicates",
       "properties": {
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8445,114 +7557,23 @@ var _apacheCamelModel ={
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
           "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
+          "required": false
         }
       }
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
     },
     "ref": {
       "type": "object",
-<<<<<<< HEAD
-      "description": "org.apache.camel.model.loadbalancer.Topic Load Balancer",
-      "tooltip": "org.apache.camel.model.loadbalancer.Topic Load Balancer",
-      "properties": {}
-    }
-  },
-  "languages": {
-    "constant": {
-      "name": "Constant",
-      "description": "Constant expression"
-    },
-    "el": {
-      "name": "EL",
-      "description": "Unified expression language from JSP / JSTL / JSF"
-    },
-    "header": {
-      "name": "Header",
-      "description": "Header value"
-    },
-    "javaScript": {
-      "name": "JavaScript",
-      "description": "JavaScript expression"
-    },
-    "jxpath": {
-      "name": "JXPath",
-      "description": "JXPath expression"
-    },
-    "method": {
-      "name": "Method",
-      "description": "Method call expression"
-    },
-    "mvel": {
-      "name": "MVEL",
-      "description": "MVEL expression"
-    },
-    "ognl": {
-      "name": "OGNL",
-      "description": "OGNL expression"
-    },
-    "groovy": {
-      "name": "Groovy",
-      "description": "Groovy expression"
-    },
-    "property": {
-      "name": "Property",
-      "description": "Property value"
-    },
-    "python": {
-      "name": "Python",
-      "description": "Python expression"
-    },
-    "php": {
-      "name": "PHP",
-      "description": "PHP expression"
-    },
-    "ref": {
-      "name": "Ref",
-      "description": "Reference to a bean expression"
-    },
-    "ruby": {
-      "name": "Ruby",
-      "description": "Ruby expression"
-    },
-    "simple": {
-      "name": "Simple",
-      "description": "Simple expression language from Camel"
-    },
-    "spel": {
-      "name": "Spring EL",
-      "description": "Spring expression language"
-    },
-    "sql": {
-      "name": "SQL",
-      "description": "SQL expression"
-    },
-    "tokenize": {
-      "name": "Tokenizer",
-      "description": "Tokenizing expression"
-    },
-    "xpath": {
-      "name": "XPath",
-      "description": "XPath expression"
-    },
-    "xquery": {
-      "name": "XQuery",
-      "description": "XQuery expression"
-    }
-  }
-};
-=======
       "title": "Ref",
       "group": "language",
       "icon": "generic24.png",
       "description": "For using a custom expression",
       "properties": {
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8566,6 +7587,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8577,13 +7605,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "For Ruby expressions and predicates",
       "properties": {
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8597,6 +7618,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8615,13 +7643,6 @@ var _apacheCamelModel ={
           "title": "Result Type",
           "required": false
         },
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8635,6 +7656,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8646,13 +7674,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "For Spring Expression Language (SpEL) expressions and predicates",
       "properties": {
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8666,6 +7687,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8677,13 +7705,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "For SQL expressions and predicates",
       "properties": {
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8697,6 +7718,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8708,13 +7736,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "For HL7 terser expressions and predicates",
       "properties": {
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8728,6 +7749,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8798,13 +7826,6 @@ var _apacheCamelModel ={
           "title": "Group",
           "required": false
         },
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8818,6 +7839,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8829,13 +7857,6 @@ var _apacheCamelModel ={
       "icon": "generic24.png",
       "description": "For VTD-XML (fast and efficient XPath) expressions and predicates",
       "properties": {
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8849,6 +7870,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8911,13 +7939,6 @@ var _apacheCamelModel ={
           "title": "Header Name",
           "required": false
         },
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8931,6 +7952,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -8956,13 +7984,6 @@ var _apacheCamelModel ={
           "title": "Header Name",
           "required": false
         },
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -8976,6 +7997,13 @@ var _apacheCamelModel ={
           "defaultValue": "true",
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
+          "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
           "required": false
         }
       }
@@ -9008,13 +8036,6 @@ var _apacheCamelModel ={
           "title": "Group",
           "required": false
         },
-        "id": {
-          "kind": "attribute",
-          "type": "string",
-          "description": "Sets the id of this node",
-          "title": "Id",
-          "required": false
-        },
         "expression": {
           "kind": "value",
           "type": "string",
@@ -9029,9 +8050,15 @@ var _apacheCamelModel ={
           "description": "Whether to trim the value to remove leading and trailing whitespaces and line breaks",
           "title": "Trim",
           "required": false
+        },
+        "id": {
+          "kind": "attribute",
+          "type": "string",
+          "description": "Sets the id of this node",
+          "title": "Id",
+          "required": false
         }
       }
     }
   }
 }
->>>>>>> a0fcdcf... #1858: Maven goal to generate camelModel from Apache Camel release
