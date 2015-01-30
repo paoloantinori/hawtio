@@ -13,6 +13,8 @@ module Camel {
   export var defaultMaximumLabelWidth = 34;
   export var defaultCamelMaximumTraceOrDebugBodyLength = 5000;
   export var defaultCamelRouteMetricMaxSeconds = 10;
+  export var defaultShowEIPDocumentation = true;
+  export var defaultHideUnusedEIP = false;
 
   /**
    * Looks up the route XML for the given context and selected route and
@@ -1439,6 +1441,24 @@ module Camel {
       value = Camel.defaultCamelRouteMetricMaxSeconds;
     }
     return value;
+  }
+
+  /**
+   * Whether to show EIP documentation
+   * @method
+   */
+  export function showEIPDocumentation(localStorage) {
+    var value = localStorage["camelShowEIPDocumentation"];
+    return Core.parseBooleanValue(value, Camel.defaultShowEIPDocumentation);
+  }
+
+  /**
+   * Whether to hide unused EIP options
+   * @method
+   */
+  export function hideUnusedEIP(localStorage) {
+    var value = localStorage["camelHideUnusedEIP"];
+    return Core.parseBooleanValue(value, Camel.defaultHideUnusedEIP);
   }
 
   /**
