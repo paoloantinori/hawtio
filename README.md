@@ -29,4 +29,3 @@ We love [contributions](http://hawt.io/contributing/index.html)!
 Check out our [huboard](https://huboard.com/hawtio/hawtio#/) for prioritizing issues.
 
 
-
