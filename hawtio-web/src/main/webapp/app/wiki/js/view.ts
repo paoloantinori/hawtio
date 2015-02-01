@@ -6,7 +6,6 @@
 /// <reference path="wikiDialogs.ts"/>
 /// <reference path="../../fabric/js/fabricGlobals.ts"/>
 /// <reference path="../../fabric/js/fabricHelpers.ts"/>
-/// <reference path="../../kubernetes/js/kubernetesHelpers.ts"/>
 /// <reference path="../../helpers/js/storageHelpers.ts"/>
 /// <reference path="../../helpers/js/selectionHelpers.ts"/>
 module Wiki {
@@ -603,27 +602,6 @@ module Wiki {
           $scope.readMePath = pageName;
           wikiRepository.getPage($scope.branch, pageName, $scope.objectId, (readmeDetails) => {
             viewContents(pageName, readmeDetails.text);
-          });
-        }
-        var kubernetesJson = $scope.children.find((child) => {
-          var name = (child.name || "").toLowerCase();
-          var ext = fileExtension(name);
-          return name && ext && name.startsWith("kubernetes") && ext === "json";
-        });
-        if (kubernetesJson) {
-          wikiRepository.getPage($scope.branch, kubernetesJson.path, undefined, (json) => {
-            if (json && json.text) {
-              try {
-                $scope.kubernetesJson = angular.fromJson(json.text);
-              } catch (e) {
-                $scope.kubernetesJson = {
-                  errorParsing: true,
-                  error: e
-                };
-              }
-              $scope.showAppHeader = true;
-              Core.$apply($scope);
-            }
           });
         }
         $scope.$broadcast('Wiki.ViewPage.Children', $scope.pageId, $scope.children);

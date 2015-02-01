@@ -4,7 +4,6 @@
 /// <reference path="../../git/js/git.ts"/>
 /// <reference path="../../fabric/js/fabricHelpers.ts"/>
 /// <reference path="../../helpers/js/urlHelpers.ts"/>
-/// <reference path="../../docker-registry/js/dockerRegistryHelpers.ts"/>
 /**
  * @module Wiki
  */
@@ -94,19 +93,14 @@ module Wiki {
             mbean: 'io.fabric8:type=KubernetesTemplateManager',
             operation: 'createAppByJson',
             arguments: [json]
-          }, onSuccess((response) => { 
+          }, onSuccess((response) => {
             log.debug("Generated app, response: ", response);
-            options.success(undefined); 
+            options.success(undefined);
           }, {
             error: (response) => { options.error(response.error); }
           }));
         },
         form: (workspace, $scope) => {
-          if (!$scope.doDockerRegistryCompletion) {
-            $scope.fetchDockerRepositories = () => {
-              return DockerRegistry.completeDockerRegistry();
-            }
-          }
           return {
             summaryMarkdown: 'Add app summary here',
             replicaCount: 1
@@ -116,16 +110,6 @@ module Wiki {
           description: 'App settings',
           type: 'java.lang.String',
           properties: {
-            'dockerImage': {
-              'description': 'Docker Image',
-              'type': 'java.lang.String',
-              'input-attributes': { 
-                'required': '', 
-                'class': 'input-xlarge',
-                'typeahead': 'repo for repo in fetchDockerRepositories() | filter:$viewValue',
-                'typeahead-wait-ms': '200'
-              }
-            },
             'summaryMarkdown': {
               'description': 'Short Description',
               'type': 'java.lang.String',
@@ -201,7 +185,7 @@ module Wiki {
           var encodedForm = JSON.stringify(options.form)
           var mbean = 'hawtio:type=KeystoreService';
           var response = options.workspace.jolokia.request( {
-              type: 'exec', 
+              type: 'exec',
               mbean: mbean,
               operation: 'createKeyStoreViaJSON(java.lang.String)',
               arguments: [encodedForm]
@@ -215,8 +199,8 @@ module Wiki {
               }
             });
         },
-        form: function(workspace, $scope){ 
-          return { 
+        form: function(workspace, $scope){
+          return {
             storeType: $scope.securityProviderInfo.supportedKeyStoreTypes[0],
             createPrivateKey: false,
             keyLength: 4096,
@@ -227,7 +211,7 @@ module Wiki {
         schema: {
            "description": "Keystore Settings",
            "type": "java.lang.String",
-           "properties": { 
+           "properties": {
              "storePassword": {
                "description": "Keystore password.",
                "type": "password",
