@@ -107,7 +107,7 @@ module Insight {
             isValid: (workspace:Workspace) => {
                 return Fabric.hasFabric(workspace) && Insight.hasInsight(workspace) && Insight.hasEsHead(workspace);
             },
-            isActive: () => workspace.isTopTabActive("insight-eshead")
+            isActive: () => workspace.isTopTabActive("eshead")
         });
 
     }]);
