@@ -36,6 +36,7 @@ module Insight {
             },
             label: "Insight",
             isValid: (workspace) => Insight.hasInsight(workspace),
+            lastPage: "#/insight/logs",
             topLevelTabs: {
                 includes: [
                     {
