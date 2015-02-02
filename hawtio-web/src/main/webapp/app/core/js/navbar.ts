@@ -20,7 +20,7 @@ module Core {
   }
 
 
-  export var NavBarController = _module.controller("Core.NavBarController", ["$scope", "$location", "workspace", "$route", "jolokia", "localStorage", "NavBarViewCustomLinks", ($scope, $location:ng.ILocationService, workspace:Workspace, $route, jolokia, localStorage, NavBarViewCustomLinks:Core.NavBarViewCustomLinks) => {
+  export var NavBarController = _module.controller("Core.NavBarController", ["$scope", "$location", "workspace", "$route", "jolokia", "localStorage", "NavBarViewCustomLinks", "postLoginTasks", ($scope, $location:ng.ILocationService, workspace:Workspace, $route, jolokia, localStorage, NavBarViewCustomLinks:Core.NavBarViewCustomLinks, postLoginTasks:Core.Tasks) => {
 
     $scope.hash = workspace.hash();
     $scope.topLevelTabs = [];
@@ -51,6 +51,8 @@ module Core {
     };
 
     $scope.clearConnections = Core.clearConnections;
+
+    postLoginTasks.addTask('navbarReloadPerspectives', reloadPerspective);
 
     $scope.perspectiveDetails = {
       perspective: null
