@@ -33,28 +33,32 @@ var RHAccess = (function (RHAccess) {
             title: "Open a new Case",
             isValid: function () { return true; },
             href: RHAccess.localAppEntryPoint,
-            _href: RHAccess.remoteAppEntryPoint + "#case/new"
+            _href: RHAccess.remoteAppEntryPoint + "#case/new",
+            isActive: true
         },
         {
             content: '<i class="icon-search"></i> Search Case',
             title: "Search Case",
             isValid: function () { return true; },
             href: RHAccess.localAppEntryPoint,
-            _href: RHAccess.remoteAppEntryPoint + "#case/search"
+            _href: RHAccess.remoteAppEntryPoint + "#case/search",
+            isActive: false
         },
         {
             content: '<i class="icon-stethoscope"></i> Diagnose Log',
             title: "Diagnose Log",
             isValid: function () { return true; },
             href: RHAccess.localAppEntryPoint,
-            _href: RHAccess.remoteAppEntryPoint + "#logviewer"
+            _href: RHAccess.remoteAppEntryPoint + "#logviewer",
+            isActive: false
         },
         {
             content: '<i class="icon-book"></i> Search Knowledge Base',
             title: "Search Knowledge Base",
             isValid: function () { return true },
             href: RHAccess.localAppEntryPoint,
-            _href: RHAccess.remoteAppEntryPoint + "#search"
+            _href: RHAccess.remoteAppEntryPoint + "#search",
+            isActive: false
         }
     ];
 
@@ -77,7 +81,16 @@ var RHAccess = (function (RHAccess) {
         };
 
         $scope.updateIframe = function(link) {
-            $scope.sharedProperties.iframeUrl = link;
+            $scope.sharedProperties.iframeUrl = link._href;
+            link.isActive = true;
+          debugger;
+            $scope.breadcrumbs.forEach(function(element){
+              debugger;
+              if(element != link){
+                element.isActive = false;
+              }
+            });
+
             true;
         }
 
