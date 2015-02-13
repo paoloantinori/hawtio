@@ -138,7 +138,7 @@ var RHAccess = (function(RHAccess) {
      */
     workspace.topLevelTabs.push({
       id: "rhaccess",
-      content: "Red Hat Support",
+      content: "Red Hat Access",
       title: "RHAccess plugin loaded dynamically",
       isValid: function(workspace) { return true; },
       href: function() { return "#/" + RHAccess.pluginName; },
@@ -172,19 +172,6 @@ var RHAccess = (function(RHAccess) {
       action: function() {
         var destination = '/rhaccess_plugin?p=container';
         var iframe = RHAccess.remoteAppEntryPoint + "#case/list";
-        Logger.debug("going to: " + destination + ':' + iframe);
-        RHAccessSharedProperties.iframeUrl = iframe ;
-        $location.url(destination);
-      }
-    });
-    NavBarViewCustomLinks.list.push( {
-      icon: 'icon-search',
-      buttonClass: 'btn-primary',
-      title: 'Search Case',
-      href:'/hawtio/rhaccess_plugin',
-      action: function() {
-        var destination = '/rhaccess_plugin?p=container';
-        var iframe = RHAccess.remoteAppEntryPoint + "#case/search";
         Logger.debug("going to: " + destination + ':' + iframe);
         RHAccessSharedProperties.iframeUrl = iframe ;
         $location.url(destination);
