@@ -37,6 +37,13 @@ var RHAccess = (function (RHAccess) {
             isActive: true
         },
         {
+            content: '<i class="icon-th-list"></i> List Cases',
+            title: "List Cases",
+            isValid: function () { return true; },
+            href: RHAccess.localAppEntryPoint,
+            _href: RHAccess.remoteAppEntryPoint + "#case/list"
+        },
+        {
             content: '<i class="icon-search"></i> Search Case',
             title: "Search Case",
             isValid: function () { return true; },
@@ -53,8 +60,8 @@ var RHAccess = (function (RHAccess) {
             isActive: false
         },
         {
-            content: '<i class="icon-book"></i> Search Knowledge Base',
-            title: "Search Knowledge Base",
+            content: '<i class="icon-book"></i> Search Articles and Solutions',
+            title: "Search Articles and Solutions",
             isValid: function () { return true },
             href: RHAccess.localAppEntryPoint,
             _href: RHAccess.remoteAppEntryPoint + "#search",
