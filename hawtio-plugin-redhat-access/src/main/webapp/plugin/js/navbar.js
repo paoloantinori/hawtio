@@ -82,9 +82,9 @@ var RHAccess = (function (RHAccess) {
         $scope.updateIframe = function(link) {
             $scope.sharedProperties.iframeUrl = link._href;
             link.isActive = true;
-          debugger;
+          
             $scope.breadcrumbs.forEach(function(element){
-              debugger;
+              
               if(element != link){
                 element.isActive = false;
               }
