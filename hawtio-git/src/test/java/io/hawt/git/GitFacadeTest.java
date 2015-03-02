@@ -26,7 +26,8 @@ import static org.junit.Assert.fail;
  * Tests we create a configuration directory
  */
 public class GitFacadeTest {
-    GitFacade git = createTestGitFacade();
+    String gitConfigDirectory = "hawtio-config-" + System.currentTimeMillis();
+    GitFacade git = createTestGitFacade(gitConfigDirectory);
 
     public static void main(String[] args) {
         GitFacadeTest test = new GitFacadeTest();

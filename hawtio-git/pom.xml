@@ -166,28 +166,4 @@
     </plugins>
   </build>
 
-  <profiles>
-    <profile>
-      <id>
-        SkipTestsOnWindows
-      </id>
-      <activation>
-        <os>
-          <family>Windows</family>
-        </os>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <excludes>
-                <exclude>**/GitFacadeTest.*</exclude>
-              </excludes>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>
