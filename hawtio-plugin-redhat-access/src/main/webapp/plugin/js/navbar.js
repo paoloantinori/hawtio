@@ -34,7 +34,7 @@ var RHAccess = (function (RHAccess) {
             isValid: function () { return true; },
             href: RHAccess.localAppEntryPoint,
             _href: RHAccess.remoteAppEntryPoint + "#case/new",
-            isActive: true
+            isActive: false
         },
         {
             content: '<i class="icon-th-list"></i> List Cases',
@@ -57,7 +57,7 @@ var RHAccess = (function (RHAccess) {
             isValid: function () { return true },
             href: RHAccess.localAppEntryPoint,
             _href: RHAccess.remoteAppEntryPoint + "#search",
-            isActive: false
+            isActive: true
         }
     ];
 
@@ -78,7 +78,7 @@ var RHAccess = (function (RHAccess) {
         $scope.isValid = function(link) {
             return link.isValid();
         };
-
+    
         $scope.updateIframe = function(link) {
             $scope.sharedProperties.iframeUrl = link._href;
             link.isActive = true;

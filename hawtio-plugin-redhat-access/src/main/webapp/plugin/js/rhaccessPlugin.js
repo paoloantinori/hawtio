@@ -227,10 +227,19 @@ var RHAccess = (function(RHAccess) {
     $scope.iframeUrl = RHAccess.rhAccessContextPath + 'support.html#search';
 
     $scope.$watch("sharedProperties", function(newVal, oldVal) {
+
         if ( newVal.iframeUrl !== null){
             $scope.iframeUrl = newVal.iframeUrl;
+            RHAccess.breadcrumbs.forEach(function(element){
+                if(element._href != newVal.iframeUrl){
+                    element.isActive = false;
+                } else{
+                    element.isActive = true;
+                }
+            });
         }
     }, true);
+
   };
 
 
