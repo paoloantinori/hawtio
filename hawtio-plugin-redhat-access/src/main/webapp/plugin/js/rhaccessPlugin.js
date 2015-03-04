@@ -178,9 +178,9 @@ var RHAccess = (function(RHAccess) {
       }
     });
     NavBarViewCustomLinks.list.push( {
-      icon: 'icon-cog',
-      buttonClass: 'icon-stethoscope',
-      title: 'Diagnose Case',
+      icon: 'icon-stethoscope',
+      buttonClass: 'btn-primary',
+      title: 'Diagnose Log',
       href:'/hawtio/rhaccess_plugin',
       action: function() {
         var destination = '/rhaccess_plugin?p=container';
@@ -193,7 +193,7 @@ var RHAccess = (function(RHAccess) {
     NavBarViewCustomLinks.list.push( {
       icon: 'icon-book',
       buttonClass: 'btn-primary',
-      title: 'Search Articles and Solutions',
+      title: 'Search Knowledge Base',
       href:'/hawtio/rhaccess_plugin',
       action: function() {
         var destination = '/rhaccess_plugin?p=container';
