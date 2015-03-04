@@ -80,11 +80,12 @@ var RHAccess = (function (RHAccess) {
         };
     
         $scope.updateIframe = function(link) {
-            $scope.sharedProperties.iframeUrl = link._href;
+
+            $scope.sharedProperties.iframeUrl = link._href + '?' + Math.random();
             link.isActive = true;
           
             $scope.breadcrumbs.forEach(function(element){
-              
+
               if(element != link){
                 element.isActive = false;
               }
