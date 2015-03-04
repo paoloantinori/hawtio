@@ -179,7 +179,7 @@ var RHAccess = (function(RHAccess) {
     });
     NavBarViewCustomLinks.list.push( {
       icon: 'icon-stethoscope',
-      buttonClass: 'btn-primary',
+      buttonClass: 'btn-primary ',
       title: 'Diagnose Log',
       href:'/hawtio/rhaccess_plugin',
       action: function() {
@@ -231,7 +231,8 @@ var RHAccess = (function(RHAccess) {
         if ( newVal.iframeUrl !== null){
             $scope.iframeUrl = newVal.iframeUrl;
             RHAccess.breadcrumbs.forEach(function(element){
-                if(element._href != newVal.iframeUrl){
+                
+                if( !  (newVal.iframeUrl.startsWith(element._href) ) ){
                     element.isActive = false;
                 } else{
                     element.isActive = true;
