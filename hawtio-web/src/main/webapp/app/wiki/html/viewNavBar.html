@@ -6,7 +6,7 @@
       </li>
       <li ng-repeat="link in breadcrumbs" ng-class='{active : isActive(link.href) && !objectId}'>
         <a class="breadcrumb-link" ng-href="{{link.href}}">
-          <span class="contained c-medium">{{link.name}}</span>
+          {{link.name}}
         </a>
       </li>
       <li ng-show="objectId">
