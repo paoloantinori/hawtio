@@ -344,7 +344,7 @@ module Fabric {
     }
   }
 
-  export function doCreateVersion($scope, jolokia, $location, newVersionName) {
+  export function doCreateVersion($scope, jolokia, $location, newVersionName, newVersionDescription = "", parentId = "") {
     var success = function (response) {
       var newVersion = response.value.id;
       Core.notification('success', "Created version <strong>" + newVersion + "</strong>, switching to this new version");
@@ -365,7 +365,22 @@ module Fabric {
     };
 
     if (!Core.isBlank(newVersionName)) {
-      Fabric.createVersionWithId(jolokia, newVersionName, success, error);
+        if (!Core.isBlank(newVersionDescription)) {
+            jolokia.request(
+                {
+                    type: 'exec', mbean: Fabric.profileManagementMBean,
+                    operation: "createVersionFrom",
+                    // had to pass map in json format, jolokia seemed confused by the js map instance
+                    arguments: [parentId, newVersionName, '{"description": "' + newVersionDescription + '"}']
+                },
+                {
+                    method: 'POST',
+                    success: success,
+                    error: error
+                });
+        }else{
+            Fabric.createVersionWithId(jolokia, newVersionName, success, error);
+        }
     } else {
       Fabric.createVersion(jolokia, success, error);
     }

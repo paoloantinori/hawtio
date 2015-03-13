@@ -36,10 +36,14 @@ module Fabric {
         templateUrl: 'app/fabric/html/createVersionDialog.html',
         controller: ["$scope", "dialog", "jolokia", "$location", ($scope, dialog, jolokia, $location) => {
           $scope.name = '';
+          $scope.description = '';
           $scope.close = (result) => {
             dialog.close();
             if (result) {
-              Fabric.doCreateVersion($scope, jolokia, $location, $scope.name);
+              //uses current version default
+              var version:string = jolokia.execute(Fabric.managerMBean, "defaultVersion", [[]]);
+              var id:string = version['id'];
+              Fabric.doCreateVersion($scope, jolokia, $location, $scope.name, $scope.description, id);
             }
           }
         }]

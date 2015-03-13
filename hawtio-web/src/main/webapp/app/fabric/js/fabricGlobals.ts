@@ -13,8 +13,9 @@ module Fabric {
    * @type {string}
    */
   export var managerMBean = Fabric.jmxDomain + ":type=Fabric";
+  export var profileManagementMBean = Fabric.jmxDomain + ":type=ProfileManagement";
 
-  /**
+    /**
    * mbean that provides functions related to managing the zookeeper ensemble
    * @type {string}
    */
