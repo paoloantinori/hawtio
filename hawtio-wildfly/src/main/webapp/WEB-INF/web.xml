@@ -124,7 +124,6 @@
     <url-pattern>/proxy/*</url-pattern>
   </servlet-mapping>
 
-
   <servlet>
     <servlet-name>file-upload</servlet-name>
     <servlet-class>io.hawt.web.UploadServlet</servlet-class>
@@ -173,16 +172,6 @@
 
 
   <servlet>
-    <servlet-name>gitServlet</servlet-name>
-    <servlet-class>io.hawt.web.GitServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>gitServlet</servlet-name>
-    <url-pattern>/git/*</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
     <servlet-name>maven-source</servlet-name>
     <servlet-class>io.hawt.web.JavaDocServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
@@ -196,15 +185,9 @@
     <listener-class>io.hawt.HawtioContextListener</listener-class>
   </listener>
   <listener>
-      <listener-class>io.hawt.git.GitContextListener</listener-class>
-  </listener>
-  <listener>
     <listener-class>org.apache.commons.fileupload.servlet.FileCleanerCleanup</listener-class>
   </listener>
-  <context-param>
-    <param-name>hawtio.config.dir</param-name>
-    <param-value>${hawtio.config.dir}</param-value>
-  </context-param>
+
   <error-page>
     <error-code>404</error-code>
     <location>/index.html</location>
