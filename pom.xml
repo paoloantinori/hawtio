@@ -677,11 +677,11 @@
     <!-- only build the CRX if you've setup the CRX key -->
     <profile>
       <id>crx</id>
-      <activation>
+      <!--activation>
         <file>
           <exists>${user.home}/.m2/hawtio-crx.pem</exists>
         </file>
-      </activation>
+      </activation-->
       <modules>
         <module>hawtio-crx</module>
       </modules>
