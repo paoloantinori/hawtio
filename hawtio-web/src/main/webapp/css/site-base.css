@@ -4462,3 +4462,6 @@ td > .zebra-list > li {
 .form-horizontal textarea + div + .help-block {
   margin-top: 10px;
 }
+
+input[type=text]::-ms-clear {  display: none; width : 0; height: 0; }
+input[type=text]::-ms-reveal {  display: none; width : 0; height: 0; }
