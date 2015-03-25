@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee"
-	      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	      xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
-	      http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
-	      version="2.4">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
 
   <description>hawtio</description>
   <display-name>hawtio</display-name>
@@ -12,35 +11,36 @@
     <description>Enable/disable hawtio's authentication filter, value is really a boolean</description>
     <env-entry-name>hawtio/authenticationEnabled</env-entry-name>
     <env-entry-type>java.lang.String</env-entry-type>
-    <env-entry-value>${hawtio.authenticationEnabled:false}</env-entry-value>
+    <env-entry-value>true</env-entry-value>
   </env-entry>
 
   <env-entry>
     <description>Authorized user role, empty string disables authorization</description>
     <env-entry-name>hawtio/role</env-entry-name>
     <env-entry-type>java.lang.String</env-entry-type>
-    <env-entry-value>${hawtio.role:*}</env-entry-value>
+    <!-- empty == admin,viewer -->
+    <env-entry-value></env-entry-value>
   </env-entry>
 
   <env-entry>
     <description>JAAS classname that would contain the role principal, empty string disables authorization</description>
     <env-entry-name>hawtio/rolePrincipalClasses</env-entry-name>
     <env-entry-type>java.lang.String</env-entry-type>
-    <env-entry-value>${hawtio.rolePrincipalClasses:}</env-entry-value>
+    <env-entry-value>org.jboss.security.SimplePrincipal</env-entry-value>
   </env-entry>
 
   <env-entry>
     <description>JAAS realm used to authenticate users</description>
     <env-entry-name>hawtio/realm</env-entry-name>
     <env-entry-type>java.lang.String</env-entry-type>
-    <env-entry-value>${hawtio.realm:*}</env-entry-value>
+    <env-entry-value>*</env-entry-value>
   </env-entry>
 
   <env-entry>
     <description>Path to store file uploads, defaults to ${java.io.tmpdir}/uploads if blank</description>
     <env-entry-name>hawtio/uploadDirectory</env-entry-name>
     <env-entry-type>java.lang.String</env-entry-type>
-    <env-entry-value>${hawtio.uploadDirectory:}</env-entry-value>
+    <env-entry-value></env-entry-value>
   </env-entry>
 
   <filter>
@@ -53,20 +53,20 @@
   </filter-mapping>
 
   <filter>
-    <filter-name>XFrameOptionsFilter</filter-name>
-    <filter-class>io.hawt.web.XFrameOptionsFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>XFrameOptionsFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
-
-  <filter>
     <filter-name>CORSFilter</filter-name>
     <filter-class>io.hawt.web.CORSFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>CORSFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>XFrameOptionsFilter</filter-name>
+    <filter-class>io.hawt.web.XFrameOptionsFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>XFrameOptionsFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
@@ -169,7 +169,6 @@
     <servlet-name>plugin</servlet-name>
     <url-pattern>/plugin/*</url-pattern>
   </servlet-mapping>
-
 
   <servlet>
     <servlet-name>maven-source</servlet-name>
