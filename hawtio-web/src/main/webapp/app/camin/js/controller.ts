@@ -7,6 +7,8 @@ module Camin {
         $scope.breadcrumbs = [ ];
 
         $scope.onQueryChange = function() {
+            $('#gantt').html('');
+            $('#diagram').html('');
             $scope.breadcrumbs = [ $scope.query ];
             searchRequest();
         }
@@ -17,17 +19,12 @@ module Camin {
         var esClient = ejsResource(esUrl);
 
         var searchRequest = function() {
-            var queryStr = "exchange.id:\""
-                + $scope.breadcrumbs.join("\" OR exchange.id:\"") + "\" OR "
-                +"exchange.in.headers.ExtendedBreadcrumb:\""
-                + $scope.breadcrumbs.join("\" OR exchange.in.headers.ExtendedBreadcrumb:\"") + "\" OR "
-                + "exchange.out.headers.ExtendedBreadcrumb:\""
-                + $scope.breadcrumbs.join("\" OR exchange.out.headers.ExtendedBreadcrumb:\"") + "\"";
+            var queryStr = "exchange.id:\"" + $scope.breadcrumbs + "\"";
 
             var request = ejs.Request().types('camel');
 
             var searchPromise = request
-                .from(0).size(1000).query(ejs.QueryStringQuery(queryStr))
+                .from(0).size(1).query(ejs.QueryStringQuery(queryStr))
                 .doSearch();
 
             searchPromise.then(function(data) {
@@ -37,46 +34,13 @@ module Camin {
                 }
                 log.debug("Results", data);
 
-                var oldsize = $scope.breadcrumbs.length;
-                for (var i = 0; i < data.hits.hits.length; i++) {
-                  var concat = function(breadcrumbs) {
-                    if ( breadcrumbs ) {
-                      if ( typeof breadcrumbs === 'string' ) {
-                        breadcrumbs = [ breadcrumbs ];
-                      }
-                      for (var j = 0; j < breadcrumbs.length; j++) {
-                        var id = breadcrumbs[j];
-                        if ( $scope.breadcrumbs.indexOf( id ) < 0 ) {
-                          $scope.breadcrumbs.push( id );
-                        }
-                      }
-                    }
-                  }
-                  if (angular.isDefined(data.hits.hits[i]._source.exchange.in)) {
-                    concat( data.hits.hits[i]._source.exchange.in.headers.ExtendedBreadcrumb );
-                  }
-                  if (angular.isDefined(data.hits.hits[i]._source.exchange.out)) {
-                    concat( data.hits.hits[i]._source.exchange.out.headers.ExtendedBreadcrumb );
-                  }
-                }
-                log.debug("Found " + data.hits.total + " ids");
-                if (oldsize != $scope.breadcrumbs.length) {
-                  searchRequest();
-                } else {
-                  var ids = [ ];
-                  for (var i = 0; i < data.hits.hits.length; i++) {
-                    var id = data.hits.hits[i]._id;
-                    if ( ids.indexOf( id ) < 0 ) {
-                      ids.push( id );
-                    }
-                  }
-
-                  var idSearchRequest = ejs.Request().types('camel');
-                  var idSearchPromise = idSearchRequest
-                    .from(0).size(1000).query(ejs.MatchAllQuery()).filter(ejs.IdsFilter(ids)).sort('@timestamp')
+                if (data.hits.hits.length == 1) {
+                  var breadcrumbQueryStr = "exchange.in.headers.breadcrumbId:\"" + data.hits.hits[0]._source.exchange.in.headers.breadcrumbId + "\"";
+                  var breadcrumbSearchPromise = request
+                    .from(0).size(1000).query(ejs.QueryStringQuery(breadcrumbQueryStr))
                     .doSearch();
-
-                  idSearchPromise.then(function(data) {
+                  breadcrumbSearchPromise.then(function(data) {
+                    log.debug("Results", data);
                     if(!(angular.isUndefined(data.error))) {
                       log.error(data.error);
                       return;
@@ -132,7 +96,17 @@ module Camin {
             var sequence = new Sequence();
             var exchangeToExec = { };
             // Sort events
-            events = events.sort(function(a,b) { return isoDate(a['@timestamp']) - isoDate(b['@timestamp']); })
+            events = events.sort(function(a:any,b:any) {
+              var result = isoDate(a['@timestamp']) - isoDate(b['@timestamp']);
+              if (result  == 0) {
+                if (a.exchange.id > b.exchange.id) {
+                  result = 1;
+                } else if (a.exchange.id < b.exchange.id) {
+                  result = -1;
+                }
+              }
+              return result ;
+            });
             // Extract endpoints and executions
             for (var i = 0; i < events.length; i++) {
                 if (events[i].event === 'Created') {
@@ -159,15 +133,14 @@ module Camin {
             for (var i = 0; i < events.length; i++) {
                 if (events[i].event === 'Sending' && events[i].exchange.in && events[i].exchange.in.headers) {
                     var callId = events[i].exchange.in.headers.AuditCallId;
-                    if (callId && calls[callId] === undefined) {
+                    if (callId && !calls[callId]) {
                         var evtSending:any = events[i];
                         var evtSent:any    = _.find(events, function(value: any, index) {
-                          return value.event === 'Sent' && evtSending.exchange.id === value.exchange.id
-                            && value.exchange.in.headers.AuditCallId === callId;
+                          return value.event === 'Sent' && evtSending.exchange.id === value.exchange.id;
                         });
                         var evtCreated: any = _.find(events, function(value: any, index) {
                           return value.event === 'Created' && evtSending.exchange.id !== value.exchange.id
-                            && value.exchange.in.headers.AuditCallId === callId;
+                            && evtSending.exchange.in.headers.AuditCallId === value.exchange.in.headers.AuditCallId;
                         });
                         var execA = exchangeToExec[ evtSending.exchange.id ];
                         var execB = evtCreated ? exchangeToExec[ evtCreated.exchange.id ] : null;
@@ -495,7 +468,7 @@ module Camin {
               .attr('y1', function(l) { return yt(l.taskB) + ht(l.taskB) / 2; })
               .attr('x2', function(l) { return x(l.taskB.start) - arrowWidth; })
               .attr('y2', function(l) { return yt(l.taskB) + ht(l.taskB) / 2 + arrowWidth; });
-            lines.append('line')
+          /*lines.append('line')
               .attr('x1', function(l) { return x(l.taskB.stop); })
               .attr('y1', function(l) { return yt(l.taskB) + ht(l.taskB) / 2; })
               .attr('x2', function(l) { return x(l.stop); })
@@ -514,7 +487,7 @@ module Camin {
               .attr('x1', function(l) { return x(l.stop); })
               .attr('y1', function(l) { return yt(l.taskA) + ht(l.taskA); })
               .attr('x2', function(l) { return x(l.stop) + arrowWidth; })
-              .attr('y2', function(l) { return yt(l.taskA) + ht(l.taskA) + arrowWidth; });
+              .attr('y2', function(l) { return yt(l.taskA) + ht(l.taskA) + arrowWidth; });*/
         }
 
         if ($routeParams["exchangeId"]) {
