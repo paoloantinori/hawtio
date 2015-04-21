@@ -9,6 +9,10 @@ module Camel {
         'value': false,
         'converter': Core.parseBooleanValue
       },
+      'camelShowInflightCounter': {
+        'value': true,
+        'converter': Core.parseBooleanValue
+      },
       'camelMaximumLabelWidth': {
         'value': Camel.defaultMaximumLabelWidth,
         'converter': parseInt
@@ -16,6 +20,10 @@ module Camel {
       'camelMaximumTraceOrDebugBodyLength': {
         'value': Camel.defaultCamelMaximumTraceOrDebugBodyLength,
         'converter': parseInt
+      },
+      'camelTraceOrDebugIncludeStreams': {
+        'value': Camel.defaultCamelTraceOrDebugIncludeStreams,
+        'converter': Core.parseBooleanValue
       },
       'camelRouteMetricMaxSeconds': {
         'value': Camel.defaultCamelRouteMetricMaxSeconds,

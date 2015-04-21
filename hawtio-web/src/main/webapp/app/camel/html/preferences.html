@@ -48,12 +48,20 @@
         <span class="help-block">The maximum length of a label in Camel diagrams before it is clipped</span>
       </div>
     </div>
-    <label class="control-label">Do not use ID for label</label>
 
+    <label class="control-label">Do not use ID for label</label>
     <div class="control-group">
       <div class="controls">
         <input type="checkbox" ng-model="camelIgnoreIdForLabel">
         <span class="help-block">If enabled then we will ignore the ID value when viewing a pattern in a Camel diagram; otherwise we will use the ID value as the label (the tooltip will show the actual detail)</span>
+      </div>
+    </div>
+
+    <label class="control-label">Show Inflight Counter</label>
+    <div class="control-group">
+      <div class="controls">
+        <input type="checkbox" ng-model="camelShowInflightCounter">
+        <span class="help-block">Whether to show inflight counter in route diagram</span>
       </div>
     </div>
 

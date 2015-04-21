@@ -88,11 +88,8 @@ module Camel {
 
     function updateData() {
       var routeXmlNode = getSelectedRouteNode(workspace);
-      $scope.nodeData = getRouteNodeJSON(routeXmlNode);
-
-      if (routeXmlNode) {
-        var nodeName = routeXmlNode.nodeName;
-        $scope.model = getCamelSchema(nodeName);
+      if (routeXmlNode != null) {
+        $scope.model = getCamelSchema(routeXmlNode.nodeName);
 
         if ($scope.model) {
           if (log.enabledFor(Logger.DEBUG)) {

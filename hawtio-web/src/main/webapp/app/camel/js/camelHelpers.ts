@@ -12,6 +12,7 @@ module Camel {
 
   export var defaultMaximumLabelWidth = 34;
   export var defaultCamelMaximumTraceOrDebugBodyLength = 5000;
+  export var defaultCamelTraceOrDebugIncludeStreams = true;
   export var defaultCamelRouteMetricMaxSeconds = 10;
   export var defaultHideOptionDocumentation = false;
   export var defaultHideOptionDefaultValue = false;
@@ -109,16 +110,15 @@ module Camel {
         answer[attr.name] = attr.value;
       });
 
-      // lets not iterate into routes or top level tags
+      // lets not iterate into routes/rests or top level tags
       var localName = routeXmlNode.localName;
-      if (localName !== "route" && localName !== "routes" && localName !== "camelContext") {
+      if (localName !== "route" && localName !== "routes" && localName !== "camelContext" && localName !== "rests") {
         // lets look for nested elements and convert those
         // explicitly looking for expressions
         $(routeXmlNode).children("*").each((idx, element) => {
           var nodeName = element.localName;
           var langSettings = Camel.camelLanguageSettings(nodeName);
           if (langSettings) {
-            // TODO the expression key could be anything really; how should we know?
             answer["expression"] = {
               language: nodeName,
               expression: element.textContent
@@ -177,7 +177,7 @@ module Camel {
           }
           // TODO deal with nested objects...
           var nested = $(routeXmlNode).children(key);
-          var element = null;
+          var element:Element = null;
           if (append || !nested || !nested.length) {
             var doc = routeXmlNode.ownerDocument || document;
             routeXmlNode.appendChild(doc.createTextNode("\n" + childIndent));
@@ -330,7 +330,7 @@ module Camel {
    * @method
    */
   export function isCamelPattern(nodeId) {
-    return Forms.isJsonType(nodeId, _apacheCamelModel, "org.apache.camel.model.OptionalIdentifiedDefinition");
+    return Forms.lookupDefinition(nodeId, _apacheCamelModel) != null;
   }
 
   /**
@@ -852,6 +852,27 @@ module Camel {
     return null;
   }
 
+  export function getSelectionCamelInflightRepository(workspace) : string {
+    if (workspace) {
+      var contextId = getContextId(workspace);
+      var selection = workspace.selection;
+      var tree = workspace.tree;
+      if (tree && selection) {
+        var domain = selection.domain;
+        if (domain && contextId) {
+          var result = tree.navigate(domain, contextId, "services");
+          if (result && result.children) {
+            var mbean = result.children.find(m => m.title.startsWith("DefaultInflightRepository"));
+            if (mbean) {
+              return mbean.objectName;
+            }
+          }
+        }
+      }
+    }
+    return null;
+  }
+
   // TODO should be a service
   export function getContextId(workspace:Workspace) {
     var selection = workspace.selection;
@@ -1004,6 +1025,7 @@ module Camel {
         if (typeName) messageData.headerTypes[key] = typeName;
 
         headerHtml += "<tr><td class='property-name'>" + key + "</td>" +
+                "<td class='property-value'>" + (humanizeJavaType(typeName)) + "</td>" +
                 "<td class='property-value'>" + (value || "") + "</td></tr>";
       }
     });
@@ -1034,9 +1056,20 @@ module Camel {
       var bodyText = body.textContent;
       var bodyType = body.getAttribute("type");
       messageData["body"] = bodyText;
-      messageData["bodyType"] = bodyType;
+      messageData["bodyType"] = humanizeJavaType(bodyType);
     }
     return messageData;
+  }
+
+  export function humanizeJavaType(type:String) {
+    if (!type) {
+      return "";
+    }
+    // skip leading java.lang
+    if (type.startsWith("java.lang")) {
+      return type.substr(10)
+    }
+    return type;
   }
 
   export function createBrowseGridOptions() {
@@ -1096,7 +1129,7 @@ module Camel {
         parentId = id;
       }
       var nodeSettings = getCamelSchema(nodeId);
-      var node = null;
+      var node:{} = null;
       if (nodeSettings) {
         var label = nodeSettings["title"] || nodeId;
         var uri = getRouteNodeUri(route);
@@ -1391,12 +1424,23 @@ module Camel {
   }
 
   /**
+   * Returns true if we should show inflight counter in Camel route diagram
+   * @method
+   */
+  export function showInflightCounter(localStorage) {
+    var value = localStorage["camelShowInflightCounter"];
+    // is default enabled
+    return Core.parseBooleanValue(value, true);
+  }
+
+
+  /**
    * Returns true if we should ignore ID values for labels in camel diagrams
    * @method
    */
   export function ignoreIdForLabel(localStorage) {
     var value = localStorage["camelIgnoreIdForLabel"];
-    return value && (value === "true" || value === true);
+    return Core.parseBooleanValue(value);
   }
 
   /**
@@ -1427,6 +1471,15 @@ module Camel {
       value = Camel.defaultCamelMaximumTraceOrDebugBodyLength;
     }
     return value;
+  }
+
+  /**
+   * Returns whether to include streams body for tracer and debugger
+   * @method
+   */
+  export function traceOrDebugIncludeStreams(localStorage) {
+    var value = localStorage["camelTraceOrDebugIncludeStreams"];
+    return Core.parseBooleanValue(value, Camel.defaultCamelTraceOrDebugIncludeStreams);
   }
 
   /**
