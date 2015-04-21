@@ -9,7 +9,8 @@ module Forms {
    *
    * This will include either the standard AngularJS widgets or custom widgets
    */
-  export function createWidget(propTypeName, property, schema, config, id, ignorePrefixInLabel, configScopeName, wrapInGroup = true, disableHumanizeLabel = false) {
+  export function createWidget(propTypeName, property, schema, config, id, ignorePrefixInLabel, configScopeName,
+                               wrapInGroup = true, disableHumanizeLabel = false) {
     var input:JQuery = null;
     var group:JQuery = null;
 
@@ -39,6 +40,9 @@ module Forms {
     };
     var safeId = Forms.safeIdentifier(id);
 
+    // mark as required
+    var required:boolean = property.required || false;
+
     var inputMarkup = createStandardWidgetMarkup(propTypeName, property, schema, config, options, safeId);
 
     if (inputMarkup) {
@@ -56,17 +60,15 @@ module Forms {
 
       input.attr('name', id);
 
-      try {
-        if (config.isReadOnly()) {
-          input.attr('readonly', 'true');
-        }
-      } catch (e) {
-        // ignore missing read only function
-      }
       var title = property.title ||  property.tooltip || property.label;
       if (title) {
         input.attr('title', title);
       }
+      var tooltip = property.tooltip || property.description;
+      if (tooltip) {
+        input.attr('tooltip', tooltip);
+      }
+
       var disableHumanizeLabelValue = disableHumanizeLabel || property.disableHumanizeLabel;
 
       // allow the prefix to be trimmed from the label if enabled
@@ -82,8 +84,11 @@ module Forms {
         group = this.getControlGroup(config, config, id);
         var labelText = property.title || property.label ||
           (disableHumanizeLabelValue ? defaultLabel : Core.humanizeValue(defaultLabel));
-        var labelElement = Forms.getLabel(config, config, labelText);
-        if (title) {
+        var labelElement = Forms.getLabel(config, config, labelText, required);
+        if (tooltip) {
+          // favor using the tooltip as the title so we get the long description when people hover the mouse over the label
+          labelElement.attr('title', tooltip);
+        } else if (title) {
           labelElement.attr('title', title);
         }
         group.append(labelElement);
@@ -162,18 +167,18 @@ module Forms {
     }
 
     // if in read-only mode, then configure the input accordingly
-    if (config.isReadOnly()) {
-      try {
-        input.attr('readonly', 'true');
-      } catch (e) {
-        // ignore missing read only function
+    try {
+      if (config.isReadOnly()) {
+          input.attr('readonly', 'true');
+        // for checkbox in read-only mode, need to be disabled otherwise ppl can change the values in the selectbox
+        if (input[0].localName === "select" || (input[0].localName === "input" && input.attr("type") === "checkbox")) {
+          input.attr('disabled', 'true');
+        }
       }
-      // for checkbox in read-only mode, need to be disabled otherwise ppl can change the values in the selectbox
-      if (input[0].localName === "select" || (input[0].localName === "input" && input.attr("type") === "checkbox")) {
-        input.attr('disabled', 'true');
-      }
+    } catch (e) {
+      // ignore missing read only function
     }
-    if (property.required) {
+    if (required) {
       // don't mark checkboxes as required
       if (input[0].localName === "select" || (input[0].localName === "input" && input.attr("type") === "checkbox")) {
         // lets not set required on a checkbox, it doesn't make any sense ;)
@@ -259,13 +264,13 @@ module Forms {
       return null;
     }
     var defaultValueConverter:(scope:any, modelName:string) => void = null;
-    var defaultValue = property.default;
+    var defaultValue = property.default || property.defaultValue;
     if (defaultValue) {
         // lets add a default value
         defaultValueConverter = (scope, modelName):void => {
           var value = Core.pathGet(scope, modelName);
           if (!value)  {
-            Core.pathSet(scope, modelName, property.default);
+            Core.pathSet(scope, modelName, defaultValue);
           }
         };
         options.valueConverter = defaultValueConverter;
@@ -274,7 +279,7 @@ module Forms {
     function getModelValueOrDefault(scope, modelName) {
       var value = Core.pathGet(scope, modelName);
       if (!value) {
-        var defaultValue = property.default;
+        var defaultValue = property.default || property.defaultValue;
         if (defaultValue) {
           value = defaultValue;
           Core.pathSet(scope, modelName, value);

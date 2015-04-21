@@ -12,7 +12,7 @@ describe("BaseHelpers", function() {
 
   it("returns prefixed url for absolute path", function() {
     spyOn(Core, 'windowLocation').andReturn({ pathname: "/a/b" });
-    spyOn($.fn, "attr").andReturn("/a");
+    spyOn($.fn, "attr").andReturn("/a/");
     expect(Core.url("/#")).toBe("/a/#");
     expect(Core.url("/a/b/c")).toBe("/a/a/b/c");
   });

@@ -41,6 +41,9 @@ module Core {
           _urlPrefix = (<JQueryStatic>$)('base').attr('href') || "";
           if (_urlPrefix.endsWith && _urlPrefix.endsWith('/')) {
               _urlPrefix = _urlPrefix.substring(0, _urlPrefix.length - 1);
+          } else if (_urlPrefix.lastIndexOf) {
+            // base may be "/hawtio/index.html"
+            _urlPrefix = _urlPrefix.substring(0, _urlPrefix.lastIndexOf('/'));
           }
         }
         if (_urlPrefix) {
