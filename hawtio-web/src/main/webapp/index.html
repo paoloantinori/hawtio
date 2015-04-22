@@ -167,7 +167,7 @@ div.log-stack-trace p:nth-child(odd) {
                     <i class="icon-user fixme"></i>&nbsp;&nbsp;<span>{{getUsername()}}</span>&nbsp;<span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu right">
-                    <li>
+                    <li class="item">
                       <a href="" ng-click="showPreferences()" 
                          title="Edit your preferences" 
                          data-placement="bottom">
@@ -175,13 +175,13 @@ div.log-stack-trace p:nth-child(odd) {
                       </a>
                     </li>
 
-                    <li ng-show="showLogout()">
+                    <li class="item" ng-show="showLogout()">
                       <a href="" title="Log out" data-placement="bottom" ng-click="logout()">
                         <i class="icon-signout fixme"></i> Log out
                       </a>
                     </li>
 
-                    <li>
+                    <li class="item">
                       <a ng-href="{{link('#/about', true)}}" title="About" data-placement="bottom">
                         <i class="icon-info"></i> About {{branding.name}}
                       </a>

@@ -1689,8 +1689,7 @@ a:hover {
 #main.container-fluid div .nav li {
   margin-bottom: 0;
   margin-top: 0;
-  padding-left: 0;
-  padding-right: 0;
+  padding: 0;
 }
 
 #main.container-fluid div .nav li a {
@@ -2049,9 +2048,8 @@ li.dropdown.open > a.dropdown-toggle {
   max-height: 22px;
 }
 
-.dropdown-menu > li:hover {
+.dropdown-menu > li.item:hover {
   color: #ffffff !important;
-  border-top: 1px solid #2289ba;
   background-color: #40a0ce !important;
   background-image: linear-gradient(to bottom, #40a0ce 0%, #3890ba 100%) !important;
   cursor: pointer;
@@ -2097,7 +2095,6 @@ li.dropdown.open > a.dropdown-toggle {
   padding-right: 10px !important;
   line-height: 24px !important;
   border-top: none;
-  max-height: 24px;
 }
 
 li.dropdown.open > a.dropdown-toggle {
@@ -2358,6 +2355,7 @@ div[ng-controller="Log.LogController"] .logbar .logbar-container {
 .hawtio-dropdown p {
   border-top: 1px solid #d4d4d4;
   border-bottom: 1px solid #d4d4d4;
+  margin: 0 -10px;
   background-image: linear-gradient(to bottom, #fff, #e5e5e5);
 }
 .dropdown.perspective-selector .dropdown-menu li.clear-recent {
