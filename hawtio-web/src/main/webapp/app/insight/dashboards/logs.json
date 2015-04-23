@@ -4,17 +4,57 @@
     "query": {
       "list": {
         "0": {
-          "query": "_type:log",
-          "alias": "",
-          "color": "#7EB26D",
+          "query": "_type:log AND level:TRACE",
+          "alias": "trace",
+          "color": "#E5A8E2",
           "id": 0,
+          "pin": false,
+          "type": "lucene",
+          "enable": true
+        },
+        "1": {
+          "query": "_type:log AND level:DEBUG",
+          "alias": "debug",
+          "color": "#1F78C1",
+          "id": 1,
+          "pin": false,
+          "type": "lucene",
+          "enable": true
+        },
+        "2": {
+          "query": "_type:log AND level:INFO",
+          "alias": "info",
+          "color": "#7EB26D",
+          "id": 2,
+          "pin": false,
+          "type": "lucene",
+          "enable": true
+        },
+        "3": {
+          "query": "_type:log AND level:WARN",
+          "alias": "warn",
+          "color": "#E5AC0E",
+          "id": 3,
+          "pin": false,
+          "type": "lucene",
+          "enable": true
+        },
+        "4": {
+          "query": "_type:log AND level:ERROR",
+          "alias": "error",
+          "color": "#BF1B00",
+          "id": 4,
           "pin": false,
           "type": "lucene",
           "enable": true
         }
       },
       "ids": [
-        0
+        0,
+        1,
+        2,
+        3,
+        4
       ]
     },
     "filter": {
@@ -44,7 +84,7 @@
       "collapsable": true,
       "panels": [
         {
-          "span": 12,
+          "span": 9,
           "editable": false,
           "group": [
             "default"
@@ -73,7 +113,11 @@
           "queries": {
             "mode": "selected",
             "ids": [
-              0
+              0,
+              1,
+              2,
+              3,
+              4
             ]
           },
           "title": "Log events over time",
@@ -94,7 +138,7 @@
           ],
           "options": true,
           "tooltip": {
-            "value_type": "cumulative",
+            "value_type": "individual",
             "query_as_alias": true
           },
           "scale": 1,
@@ -119,6 +163,43 @@
           "zerofill": true,
           "derivative": false,
           "draggable": false
+        },
+        {
+          "error": false,
+          "span": 3,
+          "editable": false,
+          "type": "terms",
+          "loadingEditor": false,
+          "field": "level",
+          "exclude": [],
+          "missing": false,
+          "other": false,
+          "size": 10,
+          "order": "count",
+          "style": {
+            "font-size": "10pt"
+          },
+          "donut": true,
+          "tilt": false,
+          "labels": true,
+          "arrangement": "horizontal",
+          "chart": "pie",
+          "counter_pos": "above",
+          "spyable": true,
+          "queries": {
+            "mode": "all",
+            "ids": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "tmode": "terms",
+          "tstat": "total",
+          "valuefield": "",
+          "title": "Levels"
         }
       ],
       "notice": false
@@ -167,7 +248,11 @@
           "queries": {
             "mode": "selected",
             "ids": [
-              0
+              0,
+              1,
+              2,
+              3,
+              4
             ]
           },
           "field_list": false,
@@ -198,7 +283,13 @@
       "notice": false,
       "query": "*",
       "pinned": true,
-      "history": [],
+      "history": [
+        "_type:log AND level:ERROR",
+        "_type:log AND level:WARN",
+        "_type:log AND level:INFO",
+        "_type:log AND level:DEBUG",
+        "_type:log AND level:TRACE"
+      ],
       "remember": 10,
       "enable": true
     },
