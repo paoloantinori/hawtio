@@ -11,7 +11,7 @@
         <span class="help-block"
               ng-hide="createVersion.id.$invalid">Leave blank to use the next available version number.</span>
         <span class="help-block"
-              ng-show="createVersion.id.$error.pattern">Version must contain numbers separated by dots.</span>
+              ng-show="createVersion.id.$error.pattern">Version must be composed only of lowercase letters, numbers, and any of the following symbols: -_.</span>
     </div>
     <div class="modal-footer">
       <button class="btn btn-success" ng-click="close(true)" ng-disabled="!createVersion.$valid" >Create</button>
