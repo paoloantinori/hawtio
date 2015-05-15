@@ -108,7 +108,7 @@ module Core {
           // logged out
           Core.executePreLogoutTasks(() => {
             if (localStorage['jvmConnect'] && localStorage['jvmConnect'] != "undefined") {
-              var jvmConnect = angular.fromJson(localStorage['jvmConnect'])
+              var jvmConnect = angular.fromJson(localStorage['jvmConnect']);
               _.each(jvmConnect, function(value) {
                 delete value['userName'];
                 delete value['password'];
@@ -118,14 +118,14 @@ module Core {
             localStorage.removeItem('activemqUserName');
             localStorage.removeItem('activemqPassword');
 
-            Core.executePostLogoutTasks(() => {
-              log.debug("Executing logout callback after successfully executed postLogoutTasks");
-              userDetails.username = null;
-              userDetails.password = null;
-              userDetails.loginDetails = null;
-              userDetails.remoteJolokiaUserDetails = null;
-              delete localStorage['userDetails'];
-            });
+            userDetails.username = null;
+            userDetails.password = null;
+            userDetails.loginDetails = null;
+            userDetails.remoteJolokiaUserDetails = null;
+            delete localStorage['userDetails'];
+            if (found) {
+              delete window.opener["passUserDetails"];
+            }
           });
         } else {
           jolokiaStatus.xhr = xhr;
