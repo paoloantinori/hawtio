@@ -14,9 +14,9 @@ module API {
     $scope.$watch("apidocs", enrichApiDocsWithSchema);
     $scope.$watch("jsonSchema", enrichApiDocsWithSchema);
 
-    $scope.tryInvoke = (resource, method) => {
+    $scope.tryInvoke = (base, resource, method) => {
       if (resource) {
-        var path = resource.fullPath || resource.path;
+        var path = resource.fullPath || base + "/" + resource.path;
         if (path) {
           // lets substitue the parameters
           angular.forEach(resource.param, (param) => {
