@@ -274,6 +274,7 @@
     <module>hawtio-fabric8-branding</module>
     <module>hawtio-karaf</module>
     <module>hawtio-custom-app</module>
+    <module>swagger-ui</module>
   </modules>
 
   <build>

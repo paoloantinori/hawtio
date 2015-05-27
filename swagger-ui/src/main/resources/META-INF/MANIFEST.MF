@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-Description: hawtio :: Swagger UI
+Bundle-License: http://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: hawtio :: Swagger UI
+Bundle-SymbolicName: io.hawt.swagger.hawtio-swagger-ui
+Bundle-Version: ${project.version}
+Implementation-Title: hawtio :: Swagger UI
+Implementation-Version: ${project.version}
+Web-ContextPath: /hawtio-swagger
+Webapp-Context: /hawtio-swagger
