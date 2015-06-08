@@ -3,6 +3,7 @@ package io.hawt.web;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.regex.Pattern;
 import java.util.List;
 import javax.servlet.Filter;
