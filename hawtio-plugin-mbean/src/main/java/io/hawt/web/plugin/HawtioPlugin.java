@@ -75,7 +75,13 @@ public class HawtioPlugin implements HawtioPluginMBean {
                 mBeanServer.unregisterMBean(objectName);
             }
         } catch (Throwable t) {
-            LOG.error("Failed to register plugin: ", t);
+            if (t instanceof javax.management.InstanceNotFoundException) {
+                //timing issue when stop different bundles
+                //it's harmless so that the debug level log is sufficient
+                LOG.debug("Can't find MBean Instance when destroy context", t);
+            } else {
+                LOG.error("Failed to unregister plugin: ", t);
+            }
         }
     }
 
