@@ -270,7 +270,7 @@
     </listener>
 
     <listener>
-        <listener-class>org.apache.commons.fileupload.servlet.FileCleanerCleanup</listener-class>
+        <listener-class>io.hawt.web.FileCleanerCleanup</listener-class>
     </listener>
 
     <error-page>
