@@ -34,11 +34,6 @@ module FabricRequirements {
         isActive: () => UrlHelpers.contextActive($location.path(), 'sshConfig')
       },
       '2': {
-        name: 'Docker Configuration',
-        href: () => FabricRequirements.requirementsHash + '/dockerConfig',
-        isActive: () => UrlHelpers.contextActive($location.path(), 'dockerConfig')
-      },
-      '3': {
         name: 'Status',
         href: () => FabricRequirements.requirementsHash + '/status',
         isActive: () => UrlHelpers.contextActive($location.path(), 'status')
