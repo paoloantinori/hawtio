@@ -71,7 +71,7 @@ module Jmx {
         },
         'type': {
           tooltip: 'Attribute type',
-          type: 'strig',
+          type: 'string',
           readOnly: 'true'
         }
       }
