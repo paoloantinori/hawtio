@@ -59,7 +59,6 @@ module Jmx {
     var attributeSchemaBasic = {
       properties: {
         'key': {
-          description: 'Key',
           tooltip: 'Attribute key',
           type: 'string',
           readOnly: 'true'
@@ -71,9 +70,8 @@ module Jmx {
           formTemplate: "<textarea class='input-xlarge' rows='2' readonly='true'></textarea>"
         },
         'type': {
-          description: 'Type',
           tooltip: 'Attribute type',
-          type: 'string',
+          type: 'strig',
           readOnly: 'true'
         }
       }
