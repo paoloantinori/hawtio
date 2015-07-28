@@ -284,6 +284,7 @@ public class MavenIndexerFacade extends MBeanSupport implements MavenIndexerFaca
                     LOG.error("Discarding unsupported URL provided to Maven Indexer Service: {}", url, e );
                 }
             }
+            this.repositories = new String[input.length];
             result.toArray(this.repositories);
         }
     }
