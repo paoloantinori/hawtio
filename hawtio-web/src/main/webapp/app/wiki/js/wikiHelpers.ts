@@ -269,7 +269,7 @@ module Wiki {
     {
       label: "Text Document",
       tooltip: "A plain text file",
-      exemplar: "document.text",
+      exemplar: "document.txt",
       regex: defaultFileNamePattern,
       invalid: defaultFileNamePatternInvalid,
       extension: ".txt"
