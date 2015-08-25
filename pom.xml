@@ -49,7 +49,7 @@
   </prerequisites>
 
   <properties>
-    <jettyPort>8282</jettyPort>
+    <jettyPort>8383</jettyPort>
     <context>/hawtio</context>
     <hawtio-config-dir>${basedir}/hawtio-config</hawtio-config-dir>
     <hawtio-config-repo>https://github.com/hawtio/hawtio-config.git</hawtio-config-repo>
@@ -121,7 +121,7 @@
 <!--
     <jetty-version>8.1.3.v20120416</jetty-version>
 -->
-    <jetty-version>7.6.9.v20130131</jetty-version>
+    <jetty-version>7.6.16.v20140903</jetty-version>
     <jetty-plugin-groupId>org.mortbay.jetty</jetty-plugin-groupId>
     <jetty-plugin-version>7.6.16.v20140903</jetty-plugin-version>
     <jetty-webapp-artifactId>jetty-webapp</jetty-webapp-artifactId>
