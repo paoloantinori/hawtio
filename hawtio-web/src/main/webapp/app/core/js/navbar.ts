@@ -159,7 +159,14 @@ module Core {
     };
 
     $scope.fullScreenLink = () => {
-      var href = "#" + $location.path() + "?tab=notree";
+      var tab = $location.search()["tab"];
+      if (!tab) {
+        tab = "notree";
+      }
+      if (!tab.match(/notree$/)) {
+        tab = tab + ":notree";
+      }
+      var href = "#" + $location.path() + "?tab=" + tab;
       return createHref($location, href, ['tab']);
     };
 
