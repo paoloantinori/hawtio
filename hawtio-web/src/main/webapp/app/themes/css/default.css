@@ -271,10 +271,6 @@ tr td.focus {
   background: inherit;
 }
 
-.ngCellText:hover i:before {
-  text-shadow: 0px 0px 8px #969696;
-}
-
 .ACTIVE:before {
   color: #777777;
 }
