@@ -216,7 +216,8 @@ module Camel {
       content: '<i class="icon-picture"></i> Route Diagram',
       title: "View a diagram of the Camel routes",
       isValid: (workspace: Workspace) => workspace.isTopTabActive("camel")
-        && workspace.isRoute()
+        && !workspace.isEndpointsFolder()
+        && (workspace.isRoute() || workspace.isRoutesFolder())
         && workspace.hasInvokeRightsForName(getSelectionCamelContextMBean(workspace), "dumpRoutesAsXml"),
       href: () => "#/camel/routes",
       // make sure we have route diagram shown first
