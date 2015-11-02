@@ -1649,9 +1649,17 @@ a:hover {
   height: 22px;
 }
 
+#main-nav .main-nav-upper .nav li.dropdown .dropdown-menu li:hover{
+  border: none;
+  color: #ffffff !important;
+  background-color: #40a0ce !important;
+  background-image: linear-gradient(to bottom, #40a0ce 0%, #3890ba 100%) !important;
+}
 #main-nav .main-nav-upper .nav li.dropdown .dropdown-menu li:hover a {
   border: none;
-  color: white;
+  color: #ffffff !important;
+  background-color: #40a0ce !important;
+  background-image: linear-gradient(to bottom, #40a0ce 0%, #3890ba 100%) !important;
 }
 
 #main-nav .navbar-inner.main-nav-upper .nav li.active a {
