@@ -30,13 +30,13 @@
           <li class="divider">
           </li>
           -->
-          <li ng-hide="gridOptions.selectedItems.length !== 1" hawtio-show object-name="{{gitMBean}}" method-name="rename">
+          <li class="item" ng-hide="gridOptions.selectedItems.length !== 1" hawtio-show object-name="{{gitMBean}}" method-name="rename">
             <a ng-click="openRenameDialog()"
                title="Rename the selected document"
                data-placement="bottom">
               <i class="icon-adjust"></i> Rename</a>
           </li>
-          <li ng-hide="!gridOptions.selectedItems.length" hawtio-show object-name="{{gitMBean}}" method-name="rename">
+          <li class="item" ng-hide="!gridOptions.selectedItems.length" hawtio-show object-name="{{gitMBean}}" method-name="rename">
             <a ng-click="openMoveDialog()"
                title="move the selected documents to a new folder"
                data-placement="bottom">
@@ -46,7 +46,7 @@
           <li class="divider">
           </li>
           -->
-          <li ng-hide="!gridOptions.selectedItems.length" hawtio-show object-name="{{gitMBean}}" method-name="remove">
+          <li class="item" ng-hide="!gridOptions.selectedItems.length" hawtio-show object-name="{{gitMBean}}" method-name="remove">
             <a ng-click="openDeleteDialog()"
                title="Delete the selected document(s)"
                data-placement="bottom">
@@ -54,7 +54,7 @@
           </li>
           <li class="divider" ng-show="childActions.length">
           </li>
-          <li ng-repeat="childAction in childActions">
+          <li class="item" ng-repeat="childAction in childActions">
             <a ng-click="childAction.doAction()"
                title="{{childAction.title}}"
                data-placement="bottom">
