@@ -140,27 +140,18 @@ module Camel {
                     endpointsFolder.key = endpointsNode.key;
                     endpointsFolder.domain = endpointsNode.domain;
                   }
-                  var jmxNode = new Folder("MBeans");
 
                   // lets add all the entries which are not one context/routes/endpoints
-                  angular.forEach(entries, (jmxChild, name) => {
-                    if (name !== "context" && name !== "routes" && name !== "endpoints") {
-                      if (Core.matchFilterIgnoreCase(jmxChild.title, contextFilterText)) {
-                        jmxNode.children.push(jmxChild);
-                        expandFolder(jmxNode, contextFilterText);
-                      }                    }
-                  });
-
-                  if (jmxNode.children.length > 0) {
-                    jmxNode.sortChildren(false);
-                    folder.children.push(jmxNode);
-                  }
+                  var jmxNode = new Folder("MBeans");
+                  addMBeanFolder(entries, jmxNode, folder, contextFilterText);
 
                   // Only add the context node if it, or any children matched filter text
                   if (Core.matchFilterIgnoreCase(contextNode.title, contextFilterText) && !(folder.children.find(c => c.expand == true))) {
                     // The filter text only matched the top-level context node, so add all required items for its child folders
                     addContextFolderChildren(folder, routesFolder, routesNode);
                     addContextFolderChildren(folder, endpointsFolder, endpointsNode);
+                    addMBeanFolder(entries, jmxNode, folder);
+
                     folder.parent = rootFolder;
                     children.push(folder);
                   } else if (folder.children.length) {
@@ -222,6 +213,24 @@ module Camel {
       // Expands a folder if some filter text is present
       if (contextFilterText && contextFilterText.trim().length) {
         folder.expand = true;
+      }
+    }
+
+    function addMBeanFolder(entries, jmxFolder, contextFolder, contextFilterText = null) {
+      if (jmxFolder.children && jmxFolder.children.length == 0) {
+        angular.forEach(entries, (jmxChild, name) => {
+          if (name !== "context" && name !== "routes" && name !== "endpoints") {
+            if (Core.matchFilterIgnoreCase(jmxChild.title, contextFilterText)) {
+              jmxFolder.children.push(jmxChild);
+              expandFolder(jmxFolder, contextFilterText);
+            }
+          }
+        });
+
+        if (jmxFolder.children.length) {
+          jmxFolder.sortChildren(false);
+          contextFolder.children.push(jmxFolder);
+        }
       }
     }
   }]);
