@@ -79,7 +79,6 @@
     <activemq-leveldb-artifactid>activemq-leveldb-store</activemq-leveldb-artifactid>
     <aether-version>1.13.1</aether-version>
     <apollo-version>99-trunk-SNAPSHOT</apollo-version>
-    <scala-version>2.10.0</scala-version>
     <atmosphere-version>1.0.18</atmosphere-version>
     <blueprint-web-version>1.0.0</blueprint-web-version>
     <build-helper-maven-plugin-version>1.7</build-helper-maven-plugin-version>
@@ -142,7 +141,9 @@
     <ops4j-pax-web-version>3.0.1</ops4j-pax-web-version>
     <ops4j-pax-url-version>1.5.2</ops4j-pax-url-version>
     <osgi-version>4.2.0</osgi-version>
+
     <org-json-version>20070829</org-json-version>
+    <scala-version>2.10.0</scala-version>
     <servlet-api-version>2.5</servlet-api-version>
 
     <slf4j-api-version>1.6.6</slf4j-api-version>
@@ -150,9 +151,10 @@
 
     <spring-version>3.2.11.RELEASE</spring-version>
     <spring-boot-version>1.1.6.RELEASE</spring-boot-version>
-    <xbean-version>3.16</xbean-version>
+    <unsigner-maven-plugin-version>0.2</unsigner-maven-plugin-version>
     <wagon-version>2.7</wagon-version>
     <war-plugin-version>2.1.1</war-plugin-version>
+    <xbean-version>3.16</xbean-version>
   </properties>
 
   <repositories>
