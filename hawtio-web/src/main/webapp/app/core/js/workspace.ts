@@ -89,7 +89,7 @@ module Core {
     public loadTree() {
       // Make an initial blocking call to ensure the JMX tree is populated while the
       // app is initializing...
-      var flags = {ignoreErrors: true, maxDepth: 7};
+      var flags = {ignoreErrors: true, maxDepth: 2};
       var data = this.jolokia.list(null, onSuccess(null, flags));
 
       if (data) {
