@@ -153,10 +153,10 @@ public class RBACRegistry implements RBACRegistryMBean {
                 // jsonifiedMBeanInfo should not be null here and *may* be cached
                 if (mbeanInfoKey != null) {
                     // in hawtio we'll check `typeof info === 'string'` (angular.isString(info))
-                    domain.put(nameObject.getCanonicalKeyPropertyListString(), mbeanInfoKey);
+                    domain.put(nameObject.getKeyPropertyListString(), mbeanInfoKey);
                 } else {
                     // angular.isObject(info)
-                    domain.put(nameObject.getCanonicalKeyPropertyListString(), jsonifiedMBeanInfo);
+                    domain.put(nameObject.getKeyPropertyListString(), jsonifiedMBeanInfo);
                 }
 
                 visited.add(nameObject);
