@@ -884,7 +884,11 @@ module Fabric {
     // lets default to the user/pwd for the login
     var userDetails = <Core.UserDetails> Core.injector.get("userDetails");
     log.info("Logging into remote jolokia " + url + " using user details: " + StringHelpers.toString(userDetails));
-    return Core.createJolokia(url, <string> userDetails.username, <string> userDetails.password);
+    if (userDetails['remoteJolokiaUserDetails']) {
+      return Core.createJolokia(url, <string> userDetails.remoteJolokiaUserDetails.username, <string> userDetails.remoteJolokiaUserDetails.password);
+    } else {
+      return Core.createJolokia(url, <string> userDetails.username, <string> userDetails.password);
+    }
   }
 
   export function registeredProviders(jolokia) {
