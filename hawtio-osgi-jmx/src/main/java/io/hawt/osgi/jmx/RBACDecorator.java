@@ -26,20 +26,14 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
-import javax.management.MBeanAttributeInfo;
 import javax.management.MBeanInfo;
-import javax.management.MBeanNotificationInfo;
-import javax.management.MBeanOperationInfo;
-import javax.management.MBeanParameterInfo;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 import javax.management.openmbean.CompositeData;
@@ -55,12 +49,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * <p>Generally we do enhanced Jolokia <code>list</code> operation, but if OSGi env is found we decorate the returned
- * objects with RBAC information.</p>
+ * <p>An MBean that may be used by <code>hawtio:type=security,name=RBACRegistry</code> to decorate optimized
+ * jolokia <code>list</code> operation with RBAC info.</p>
  */
-public class RBACRegistry implements RBACRegistryMBean {
+public class RBACDecorator implements RBACDecoratorMBean {
 
-    public static Logger LOG = LoggerFactory.getLogger(RBACRegistry.class);
+    public static Logger LOG = LoggerFactory.getLogger(RBACDecorator.class);
 
     private static final String JMX_ACL_PID_PREFIX = "jmx.acl";
     private static final String JMX_OBJECTNAME_PROPERTY_WILDCARD = "_";
@@ -71,13 +65,13 @@ public class RBACRegistry implements RBACRegistryMBean {
     private ObjectName objectName;
     private MBeanServer mBeanServer;
 
-    public RBACRegistry(BundleContext bundleContext) {
+    public RBACDecorator(BundleContext bundleContext) {
         this.bundleContext = bundleContext;
     }
 
     void init() throws Exception {
         if (objectName == null) {
-            objectName = new ObjectName("hawtio:type=security,name=RBACRegistry");
+            objectName = new ObjectName("hawtio:type=security,area=jolokia,name=RBACDecorator");
         }
         if (mBeanServer == null) {
             mBeanServer = ManagementFactory.getPlatformMBeanServer();
@@ -91,89 +85,13 @@ public class RBACRegistry implements RBACRegistryMBean {
         }
     }
 
-    @Override
-    public Map<String, Object> list() throws Exception {
-        Map<String, Object> result = new HashMap<>();
-
-        // domain -> [mbean, mbean, ...], where mbean is either inline jsonified MBeanInfo or a key to shared
-        // jsonified MBeanInfo
-        Map<String, Map<String, Object>> domains = new HashMap<>();
-        // if MBean is found to be "special", we can cache JSONified MBeanInfo (an object with "op", "attr" and "desc"
-        // properties)
-        // key -> [mbeaninfo, mbeaninfo, ...]
-        Map<String, Map<String, Object>> cache = new HashMap<>();
-
-        result.put("cache", cache);
-        result.put("domains", domains);
-
-        if (mBeanServer == null) {
-            return result;
-        }
-
-        Set<ObjectName> visited = new HashSet<>();
-
-        // see: org.jolokia.backend.executor.AbstractMBeanServerExecutor.each()
-        for (ObjectName nameObject : mBeanServer.queryNames(null, null)) {
-            // Don't add if already visited previously
-            if (!visited.contains(nameObject)) {
-                Map<String, Object> jsonifiedMBeanInfo = null;
-
-                Map<String, Object> domain = domains.get(nameObject.getDomain());
-                if (domain == null) {
-                    domain = new HashMap<>();
-                    domains.put(nameObject.getDomain(), domain);
-                }
-
-                // Let's try to avoid invoking getMBeanInfo. simply domain+type attr is not enough, but we may
-                // detect special cases
-                String mbeanInfoKey = isSpecialMBean(nameObject);
-                if (mbeanInfoKey != null && cache.containsKey(mbeanInfoKey)) {
-                    jsonifiedMBeanInfo = cache.get(mbeanInfoKey);
-                } else {
-                    // we may have to assemble the info on the fly
-                    MBeanInfo mBeanInfo = mBeanServer.getMBeanInfo(nameObject);
-
-                    // 2nd level of special cases - a bit slower (we had to getMBeanInfo(), but we may try
-                    // cache by MBean's domain and class
-                    if (mbeanInfoKey == null) {
-                        mbeanInfoKey = isSpecialClass(nameObject, mBeanInfo);
-                    }
-                    if (mbeanInfoKey != null && cache.containsKey(mbeanInfoKey)) {
-                        jsonifiedMBeanInfo = cache.get(mbeanInfoKey);
-                    }
-
-                    // hard work here:
-                    jsonifiedMBeanInfo = jsonifyMBeanInfo(mBeanInfo);
-
-                    if (mbeanInfoKey != null) {
-                        cache.put(mbeanInfoKey, jsonifiedMBeanInfo);
-                    }
-                }
-
-                // jsonifiedMBeanInfo should not be null here and *may* be cached
-                if (mbeanInfoKey != null) {
-                    // in hawtio we'll check `typeof info === 'string'` (angular.isString(info))
-                    domain.put(nameObject.getKeyPropertyListString(), mbeanInfoKey);
-                } else {
-                    // angular.isObject(info)
-                    domain.put(nameObject.getKeyPropertyListString(), jsonifiedMBeanInfo);
-                }
-
-                visited.add(nameObject);
-            }
-        }
-
-        tryAddRBACInfo(result);
-
-        return result;
-    }
-
     /**
-     * If we have access to {@link org.osgi.service.cm.ConfigurationAdmin}, we can add RBAC information
+     * If we have access to {@link ConfigurationAdmin}, we can add RBAC information
      * @param result
      */
+    @Override
     @SuppressWarnings("unchecked")
-    private void tryAddRBACInfo(Map<String, Object> result) {
+    public void decorate(Map<String, Object> result) throws Exception {
         try {
             ServiceReference<ConfigurationAdmin> cmRef = bundleContext.getServiceReference(ConfigurationAdmin.class);
             ServiceReference<JMXSecurityMBean> jmxSecRef = bundleContext.getServiceReference(JMXSecurityMBean.class);
@@ -254,7 +172,7 @@ public class RBACRegistry implements RBACRegistryMBean {
                         ObjectName objectName = new ObjectName((String) ((CompositeData) cd).get("ObjectName"));
                         boolean canInvoke = ((CompositeData) cd).get("CanInvoke") != null ? (Boolean) ((CompositeData) cd).get("CanInvoke") : false;
                         Object mBeanInfoOrKey = domains.get(objectName.getDomain()).get(objectName.getKeyPropertyListString());
-                        Map<String, Object> mBeanInfo = null;
+                        Map<String, Object> mBeanInfo;
                         if (mBeanInfoOrKey instanceof Map) {
                             mBeanInfo = (Map<String, Object>) mBeanInfoOrKey;
                         } else /*if (mBeanInfoOrKey instanceof String) */{
@@ -273,7 +191,7 @@ public class RBACRegistry implements RBACRegistryMBean {
                         String method = (String) ((CompositeData) cd).get("Method");
                         boolean canInvoke = ((CompositeData) cd).get("CanInvoke") != null ? (Boolean) ((CompositeData) cd).get("CanInvoke") : false;
                         Object mBeanInfoOrKey = domains.get(objectName.getDomain()).get(objectName.getKeyPropertyListString());
-                        Map<String, Object> mBeanInfo = null;
+                        Map<String, Object> mBeanInfo;
                         if (mBeanInfoOrKey instanceof Map) {
                             mBeanInfo = (Map<String, Object>) mBeanInfoOrKey;
                         } else /*if (mBeanInfoOrKey instanceof String) */{
@@ -285,7 +203,7 @@ public class RBACRegistry implements RBACRegistryMBean {
                     }
 
                     result.remove("cache");
-                    result.put("rbacCache", rbacCache);
+                    result.put("cache", rbacCache);
                 }
             }
         } catch (Exception e) {
@@ -339,7 +257,7 @@ public class RBACRegistry implements RBACRegistryMBean {
     }
 
     /**
-     * Prepares list of operation signatures to pass to {@link JMXSecurityMBean#canInvoke(java.util.Map)}
+     * Prepares list of operation signatures to pass to {@link JMXSecurityMBean#canInvoke(Map)}
      * @param ops
      * @return
      */
@@ -348,7 +266,7 @@ public class RBACRegistry implements RBACRegistryMBean {
         List<String> result = new LinkedList<>();
         for (String operation : ops.keySet()) {
             Object operationOrListOfOperations = ops.get(operation);
-            List<Map<String, Object>> toStringify = null;
+            List<Map<String, Object>> toStringify;
             if (operationOrListOfOperations instanceof List) {
                 toStringify = (List<Map<String, Object>>) operationOrListOfOperations;
             } else /*if (operationOrListOfOperations instanceof Map) */{
@@ -506,142 +424,6 @@ public class RBACRegistry implements RBACRegistryMBean {
         }
 
         return pids1.size() == 0;
-    }
-
-    /**
-     * This method duplicates what Jolokia does in List Handler in order to convert {@link MBeanInfo} to JSON.
-     * @param mBeanInfo
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    private Map<String,Object> jsonifyMBeanInfo(MBeanInfo mBeanInfo) {
-        Map<String, Object> result = new LinkedHashMap<>();
-
-        // desc
-        result.put("desc", mBeanInfo.getDescription());
-
-        // attr
-        Map<String, Object> attrMap = new LinkedHashMap<>();
-        result.put("attr", attrMap);
-        for (MBeanAttributeInfo attrInfo : mBeanInfo.getAttributes()) {
-            Map<String, Object> attr = new HashMap<>();
-            attr.put("type", attrInfo.getType());
-            attr.put("desc", attrInfo.getDescription());
-            attr.put("rw", attrInfo.isWritable() && attrInfo.isReadable());
-            attrMap.put(attrInfo.getName(), attr);
-        }
-
-        // op
-        Map<String, Object> opMap = new LinkedHashMap<>();
-        result.put("op", opMap);
-        for (MBeanOperationInfo opInfo : mBeanInfo.getOperations()) {
-            Map<String, Object> map = new HashMap<>();
-            List<Map<String, String>> argList = new ArrayList<>(opInfo.getSignature().length);
-            for (MBeanParameterInfo paramInfo : opInfo.getSignature()) {
-                Map<String, String> args = new HashMap<>();
-                args.put("desc", paramInfo.getDescription());
-                args.put("name", paramInfo.getName());
-                args.put("type", paramInfo.getType());
-                argList.add(args);
-            }
-            map.put("args", argList);
-            map.put("ret", opInfo.getReturnType());
-            map.put("desc", opInfo.getDescription());
-            Object ops = opMap.get(opInfo.getName());
-            if (ops != null) {
-                if (ops instanceof List) {
-                    // If it is already a list, simply add it to the end
-                    ((List) ops).add(map);
-                } else if (ops instanceof Map) {
-                    // If it is a map, add a list with two elements
-                    // (the old one and the new one)
-                    List<Object> opList = new LinkedList<>();
-                    opList.add(ops);
-                    opList.add(map);
-                    opMap.put(opInfo.getName(), opList);
-                }
-            } else {
-                // No value set yet, simply add the map as plain value
-                opMap.put(opInfo.getName(), map);
-            }
-        }
-
-        // not
-        Map<String, Object> notMap = new LinkedHashMap<>();
-        result.put("not", notMap);
-        for (MBeanNotificationInfo notInfo : mBeanInfo.getNotifications()) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("name", notInfo.getName());
-            map.put("desc", notInfo.getDescription());
-            String[] types = notInfo.getNotifTypes();
-            List<String> tList = new ArrayList<>(types.length);
-            Collections.addAll(tList, types);
-            map.put("types", tList);
-            notMap.put(notInfo.getName(), map);
-        }
-
-        return result;
-    }
-
-    /**
-     * If the {@link ObjectName} is detected as <em>special</em> (when we may have thousands of such MBeans), we
-     * return a key to lookup already processed {@link MBeanInfo}
-     * @param nameObject
-     * @return
-     */
-    private String isSpecialMBean(ObjectName nameObject) {
-        String domain = nameObject.getDomain();
-        if ("org.apache.activemq".equals(domain)) {
-            String destinationType = nameObject.getKeyProperty("destinationType");
-            // see: org.apache.activemq.command.ActiveMQDestination.getDestinationTypeAsString()
-            if ("Queue".equals(destinationType)) {
-                return "activemq:queue";
-            }
-            if ("TempQueue".equals(destinationType)) {
-                return "activemq:tempqueue";
-            }
-            if ("Topic".equals(destinationType)) {
-                return "activemq:topic";
-            }
-            if ("TempTopic".equals(destinationType)) {
-                return "activemq:temptopic";
-            }
-        } else if ("org.apache.camel".equals(domain)) {
-            String type = nameObject.getKeyProperty("type");
-            // TODO: verify: "type" attribute is not enough - we have to know real class of MBean
-            return null;
-        }
-
-        return null;
-    }
-
-    /**
-     * If some combination of {@link ObjectName} and MBean's class name is detected as <em>special</em>, we may
-     * cache the JSONified {@link MBeanInfo} as well
-     * @param nameObject
-     * @param mBeanInfo
-     * @return
-     */
-    private String isSpecialClass(ObjectName nameObject, MBeanInfo mBeanInfo) {
-        String domain = nameObject.getDomain();
-        if ("org.apache.camel".equals(domain) && mBeanInfo.getClassName() != null) {
-            // some real data in env with 12 Camel contexts deployed
-            //  - components (total: 102)
-            //  - consumers (total: 511)
-            //  - context (total: 12)
-            //  - endpoints (total: 818)
-            //  - errorhandlers (total: 12)
-            //  - eventnotifiers (total: 24)
-            //  - processors (total: 3600)
-            //  - producers (total: 1764)
-            //  - routes (total: 511)
-            //  - services (total: 548)
-            //  - threadpools (total: 66)
-            //  - tracer (total: 24)
-            return "camel::" + mBeanInfo.getClassName();
-        }
-
-        return null;
     }
 
     /**

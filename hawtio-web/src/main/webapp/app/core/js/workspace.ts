@@ -92,14 +92,14 @@ module Core {
       } else {
         flags.maxDepth = 9;
         var res = this.jolokia.execute(this.jolokiaStatus.listMBean, "list()", onSuccess(cb, flags));
-        if (res['domains'] && res['rbacCache']) {
+        if (res['domains'] && res['cache']) {
           // post process cached RBAC info
           for (var domainName in res['domains']) {
             var domainClass = escapeDots(domainName);
             var domain = <Core.JMXDomain> res['domains'][domainName];
             for (var mbeanName in domain) {
               if (angular.isString(domain[mbeanName])) {
-                domain[mbeanName] = <Core.JMXMBean>res['rbacCache']["" + domain[mbeanName]];
+                domain[mbeanName] = <Core.JMXMBean>res['cache']["" + domain[mbeanName]];
               }
             }
           }

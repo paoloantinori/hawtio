@@ -7,7 +7,7 @@ public class Activator implements BundleActivator {
 
     private OSGiTools osgiTools;
     private ConfigAdmin configAdmin;
-    private RBACRegistry rbacRegistry;
+    private RBACDecorator rbacDecorator;
 
     @Override
     public void start(BundleContext context) throws Exception {
@@ -17,13 +17,13 @@ public class Activator implements BundleActivator {
         configAdmin = new ConfigAdmin(context);
         configAdmin.init();
 
-        rbacRegistry = new RBACRegistry(context);
-        rbacRegistry.init();
+        rbacDecorator = new RBACDecorator(context);
+        rbacDecorator.init();
     }
 
     @Override
     public void stop(BundleContext context) throws Exception {
-        rbacRegistry.destroy();
+        rbacDecorator.destroy();
         configAdmin.destroy();
         osgiTools.destroy();
     }

@@ -16,9 +16,6 @@
 package io.hawt.osgi.jmx;
 
 import java.util.Map;
-import javax.management.InstanceNotFoundException;
-import javax.management.IntrospectionException;
-import javax.management.ReflectionException;
 
 /**
  * <p>MBean that optimizes access to Karaf's RBAC services.</p>
@@ -32,14 +29,14 @@ import javax.management.ReflectionException;
  * map that is complete, but optimized (uses shared JSON elements that can be processed by hawtio client
  * app itself).</p>
  */
-public interface RBACRegistryMBean {
+public interface RBACDecoratorMBean {
 
     /**
-     * Returns {@link Map} (that can be nicely handled by Jolokia) containing everything that is initially
+     * Decorates {@link Map} (that can be nicely handled by Jolokia) containing everything that is initially
      * needed by hawtio client application. It's an optimized and dedicated method that runs much faster than
      * sequence of relevant Jolokia operations (LIST+EXEC with maxDepth=7).
      * @return
      */
-    Map<String, Object> list() throws Exception;
+    void decorate(Map<String, Object> map) throws Exception;
 
 }

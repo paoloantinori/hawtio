@@ -40,15 +40,15 @@ public class RBACRegistryTest {
 
     @Test
     public void objectNameSplitting() throws MalformedObjectNameException {
-        assertThat(RBACRegistry.nameSegments(new ObjectName("a.b:type=a,name=b")).toArray(new String[3]),
+        assertThat(RBACDecorator.nameSegments(new ObjectName("a.b:type=a,name=b")).toArray(new String[3]),
                 equalTo(new String[] { "a.b", "a", "b" }));
-        assertThat(RBACRegistry.nameSegments(new ObjectName("a.b:name=b,type=a")).toArray(new String[3]),
+        assertThat(RBACDecorator.nameSegments(new ObjectName("a.b:name=b,type=a")).toArray(new String[3]),
                 equalTo(new String[] { "a.b", "a", "b" }));
     }
 
     @Test
     public void iteratingDownPids() {
-        assertThat(RBACRegistry.iterateDownPids(Arrays.asList("a.b", "c", "d")).toArray(new String[4]),
+        assertThat(RBACDecorator.iterateDownPids(Arrays.asList("a.b", "c", "d")).toArray(new String[4]),
                 equalTo(new String[] { "jmx.acl.a.b.c.d", "jmx.acl.a.b.c", "jmx.acl.a.b", "jmx.acl" }));
     }
 
@@ -104,19 +104,19 @@ public class RBACRegistryTest {
         ObjectName o41 = new ObjectName("org.apache.activemq:type=Broker,brokerName=amq4,destinationType=Queue,destinationName=q1");
 
         // jmx.acl.org.apache.activemq.Broker.amq1.Queue._.cfg != jmx.acl.org.apache.activemq.Broker.amq1.Queue.q2.cfg
-        assertFalse(RBACRegistry.mayShareRBACInfo(realJmxAclPids, o11, o12));
-        assertTrue(RBACRegistry.mayShareRBACInfo(realJmxAclPids, o11, o13));
+        assertFalse(RBACDecorator.mayShareRBACInfo(realJmxAclPids, o11, o12));
+        assertTrue(RBACDecorator.mayShareRBACInfo(realJmxAclPids, o11, o13));
         // jmx.acl.org.apache.activemq.Broker.amq1.Queue.q2.cfg != jmx.acl.org.apache.activemq.Broker.amq1.Queue._.cfg
-        assertFalse(RBACRegistry.mayShareRBACInfo(realJmxAclPids, o12, o13));
+        assertFalse(RBACDecorator.mayShareRBACInfo(realJmxAclPids, o12, o13));
 
         // jmx.acl.org.apache.activemq.Broker.amq1.Queue._.cfg != jmx.acl.org.apache.activemq.Broker._.Queue.q1.cfg
-        assertFalse(RBACRegistry.mayShareRBACInfo(realJmxAclPids, o11, o21));
+        assertFalse(RBACDecorator.mayShareRBACInfo(realJmxAclPids, o11, o21));
 
         // jmx.acl.org.apache.activemq.Broker._.Queue.q1.cfg == jmx.acl.org.apache.activemq.Broker._.Queue.q1.cfg, but
         // jmx.acl.org.apache.activemq.Broker.amq2.cfg != jmx.acl.org.apache.activemq.Broker._.cfg
-        assertFalse(RBACRegistry.mayShareRBACInfo(realJmxAclPids, o21, o31));
+        assertFalse(RBACDecorator.mayShareRBACInfo(realJmxAclPids, o21, o31));
 
-        assertTrue(RBACRegistry.mayShareRBACInfo(realJmxAclPids, o31, o41));
+        assertTrue(RBACDecorator.mayShareRBACInfo(realJmxAclPids, o31, o41));
     }
 
     @Test
@@ -139,9 +139,9 @@ public class RBACRegistryTest {
         ObjectName o12 = new ObjectName("org.apache.activemq:type=Broker,brokerName=amq1,destinationType=Queue,destinationName=q2");
         ObjectName o13 = new ObjectName("org.apache.activemq:type=Broker,brokerName=amq1,destinationType=Queue,destinationName=q3");
 
-        String k1 = RBACRegistry.pidListKey(realJmxAclPids, o11);
-        String k2 = RBACRegistry.pidListKey(realJmxAclPids, o12);
-        String k3 = RBACRegistry.pidListKey(realJmxAclPids, o13);
+        String k1 = RBACDecorator.pidListKey(realJmxAclPids, o11);
+        String k2 = RBACDecorator.pidListKey(realJmxAclPids, o12);
+        String k3 = RBACDecorator.pidListKey(realJmxAclPids, o13);
         assertThat(k1, not(equalTo(k2)));
         assertThat(k1, equalTo(k3));
     }
