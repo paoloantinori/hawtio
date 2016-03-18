@@ -196,7 +196,7 @@ module Jmx {
           // this will also preserve expand status when redrawin tree!
           // see "this.data = $.extend({}, $.ui.dynatree.nodedatadefaults, data);" in jquery.dynatree. "data" is Folder object
           node.data.expand = flag;
-          if ((<any>node.data).isFolder()) {
+          if ((<any>node.data).isFolder() && (<any>node.data).children[0].parent) {
             (<any>node.data).children[0].parent.expand = flag;
           }
         },
