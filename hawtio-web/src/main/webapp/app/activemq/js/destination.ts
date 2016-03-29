@@ -5,6 +5,7 @@ module ActiveMQ {
     $scope.message = "";
     $scope.queueType = 'true';
 
+    $scope.createDialog = false;
     $scope.deleteDialog = false;
     $scope.purgeDialog = false;
 
@@ -60,6 +61,18 @@ module ActiveMQ {
         }
       }
       return mbean;
+    }
+
+    function validateDestinationName(name:string) {
+      return name.indexOf(":") == -1;
+    }
+
+    $scope.validateAndCreateDestination = (name, isQueue) => {
+      if (!validateDestinationName(name)) {
+        $scope.createDialog = true;
+        return;
+      }
+      $scope.createDestination(name, isQueue);
     }
 
     $scope.createDestination = (name, isQueue) => {
