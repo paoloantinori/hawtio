@@ -52,13 +52,14 @@ module Core {
 
     $scope.clearConnections = Core.clearConnections;
 
-    postLoginTasks.addTask('navbarReloadPerspectives', reloadPerspective);
-
     $scope.perspectiveDetails = {
       perspective: null
     };
 
-    $scope.topLevelTabs = () => {
+    // this may immediately need $scope.perspectiveDetails, so we've initialized it above
+    postLoginTasks.addTask('navbarReloadPerspectives', reloadPerspective);
+
+    $scope.getCurrentTopLevelTabs = () => {
       reloadPerspective();
       // TODO transform the top level tabs based on the current perspective
 
@@ -211,7 +212,7 @@ module Core {
     };
 
     $scope.activeLink = () => {
-      var tabs = $scope.topLevelTabs();
+      var tabs = $scope.getCurrentTopLevelTabs();
       if (!tabs) {
         return "Loading...";
       }
@@ -225,7 +226,7 @@ module Core {
 
     $scope.isCustomLinkSet = () => {
       return $scope.navBarViewCustomLinks.list.length;
-    }
+    };
 
     function reloadPerspective() {
       var perspectives = Perspective.getPerspectives($location, workspace, jolokia, localStorage);
