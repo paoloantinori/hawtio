@@ -18,7 +18,7 @@ module Core {
    * @param localStorage
    * @param branding
    */
-  _module.controller("Core.LoginController", ["$scope", "jolokia", "userDetails", "jolokiaUrl", "workspace", "localStorage", "branding", "postLoginTasks", ($scope, jolokia, userDetails:Core.UserDetails, jolokiaUrl, workspace, localStorage, branding, postLoginTasks) => {
+  _module.controller("Core.LoginController", ["$scope", "jolokia", "jolokiaStatus", "userDetails", "jolokiaUrl", "workspace", "localStorage", "branding", "postLoginTasks", ($scope, jolokia, jolokiaStatus, userDetails:Core.UserDetails, jolokiaUrl, workspace, localStorage, branding, postLoginTasks) => {
     jolokia.stop();
 
     $scope.userDetails = userDetails;
@@ -68,6 +68,9 @@ module Core {
               } else {
                 delete localStorage['userDetails'];
               }
+
+              // let's check if we can call faster jolokia.list()
+              Core.checkJolokiaOptimization(jolokia, jolokiaStatus);
 
               jolokia.start();
               workspace.loadTree();
