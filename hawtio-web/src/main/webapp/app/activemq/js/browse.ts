@@ -2,6 +2,13 @@
 module ActiveMQ {
   export var BrowseQueueController = _module.controller("ActiveMQ.BrowseQueueController", ["$scope", "workspace", "jolokia", "localStorage", '$location', "activeMQMessage", "$timeout", ($scope, workspace:Workspace, jolokia, localStorage, location, activeMQMessage, $timeout) => {
 
+    var log:Logging.Logger = Logger.get("ActiveMQ");
+
+    // all the queue names from the tree
+    $scope.queueNames = [];
+    // selected queue name in move dialog
+    $scope.queueName = null;
+
     $scope.searchText = '';
 
     $scope.allMessages = [];
@@ -109,7 +116,7 @@ module ActiveMQ {
     $scope.moveMessages = () => {
         var selection = workspace.selection;
         var mbean = selection.objectName;
-        if (mbean && selection) {
+        if (mbean && selection && $scope.queueName) {
             var selectedItems = $scope.gridOptions.selectedItems;
             $scope.message = "Moved " + Core.maybePlural(selectedItems.length, "message" + " to " + $scope.queueName);
             var operation = "moveMessageTo(java.lang.String, java.lang.String)";
@@ -168,7 +175,7 @@ module ActiveMQ {
       }
     };
 
-    $scope.queueNames = (completionText) => {
+    function retrieveQueueNames() {
       var queuesFolder = getSelectionQueuesFolder(workspace);
       if (queuesFolder) {
         var selectedQueue = workspace.selection.key;
@@ -177,9 +184,16 @@ module ActiveMQ {
       } else {
         return [];
       }
-    };
+    }
 
     function populateTable(response) {
+      log.debug("populateTable");
+
+      // setup queue names
+      if ($scope.queueNames.length === 0) {
+        $scope.queueNames = retrieveQueueNames();
+      }
+
       var data = response.value;
       if (!angular.isArray(data)) {
         $scope.allMessages = [];
@@ -193,8 +207,8 @@ module ActiveMQ {
         message.headerHtml = createHeaderHtml(message);
         message.bodyText = createBodyText(message);
       });
-      Core.$apply($scope);
       filterMessages($scope.gridOptions.filterOptions.filterText);
+      Core.$apply($scope);
     }
 
     /*
@@ -374,6 +388,7 @@ module ActiveMQ {
       deselectAll();
       Core.notification("success", $scope.message);
       setTimeout(loadTable, 50);
+      Core.$apply($scope);
     }
 
     function moveSuccess() {
@@ -486,6 +501,7 @@ module ActiveMQ {
     }
 
     function deselectAll() {
+      $scope.gridOptions.selectedItems = [];
       $scope.gridOptions['$gridScope'].allSelected = false;
     }
 
