@@ -10,6 +10,7 @@ module ActiveMQ {
     $scope.queueName = null;
 
     $scope.searchText = '';
+    $scope.workspace = workspace;
 
     $scope.allMessages = [];
     $scope.messages = [];
@@ -123,7 +124,7 @@ module ActiveMQ {
             angular.forEach(selectedItems, (item, idx) => {
                 var id = item.JMSMessageID;
                 if (id) {
-                    var callback = (idx + 1 < selectedItems.length) ? intermediateResult : moveSuccess;
+                    var callback = (idx + 1 < selectedItems.length) ? intermediateResult : operationSuccess;
                     jolokia.execute(mbean, operation, id, $scope.queueName, onSuccess(callback));
                 }
             });
@@ -391,14 +392,8 @@ module ActiveMQ {
       Core.$apply($scope);
     }
 
-    function moveSuccess() {
-        operationSuccess();
-        workspace.loadTree();
-    }
-
     function filterMessages(filter) {
       var searchConditions = buildSearchConditions(filter);
-
       evalFilter(searchConditions);
     }
 
