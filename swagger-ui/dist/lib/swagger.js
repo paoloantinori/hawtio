@@ -424,6 +424,9 @@
     pos = url.lastIndexOf(relativeBasePath);
     var parts = url.split('/');
     var rootUrl = parts[0] + '//' + parts[2];
+    // ENTESB-4933: handle hawtio proxy usage here
+    if (parts.length >= 7 && parts[3] === 'hawtio' && parts[4] === 'proxy')
+        rootUrl = rootUrl + '/' + parts[3] + '/' + parts[4] + '/' + parts[5] + '/' + parts[6];
 
     if (relativeBasePath.indexOf('http') === 0)
       return relativeBasePath;
