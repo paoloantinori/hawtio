@@ -8,13 +8,13 @@ import org.apache.aries.blueprint.container.BlueprintContainerImpl;
 import org.apache.camel.CamelException;
 import org.apache.camel.util.CamelContextHelper;
 import org.eclipse.jetty.jmx.MBeanContainer;
+import org.eclipse.jetty.maven.plugin.JettyWebAppContext;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.util.log.Log;
 import org.eclipse.jetty.util.log.Slf4jLog;
 import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.WebInfConfiguration;
 import org.eclipse.jetty.webapp.WebXmlConfiguration;
-import org.mortbay.jetty.plugin.JettyWebAppContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -115,9 +115,7 @@ public class Main {
             // enable JMX
             MBeanServer mbeanServer = ManagementFactory.getPlatformMBeanServer();
             MBeanContainer mbeanContainer = new MBeanContainer(mbeanServer);
-            if (server.getContainer() != null) {
-                server.getContainer().addEventListener(mbeanContainer);
-            }
+            server.addEventListener(mbeanContainer);
             server.addBean(mbeanContainer);
 
             List<URL> resourcePaths = new ArrayList<URL>();

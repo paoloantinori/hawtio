@@ -151,18 +151,18 @@
       <version>${guava-version}</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.eclipse.jetty.aggregate</groupId>
-      <artifactId>${jetty-webapp-artifactId}</artifactId>
-      <version>${jetty-version}</version>
-      <scope>test</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>org.eclipse.jetty.orbit</groupId>
-          <artifactId>javax.servlet</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.eclipse.jetty.aggregate</groupId>-->
+      <!--<artifactId>${jetty-webapp-artifactId}</artifactId>-->
+      <!--<version>${jetty-version}</version>-->
+      <!--<scope>test</scope>-->
+      <!--<exclusions>-->
+        <!--<exclusion>-->
+          <!--<groupId>org.eclipse.jetty.orbit</groupId>-->
+          <!--<artifactId>javax.servlet</artifactId>-->
+        <!--</exclusion>-->
+      <!--</exclusions>-->
+    <!--</dependency>-->
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-annotations</artifactId>
@@ -196,6 +196,10 @@
         <exclusion>
           <groupId>org.eclipse.jetty.orbit</groupId>
           <artifactId>javax.servlet</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.eclipse.jetty</groupId>
+          <artifactId>apache-jsp</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -746,12 +750,6 @@
           <stopKey>foo</stopKey>
           <stopPort>9999</stopPort>
           <useTestScope>true</useTestScope>
-          <connectors>
-            <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-              <port>${jettyPort}</port>
-              <maxIdleTime>60000</maxIdleTime>
-            </connector>
-          </connectors>
           <systemProperties>
             <systemProperty>
               <key>hawtio.config.dir</key>
