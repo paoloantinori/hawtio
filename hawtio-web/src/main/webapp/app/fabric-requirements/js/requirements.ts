@@ -58,6 +58,7 @@ module FabricRequirements {
         $timeout(() => {
           Object.merge($scope.requirements, $scope.requirementsFromServer, true);
         }, 20);
+        $scope.requirements.$dirty = false;
       }
     };
 
