@@ -29,10 +29,6 @@ module Camel {
       $timeout(updateRoutes, delayUpdatingRoutes);
     });
 
-    $scope.updateSelectedRoute = function() {
-      $timeout(updateRoutes, delayUpdatingRoutes);
-    };
-
     $scope.$on("$routeChangeSuccess", function (event, current, previous) {
       // lets do this asynchronously to avoid Error: $digest already in progress
       $timeout(updateRoutes, delayUpdatingRoutes);
