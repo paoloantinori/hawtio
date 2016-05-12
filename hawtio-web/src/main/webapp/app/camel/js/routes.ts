@@ -1,7 +1,7 @@
 /// <reference path="camelPlugin.ts"/>
 module Camel {
 
-  _module.controller("Camel.RouteController", ["$scope", "$routeParams", "$element", "$timeout", "workspace", "$location", "jolokia", "localStorage", ($scope, $routeParams, $element, $timeout, workspace:Workspace, $location, jolokia, localStorage) => {
+  _module.controller("Camel.RouteController", ["$scope", "$rootScope", "$routeParams", "$element", "$timeout", "workspace", "$location", "jolokia", "localStorage", ($scope, $rootScope, $routeParams, $element, $timeout, workspace:Workspace, $location, jolokia, localStorage) => {
     var log:Logging.Logger = Logger.get("Camel");
 
     $scope.routes = [];
@@ -23,6 +23,11 @@ module Camel {
     // lets delay a little updating the routes to avoid timing issues where we've not yet
     // fully loaded the workspace and/or the XML model
     var delayUpdatingRoutes = 300;
+
+    $rootScope.$on('ignoreIdForLabel', (event, value) => {
+      $scope.camelIgnoreIdForLabel = value;
+      $timeout(updateRoutes, delayUpdatingRoutes);
+    });
 
     $scope.$on("$routeChangeSuccess", function (event, current, previous) {
       // lets do this asynchronously to avoid Error: $digest already in progress
