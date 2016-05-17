@@ -154,11 +154,12 @@
 
   <repositories>
     <repository>
-      <id>public.jboss.org</id>
-      <name>JBoss Public Repository</name>
-      <url>http://repository.jboss.org/nexus/content/groups/public</url>
+      <id>fusesource.public</id>
+      <name>Fusesource Public Release Repositories</name>
+      <url>http://repository.jboss.org/nexus/content/groups/fs-public</url>
       <releases>
         <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
       </releases>
       <snapshots>
         <enabled>false</enabled>
@@ -175,28 +176,30 @@
       </snapshots>
     </repository>
     <repository>
-        <id>jboss.ea</id>
-        <name>JBoss Community Early Access Release Repository</name>
-        <url>https://repo.fusesource.com/nexus/content/groups/ea</url>
-        <snapshots>
-            <enabled>false</enabled>
-        </snapshots>
-        <releases>
-            <enabled>true</enabled>
-        </releases>
-    </repository>
-  </repositories>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>public.jboss.org</id>
-      <name>JBoss Public Repository</name>
-      <url>http://repository.jboss.org/nexus/content/groups/public</url>
+      <id>jboss.ea</id>
+      <name>Fusesource Early Access Release Repository</name>
+      <url>https://repo.fusesource.com/nexus/content/groups/ea</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
       <releases>
         <enabled>true</enabled>
+      <updatePolicy>never</updatePolicy>
+      </releases>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>fusesource.public</id>
+      <name>Fusesource Public Release Repositories</name>
+      <url>http://repository.jboss.org/nexus/content/groups/fs-public</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
       </releases>
     </pluginRepository>
     <pluginRepository>
@@ -211,13 +214,14 @@
     </pluginRepository>  
     <pluginRepository>
       <id>ea.jboss.org</id>
-      <name>JBoss Early Access Repository</name>
+      <name>Fusesource Early Access Release Repository</name>
       <url>https://repository.jboss.org/nexus/content/groups/ea</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
       <releases>
         <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
       </releases>
     </pluginRepository>
   </pluginRepositories>
