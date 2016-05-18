@@ -29,6 +29,7 @@
 
   <groupId>io.hawt.swagger</groupId>
   <artifactId>hawtio-swagger-ui</artifactId>
+  <name>${project.artifactId}</name>
   <packaging>war</packaging>
 
   <dependencies>

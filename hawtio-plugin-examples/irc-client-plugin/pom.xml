@@ -10,6 +10,7 @@
 
   <packaging>war</packaging>
   <artifactId>irc-client-plugin</artifactId>
+  <name>${project.artifactId}</name>
   <description>hawtio :: hawtio IRC client plugin example</description>
 
   <properties>
