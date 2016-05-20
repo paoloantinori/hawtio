@@ -156,14 +156,15 @@
     <repository>
       <id>fusesource.public</id>
       <name>Fusesource Public Release Repositories</name>
-      <url>http://repository.jboss.org/nexus/content/groups/fs-public</url>
+      <url>https://repository.jboss.org/nexus/content/groups/fs-public</url>
+      <layout>default</layout>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
       <releases>
         <enabled>true</enabled>
         <updatePolicy>never</updatePolicy>
       </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
     </repository>
     <repository>
       <id>redhat-ga-repository</id>
@@ -176,15 +177,15 @@
       </snapshots>
     </repository>
     <repository>
-      <id>jboss.ea</id>
+      <id>fusesource.ea</id>
       <name>Fusesource Early Access Release Repository</name>
-      <url>https://repo.fusesource.com/nexus/content/groups/ea</url>
+      <url>https://repository.jboss.org/nexus/content/groups/ea</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
       <releases>
         <enabled>true</enabled>
-      <updatePolicy>never</updatePolicy>
+        <updatePolicy>never</updatePolicy>
       </releases>
     </repository>
   </repositories>
@@ -193,7 +194,7 @@
     <pluginRepository>
       <id>fusesource.public</id>
       <name>Fusesource Public Release Repositories</name>
-      <url>http://repository.jboss.org/nexus/content/groups/fs-public</url>
+      <url>https://repository.jboss.org/nexus/content/groups/fs-public</url>
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
@@ -213,7 +214,7 @@
       </snapshots>
     </pluginRepository>  
     <pluginRepository>
-      <id>ea.jboss.org</id>
+      <id>fusesource.ea</id>
       <name>Fusesource Early Access Release Repository</name>
       <url>https://repository.jboss.org/nexus/content/groups/ea</url>
       <snapshots>
