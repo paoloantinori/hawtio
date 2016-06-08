@@ -83,9 +83,9 @@
     <blueprint-web-version>1.0.0</blueprint-web-version>
     <build-helper-maven-plugin-version>1.7</build-helper-maven-plugin-version>
     <camel-version>2.15.1.redhat-620117</camel-version>
-    <commons-codec-version>1.6</commons-codec-version>
+    <commons-codec-version>1.6.0.redhat-4</commons-codec-version>
     <commons-fileupload-version>1.3.1</commons-fileupload-version>
-    <commons-httpclient-version>3.1</commons-httpclient-version>
+    <commons-httpclient-version>3.1.0.redhat-7</commons-httpclient-version>
     <commons-io-version>2.2</commons-io-version>
     <commons-logging-version>1.1.3</commons-logging-version>
     <cxf-version>3.0.1</cxf-version>
@@ -109,7 +109,7 @@
 
     <insight-log4j-version>${fabric-test-version}</insight-log4j-version>
     <!-- make sure to align jackson with fabric8 -->
-    <jackson-version>2.6.3</jackson-version>
+    <jackson-version>2.6.3.redhat-2</jackson-version>
     <javaewah-version>0.5.6</javaewah-version>
     <!-- make sure to align jaxb with fabric8 -->
     <jaxb-version>2.2.7</jaxb-version>
@@ -126,7 +126,7 @@
     <jolokia-version>1.3.2.redhat-1</jolokia-version>
     <junit-version>4.11</junit-version>
     <karaf-version>2.4.0</karaf-version>
-    <log4j-version>1.2.17</log4j-version>
+    <log4j-version>1.2.17.redhat-1</log4j-version>
     <maven-version>3.0.4</maven-version>
     <maven-antrun-plugin-version>1.7</maven-antrun-plugin-version>
     <maven-bundle-plugin-version>2.3.7</maven-bundle-plugin-version>
@@ -138,7 +138,7 @@
     <ops4j-pax-url-version>1.5.2</ops4j-pax-url-version>
     <osgi-version>5.0.0</osgi-version>
     <org-json-version>20070829</org-json-version>
-    <scala-version>2.10.0</scala-version>
+    <scala-version>2.10.4-redhat-1</scala-version>
     <servlet-api-version>2.5</servlet-api-version>
 
     <slf4j-api-version>1.6.6</slf4j-api-version>
