@@ -1,6 +1,7 @@
 package io.hawt.web;
 import org.jolokia.config.ConfigKey;
 import org.jolokia.http.AgentServlet;
+import org.jolokia.restrictor.Restrictor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +11,7 @@ import javax.servlet.ServletException;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-public class JolokiaConfiguredAgentServlet extends AgentServlet{
+public class JolokiaConfiguredAgentServlet extends AgentServlet {
     private static final transient Logger LOG = LoggerFactory.getLogger(JolokiaConfiguredAgentServlet.class);
 
     @Override
@@ -28,6 +29,11 @@ public class JolokiaConfiguredAgentServlet extends AgentServlet{
             super.init(pServletConfig);
         }
 
+    }
+
+    @Override
+    protected Restrictor createRestrictor(String policyLocation) {
+        return new RBACRestrictor(policyLocation);
     }
 
     class ServletConfigWrapper implements ServletConfig {
