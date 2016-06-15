@@ -52,22 +52,25 @@ public class RBACRestrictor implements Restrictor {
     protected ObjectName securityMBean;
 
     public RBACRestrictor(Configuration config) {
-        initDelegate(config);
+        this(NetworkUtil.replaceExpression(config.get(ConfigKey.POLICY_LOCATION)));
+    }
+
+    public RBACRestrictor(String policyLocation) {
+        initDelegate(policyLocation);
         initSecurityMBean();
     }
 
-    protected void initDelegate(Configuration config) {
-        String location = NetworkUtil.replaceExpression(config.get(ConfigKey.POLICY_LOCATION));
+    protected void initDelegate(String policyLocation) {
         try {
-            this.delegate = RestrictorFactory.lookupPolicyRestrictor(location);
+            this.delegate = RestrictorFactory.lookupPolicyRestrictor(policyLocation);
             if (this.delegate != null) {
-                LOG.debug("Delegate - Using policy access restrictor {}", location);
+                LOG.debug("Delegate - Using policy access restrictor {}", policyLocation);
             } else {
                 LOG.debug("Delegate - No policy access restrictor found, access to any MBean is allowed");
                 this.delegate = new AllowAllRestrictor();
             }
         } catch (IOException e) {
-            LOG.error("Delegate - Error while accessing access policy restrictor at " + location +
+            LOG.error("Delegate - Error while accessing access policy restrictor at " + policyLocation +
                     ". Denying all access to MBeans for security reasons. Exception: " + e, e);
             this.delegate = new DenyAllRestrictor();
         }
@@ -119,7 +122,7 @@ public class RBACRestrictor implements Restrictor {
         }
         if (LOG.isDebugEnabled()) {
             LOG.debug("isOperationAllowed(objectName = {}, operation = {}) = {}",
-                    objectName, operation, allowed);
+                    new Object[] { objectName, operation, allowed });
         }
         return allowed;
     }
@@ -174,7 +177,7 @@ public class RBACRestrictor implements Restrictor {
         }
         if (LOG.isDebugEnabled()) {
             LOG.debug("isAttributeReadAllowed(objectName = {}, attribute = {}) = {}",
-                    objectName, attribute, allowed);
+                    new Object[] { objectName, attribute, allowed });
         }
         return allowed;
     }
@@ -193,7 +196,7 @@ public class RBACRestrictor implements Restrictor {
         }
         if (LOG.isDebugEnabled()) {
             LOG.debug("isAttributeWriteAllowed(objectName = {}, attribute = {}) = {}",
-                    objectName, attribute, allowed);
+                    new Object[] { objectName, attribute, allowed });
         }
         return allowed;
     }
@@ -250,7 +253,7 @@ public class RBACRestrictor implements Restrictor {
         boolean allowed = delegate.isOriginAllowed(origin, strictCheck);
         if (LOG.isTraceEnabled()) {
             LOG.trace("isOriginAllowed(origin = {}, strictCheck = {}) = {}",
-                    origin, strictCheck, allowed);
+                    new Object[] { origin, strictCheck, allowed });
         }
         return allowed;
     }

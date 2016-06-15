@@ -107,7 +107,7 @@ public class RBACRestrictorTest {
 
         @Override
         public boolean canInvoke(String objectName, String methodName, String[] argTypes) throws Exception {
-            LOG.debug("{}, {}, {}", objectName, methodName, Arrays.asList(argTypes));
+            LOG.debug("{}, {}, {}", new Object[] { objectName, methodName, Arrays.asList(argTypes) });
             if ("hawtio:type=Test".equals(objectName) && "allowed".equals(methodName) && argTypes.length == 3
                     && "boolean".equals(argTypes[0]) && "long".equals(argTypes[1]) && "java.lang.String".equals(argTypes[2])) {
                 return true;
