@@ -78,15 +78,19 @@ module Karaf {
         $scope.data.frameworkVersion = "?";
 
         var systemMbean = "org.apache.karaf:type=system,name=" + rootInstance.Name;
-        // get more data, and its okay to do this synchronously
-        var response = jolokia.request({type: "read", mbean: systemMbean,
-          attribute: ["StartLevel", "Framework", "Version"]}, onSuccess(null));
+        // the system mbean is not available in A-MQ
+        var systemMbeanExists = jolokia.search(systemMbean, onSuccess(null));
+        if (systemMbeanExists && !systemMbeanExists.isEmpty()) {
+          // get more data, and its okay to do this synchronously
+          var response = jolokia.request({type: "read", mbean: systemMbean,
+            attribute: ["StartLevel", "Framework", "Version"]}, onSuccess(null));
 
-        var obj = response.value;
-        if (obj) {
-          $scope.data.version = obj.Version;
-          $scope.data.startLevel = obj.StartLevel;
-          $scope.data.framework = obj.Framework;
+          var obj = response.value;
+          if (obj) {
+            $scope.data.version = obj.Version;
+            $scope.data.startLevel = obj.StartLevel;
+            $scope.data.framework = obj.Framework;
+          }
         }
 
         // and the osgi framework version is the bundle version
