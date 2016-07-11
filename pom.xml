@@ -85,7 +85,7 @@
     <camel-version>2.15.1.redhat-620117</camel-version>
     <commons-codec-version>1.6.0.redhat-4</commons-codec-version>
     <commons-fileupload-version>1.3.1</commons-fileupload-version>
-    <commons-httpclient-version>3.1.0.redhat-7</commons-httpclient-version>
+    <httpclient-version>4.5.1</httpclient-version>
     <commons-io-version>2.2</commons-io-version>
     <commons-logging-version>1.1.3</commons-logging-version>
     <cxf-version>3.0.1</cxf-version>
