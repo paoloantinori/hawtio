@@ -129,6 +129,7 @@ module ActiveMQ {
                 }
             });
         }
+        $scope.refresh();
     };
 
     $scope.resendMessage = () => {
@@ -157,6 +158,7 @@ module ActiveMQ {
           }
         });
       }
+      $scope.refresh();
     };
 
     $scope.retryMessages = () => {
