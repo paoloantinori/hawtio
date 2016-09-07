@@ -288,7 +288,6 @@
     -->
     <module>hawtio-redhat-fuse-branding</module>
     <module>hawtio-redhat-amq-branding</module>
-    <module>hawtio-plugin-redhat-access</module>
     <module>hawtio-fabric8-branding</module>
     <module>hawtio-karaf</module>
     <module>hawtio-custom-app</module>
