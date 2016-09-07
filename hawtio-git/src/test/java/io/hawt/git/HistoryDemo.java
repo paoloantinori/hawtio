@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import static io.hawt.git.GitFacadeTest.createTestGitFacade;
+import static io.hawt.git.GitFacadeIT.createTestGitFacade;
 
 /**
  * A little sample program that lets you view the log and history of one or more paths or files

@@ -128,6 +128,24 @@
   <build>
     <plugins>
       <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <classpathDependencyExcludes>
+            <classpathDependencyExclude>org.eclipse.jgit:org.eclipse.jgit</classpathDependencyExclude>
+          </classpathDependencyExcludes>
+          <additionalClasspathElements>
+            <additionalClasspathElement>${project.build.directory}/${project.build.finalName}.jar</additionalClasspathElement>
+          </additionalClasspathElements>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
         <version>${maven-bundle-plugin-version}</version>
@@ -150,9 +168,10 @@
           <instructions>
             <Export-Package>${fuse.osgi.export}</Export-Package>
             <Import-Package>${fuse.osgi.import}</Import-Package>
+            <Private-Package>org.eclipse.jgit*</Private-Package>
 
             <!-- TODO note we're embedding hawtio-core in here as its not yet a bundle and is often included in the war -->
-            <Embed-Dependency>*;inline=true;artifactId=hawtio-core|hawtio-util|gitective-core|jsch|jzlib|JavaEWAH|org.eclipse.jgit*</Embed-Dependency>
+            <Embed-Dependency>*;inline=true;artifactId=hawtio-core|hawtio-util|gitective-core|jsch|jzlib|JavaEWAH</Embed-Dependency>
             <Embed-Transitive>true</Embed-Transitive>
 
             <Bundle-Name>${project.description}</Bundle-Name>

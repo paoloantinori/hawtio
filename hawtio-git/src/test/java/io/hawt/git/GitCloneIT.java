@@ -4,14 +4,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static io.hawt.git.GitFacadeTest.assertConfigDirectoryExists;
-import static io.hawt.git.GitFacadeTest.assertFileContents;
-import static io.hawt.git.GitFacadeTest.createTestGitFacade;
+import static io.hawt.git.GitFacadeIT.assertConfigDirectoryExists;
+import static io.hawt.git.GitFacadeIT.assertFileContents;
+import static io.hawt.git.GitFacadeIT.createTestGitFacade;
 
 /**
  * Tests we can clone a remote repo
  */
-public class GitCloneTest {
+public class GitCloneIT {
     GitFacade git = createTestGitFacade();
 
     @Before

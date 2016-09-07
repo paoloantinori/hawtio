@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
 import java.util.Collection;
 import java.util.List;
 
-import static io.hawt.git.GitFacadeTest.assertConfigDirectoryExists;
-import static io.hawt.git.GitFacadeTest.createTestGitFacade;
+import static io.hawt.git.GitFacadeIT.assertConfigDirectoryExists;
+import static io.hawt.git.GitFacadeIT.createTestGitFacade;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -19,13 +19,13 @@ import static org.junit.Assert.assertTrue;
 /**
  * Tests we create a configuration directory
  */
-public class GitBranchDiffTest {
-    private static final transient Logger LOG = LoggerFactory.getLogger(GitBranchDiffTest.class);
+public class GitBranchDiffIT {
+    private static final transient Logger LOG = LoggerFactory.getLogger(GitBranchDiffIT.class);
 
     GitFacade git = createTestGitFacade("git-branch-diff-test");
 
     public static void main(String[] args) {
-        GitBranchDiffTest test = new GitBranchDiffTest();
+        GitBranchDiffIT test = new GitBranchDiffIT();
         try {
             test.init();
             test.testBranchesAndDiff();
