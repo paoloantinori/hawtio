@@ -39,6 +39,8 @@ public class AuthenticationFilter implements Filter {
     public static final String HAWTIO_ROLES = "hawtio.roles";
     public static final String HAWTIO_ROLE_PRINCIPAL_CLASSES = "hawtio.rolePrincipalClasses";
 
+    public static final String AUTHENTICATION_CONFIGURATION = "authenticationConfig";
+
     private final AuthenticationConfiguration configuration = new AuthenticationConfiguration();
 
     // add known SPI authentication container discovery
@@ -103,6 +105,7 @@ public class AuthenticationFilter implements Filter {
         }
 
         filterConfig.getServletContext().setAttribute("authenticationEnabled", configuration.isEnabled());
+        filterConfig.getServletContext().setAttribute(AUTHENTICATION_CONFIGURATION, configuration);
 
         if (configuration.isEnabled()) {
             LOG.info("Starting hawtio authentication filter, JAAS realm: \"{}\" authorized role(s): \"{}\" role principal classes: \"{}\"",
