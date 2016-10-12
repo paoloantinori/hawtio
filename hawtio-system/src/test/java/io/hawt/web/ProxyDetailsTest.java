@@ -233,6 +233,6 @@ public class ProxyDetailsTest {
         assertEquals("getPort()", 80, details.getPort());
         assertEquals("getProxyPath()", "/jolokia//exec/org.apache.camel:context=camel-1,type=context,name=%22camel-1%22/canSendToEndpoint(java.lang.String)/activemq:!/!/queue:newOrder", details.getProxyPath());
         assertEquals("getScheme()", "http", details.getScheme());
-        assertEquals("getStringProxyURL()", "http://127.0.0.1:54155/jolokia//exec/org.apache.camel:context=camel-1,type=context,name=%22camel-1%22/canSendToEndpoint(java.lang.String)/activemq:!/!/queue:newOrder?maxDepth=7&maxCollectionSize=5000&ignoreErrors=true&canonicalNaming=false", details.getFullProxyUrl());
+        assertEquals("getStringProxyURL()", "http://127.0.0.1:54155/jolokia//exec/org.apache.camel:context=camel-1,type=context,name=%22camel-1%22/canSendToEndpoint(java.lang.String)/activemq:!/!/queue:newOrder?maxDepth=7&maxCollectionSize=5000&ignoreErrors=true&canonicalNaming=false", details.getStringProxyURL());
     }
 }
