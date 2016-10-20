@@ -1,6 +1,7 @@
 package io.hawt.web;
 
 import org.jolokia.config.ConfigKey;
+import org.jolokia.config.Configuration;
 import org.jolokia.http.AgentServlet;
 import org.jolokia.restrictor.Restrictor;
 import org.slf4j.Logger;
@@ -52,6 +53,7 @@ public class JolokiaConfiguredAgentServlet extends AgentServlet {
                 }
             }
         }
+
         if (pServletConfigWrapper != null) {
             super.init(pServletConfigWrapper);
 
@@ -63,7 +65,8 @@ public class JolokiaConfiguredAgentServlet extends AgentServlet {
     }
 
     @Override
-    protected Restrictor createRestrictor(String policyLocation) {
+    protected Restrictor createRestrictor(Configuration config) {
+        String policyLocation = config.get(ConfigKey.POLICY_LOCATION);
         return new RBACRestrictor(policyLocation);
     }
 
