@@ -156,6 +156,7 @@
   SwaggerApi.prototype.build = function (mock) {
     if (this.isBuilt)
       return this;
+    this.url = encodeURI(this.url);
     var _this = this;
     this.progress('fetching resource list: ' + this.url);
     var obj = {
@@ -178,7 +179,13 @@
           }
         },
         response: function (resp) {
-          var responseObj = resp.obj || JSON.parse(resp.data);
+          var responseObj = resp.obj || JSON.parse(resp.data, (key, value) => {
+                if (typeof(value) === 'string') {
+                  value = escapeHtml(value);
+                }
+                return value;
+          });
+
           _this.swaggerVersion = responseObj.swaggerVersion;
           if (_this.swaggerVersion === '1.2') {
             return _this.buildFromSpec(responseObj);
@@ -195,6 +202,12 @@
 
     new SwaggerHttp().execute(obj);
     return this;
+  };
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
   };
 
   SwaggerApi.prototype.buildFromSpec = function (response) {
