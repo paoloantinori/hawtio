@@ -1,7 +1,189 @@
 
 ### Change Log
 
-#### 1.4.38 ... 
+#### 1.4.68
+
+* Fixed hawtio-wildfly to run on WildFly / JBoss EAP even after JBoss RBAC is enabled.
+
+#### 1.4.67
+
+* Fixed hawtio-app may not start due two different versions of http-client included.
+
+#### 1.4.66
+
+* Now every Jolokia call within Hawtio is checked based on RBAC. This means Hawtio is made more secure, but
+  you may also encounter a bunch of access exceptions. Most of those exceptions are not a Hawtio bug, but
+  just indicate lack of some necessary RBAC configurations on the container, e.g. Karaf ACL files.
+  You can resolve those exceptions by fulfilling the required configurations on the running container.
+* Added support for customization of Jolokia through Java system properties, i.e.:
+  `-Djolokia.policyLocation=file:///home/fuse/my-access.xml`
+* Added new pages to the ActiveMQ plugin for monitoring brokers with large number of destinations
+* Improved KeyCloak plugin to better support WildFly and EAP
+* Various fixes and improvements for RBAC on Hawtio web UI
+* Upgraded to Camel 2.18.0
+* Upgraded to Jolokia 1.3.5
+* KeyCloak updated to 2.2.1
+
+#### 1.4.65
+
+* Upgraded to Camel 2.17.1
+* The Camel JMX domain name can be configured in the preference
+* Various other small bug fixes
+
+#### 1.4.64
+
+* Added more icons for various Camel endpoints and a few more EIPs
+* Upgraded to Camel 2.17.0
+* Various other small bug fixes
+
+#### 1.4.63
+
+* hawtio can be installed in Apache Karaf 2.4.x again if you install the `hawtio-core` feature. Log and Terminal plugin is not supported on Karaf 2.x.
+* upgraded to KeyCloack 1.9.1
+
+#### 1.4.62
+
+* Add `hawtio:type=security,name=RBACRegistry` JMX bean that provides optimized version of Jolokia `list` operation.
+  Normally, Jolokia fetches and marshalls each MBeanInfo it can find. When there are thousands of same MBeanInfos
+  (like ActiveMQ queues or Camel processors/endpoints/routes/...) it was very inefficient. Now the MBeanInfo
+  is shared in special cases which greatly improves performance.
+* When displaying a table of JMX attributes for a list of MBeans, data is fetched only for visible (non-filtered)
+  objects. After clearing/changing filter, old Jolokia requests are unregistered and new ones are created.
+* Fixed the AcitveMQ plugin to show the browse message dialog again, after it has been closed previously.
+* Increased the default jolokia max collection limit from 5000 to 50000 to ensure JVMs with many mbeans are all populated in hawtio
+* Removed a bunch of outdated help pages in the plugins to trim down the distribution size.
+* Added back the missing icons for the Camel debugger which was missing in the previous release.
+* Add option to control whether hawtio should automatic open the web console in the browser or not, when running hawtio-app.
+* Hawtio now supports url links to auto connect remote JVMs where the options is provided as url parameters in the link.
+      such as: /hawtio/index.html#/jvm/connect?name=xxx&host=xxx&port=xxx&path=xxx&userName=xxx&password=xxx
+      (where you replace xxx with the desired values)
+
+#### 1.4.61
+
+* ActiveMQ browse messages now show the table quicker when data retrieved
+* ActiveMQ move dialog uses a selectbox instead of type ahead which could be buggy in some browsers
+* Upgrade to Jolokia 1.3.3
+* Jolokia is set to not return error details to avoid exposing stacktraces from the JVMs
+
+#### 1.4.60
+
+* Fixed hawtio-app to scan for 3rd party plugins in `--pluginsDir` to work on Windows
+* Added a copy to clipboard button on the Camel and ActiveMQ message browser
+* The Camel filter box now works better to filter all kinds of nodes in the tree
+* Fixed issue with remote Jolokia cannot send message to ActiveMQ queue/Camel endpoint
+* Add spring-boot as goal to the hawtio-maven-plugins.
+* Upgraded to Camel 2.16.2
+
+#### 1.4.59
+
+* Camel plugin able to show message history metrics if using Camel 2.17 onwards
+* Camel route diagram now allows to select which routes to display
+* Dashboard plugin is now enabled again
+
+#### 1.4.58
+
+* When using ActiveMQ the hawtio web console no longer causing the tree to continuesly being updated, which otherwise will cause the web UI to be sluggish. Notice the reason for the update is becuse of ActiveMQ and end user may not use pooled connections or is using XA with no consumer cache. In either case hawtio now filter out those events to avoid triggering the web console UI to be updated constantly.
+* The hawtio-maven-plugin now waits 3 seconds before opening the web-console which allows the JVM to startip Camel and other services to be ready prior to the web console. The delay can be configured.
+* The karaf terminal plugin requires Karaf 4.x (2.x/3.x no longer supported)
+* Upgraded to Camel 2.16.1
+
+#### 1.4.57
+
+* hawtio-maven-plugin camel goal - Now supports using mainClass configured from the camel-maven-plugin, so it uses that out of the box
+* Fixed an issue with the spring-boot plugin with base urls
+
+#### 1.4.56
+
+* Camel plugin - Now groups the properties into tabs so viewing endpoint properties with many options is using multi-tabs to group the options.
+* Added camel-cdi as goal to the [maven](http://hawt.io/maven/) plugin to allow starting a Camel CDI application with hawtio embedded.
+* Fixed so JUnit plugin is not shown by default when there is no unit tests in the JVM to run.
+* Removed the kubernetes plugin which are only part of hawtio 2.x
+* Remove the apollo plugin as it was never complete and ActiveMQ Apollo is a dead project.
+* Ported the fabric8-insight-log to hawtio-insight-log so we have the source code and maintain out of the box in the hawtio project
+* The Log plugin works again in Karaf containers (requires Karaf 3.0 or higher)
+
+#### 1.4.55
+
+* Upgrade to Camel 2.16.0
+* Upgrade to Jolokia 1.3.2
+* Camel plugin - Can list and show detailed information about how each data format has been configured (requires Camel 2.16 onwards)
+* Camel plugin - Can list and show detailed information about how each component has been configured
+
+#### 1.4.54
+
+* Camel plugin - Route diagram can now show all routes
+
+#### 1.4.53
+
+* Camel plugin can now show in/out endpoints when using Camel 2.16 onwards
+* Camel plugin can now show blocked exchanges when using Camel 2.15 onwards
+* Various fabric8 v1 bugs and cosmetic issues fixed
+* The remote JVM connect plugin now uses the browser dialog for username/password which allows to use the browser for storing these secured (using browser plugins such as safepass or others)
+* Fabric - when deleting profiles from wiki pages, a warning is shown when some containers use the profiles
+* OSGi - better filtering of bundles
+* Upgrade to frontend-maven-plugin 0.0.24 - will work with Maven 3.3.3
+* Sorting of simple tables works again
+* Camel - fixes to "full screen" (notree) mode
+* Dashboard - fixed navigation on "manage" view
+
+#### 1.4.52
+
+* Upgrade to Jolokia 1.3.1
+* Authentication with JBoss EAP 6.x now matches user roles correctly
+
+#### 1.4.51
+
+* Upgrade to Jolokia 1.3.0
+* Upgrade to Camel 2.15.2
+* Kubernetes plugin supports v1beta2 kubernetes api
+
+#### 1.4.50
+
+* Connect plugin no longer shows welcome screen when connecting to other JVMs
+* Fixed issue with missing dangle module from 1.4.49 release.
+* Fixed so the dashboard plugin is visible again
+* The wiki plugin is disabled for non fabric JVMs
+* Jetty 7 is no longer used for testing and is considered deprecated. Jetty 8 is used as default for testing.
+* ActiveMQ and Camel plugin now hides the choose sub tab in the send message dialog; as that is only in use when using fabric8 v1
+* OSGi plugin now shows feature and server details for Karaf 3.x onwards
+* Other [minor isseues fixed](https://github.com/hawtio/hawtio/issues?q=milestone%3A1.4.50+is%3Aclosed)
+
+#### 1.4.49
+
+* Running hawtio on Apache Tomcat with users defined in `tomcat-users.xml` now supports specifying the password hashed algorithm to use.
+* Upgrade to Camel 2.15.1
+* Camel plugin: Clicking on a EIP/node in the Route Diagram redirects to the selected EIP properties page
+* Camel plugin: Fixed inflight page didnt clear data if no longer any exchanges inflight
+* Camel plugin: Fixed endpoint properties to show option names correctly when the option has a label associated
+* Various fixes and improvements for Fabric 1.x plugin
+* Fixed Karaf terminal to avoid potentially sending duplicat keys
+* Other bug fixes as part of hardening hawtio for JBoss Fuse 6.2 product
+
+#### 1.4.47 ... 1.4.48
+
+* Update ng-grid to version 2.0.14
+* Fabric - show default version in Wiki pages
+* Camel 2.15 - Add endpoint documentation when selecting endpoints
+* Upgrade to Camel 2.15.0
+* Camel plugin - Properties sub tab improvements
+* Use model json from Camel
+* hawtio-jboss is now hawtio-wildfly
+* hawtio-wildfly - add sensible defaults for integration with Wildfly security realms
+
+#### 1.4.46
+
+* Camel plugin now includes up to date model with EIP documentation included
+* Camel plugin reworked properites page to present more information about the EIP
+* Camel plugin can now show endpoint properties with documentation included (requires Camel 2.15 onwards)
+* The Camel model is auto generated as part of the build using Apache Camel 2.15.0 onwards (but up to date with current Apache Camel in this release)
+* Hawtio can now be secured using KeyCloak
+
+#### 1.4.45
+
+* Camel plugin supports new inflight exchanges from Camel 2.15 onwards
+* Fixed Camel plugin to show convertBodyTo in the route diagram
+
+#### 1.4.38 ... 1.4.44
 
 * Camel tracer and debugger now shows message bodies that are stream/file based
 * Camel message browser now shows the java types of the headers and body
