@@ -24,7 +24,9 @@
 
         <div class="hero-unit" ng-show="apis.length === 0 || (apis.length === 1  && apis[0].port.has('FabricResource'))">
 
-          <p>To try out the API browser try creating one of the example <a href="#/wiki/branch/{{versionId}}/view/fabric/profiles/quickstarts">quickstarts</a></p>
+          <p>To try out the API browser try creating one of the example quickstarts </p>
+          <p>Quickstarts and examples are not included by default. To include them as default uncomment the property </p>
+          <p>`importProfileURLs` in the `io.fabric8.import.profiles.properties` file or deploy a quickstart from distribution</p>
 
           <p hawtio-show object-name="{{managerMBean}}" method-name="createContainers">
             or try creating a container for:
