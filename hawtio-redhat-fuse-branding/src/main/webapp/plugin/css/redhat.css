@@ -1674,11 +1674,6 @@ a:hover {
   display: none;
 }
 
-#main.container-fluid {
-  padding-left: 0;
-  padding-right: 0;
-}
-
 #main.container-fluid div .nav {
   background-image: none;
   background: #f6f6f6;
