@@ -1,5 +1,6 @@
 package io.hawt.web;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
@@ -78,6 +79,14 @@ public class ProxyDetails {
                 LOG.debug("Proxying to " + getStringProxyURL() + " as user: " + userName);
             }
         }
+    }
+
+    public boolean isAllowed(List<String> whitelist) {
+        if (whitelist.contains("*")) {
+            return true;
+        }
+        // host may contain port number! (e.g. "localhost:9000")
+        return whitelist.contains(host.split(":")[0]);
     }
 
     @Override

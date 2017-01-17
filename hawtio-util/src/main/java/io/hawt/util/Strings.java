@@ -1,6 +1,10 @@
 package io.hawt.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
+ * String utility.
  */
 public class Strings {
     public static String trimString(String value, int max) {
@@ -32,7 +36,7 @@ public class Strings {
         if (isBlank(name)) {
             return name;
         }
-        return name.replaceAll("[^0-9a-zA-Z\\+\\.\\(\\)_\\-]","");
+        return name.replaceAll("[^0-9a-zA-Z\\+\\.\\(\\)_\\-]", "");
     }
 
     /**
@@ -46,5 +50,19 @@ public class Strings {
             return name;
         }
         return sanitize(name).replace(".", "");
+    }
+
+    public static List<String> split(String text, String delimiter) {
+        if (text == null || delimiter == null) {
+            throw new IllegalArgumentException("Both 'text' and 'delimiter' should not be null.");
+        }
+        List<String> answer = new ArrayList<>();
+        for (String s : text.split(delimiter)) {
+            s = s.trim();
+            if (isNotBlank(s)) {
+                answer.add(s);
+            }
+        }
+        return answer;
     }
 }
