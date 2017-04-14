@@ -5,7 +5,7 @@
   <parent>
     <groupId>io.hawt</groupId>
     <artifactId>project</artifactId>
-    <version>1.4.redhat-630-SNAPSHOT</version>
+    <version>1.4.redhat-630262</version>
     <relativePath>..</relativePath>
   </parent>
 

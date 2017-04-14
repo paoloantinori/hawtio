@@ -11,7 +11,7 @@
   <groupId>io.hawt</groupId>
   <artifactId>project</artifactId>
   <packaging>pom</packaging>
-  <version>1.4.redhat-630-SNAPSHOT</version>
+  <version>1.4.redhat-630262</version>
   <name>project</name>
   <description>hawtio :: project</description>
   <url>http://hawt.io/</url>
@@ -64,16 +64,16 @@
     <!-- redhat -->
     <!-- fabric test version points to a previous release version to break cycle with fabric -->
     <!-- we disable redhat as that is for jboss-fuse
-    <perfectus-number>379</perfectus-number>
+    <perfectus-number>262</perfectus-number>
     <perfectus-previous-number>355</perfectus-previous-number>
     <perfectus-build>610${perfectus-number}</perfectus-build>
     <fabric-test-version>1.0.0.redhat-${perfectus-previous-number}</fabric-test-version>
-    <fabric-version>1.0.0.redhat-${perfectus-number}</fabric-version>
+    <fabric-version>1.2.0.redhat-630262</fabric-version>
     -->
 
     <!-- fabric8 -->
     <fabric-test-version>1.2.0.redhat-067</fabric-test-version>
-    <fabric-version>1.2.0.redhat-067</fabric-version>
+    <fabric-version>1.2.0.redhat-630262</fabric-version>
 
     <activemq-version>5.10.0</activemq-version>
     <activemq-leveldb-artifactid>activemq-leveldb-store</activemq-leveldb-artifactid>
@@ -82,13 +82,13 @@
     <atmosphere-version>1.0.18</atmosphere-version>
     <blueprint-web-version>1.0.0</blueprint-web-version>
     <build-helper-maven-plugin-version>1.7</build-helper-maven-plugin-version>
-    <camel-version>2.15.1.redhat-620117</camel-version>
+    <camel-version>2.17.0.redhat-630262</camel-version>
     <commons-codec-version>1.6.0.redhat-4</commons-codec-version>
     <commons-fileupload-version>1.3.1</commons-fileupload-version>
     <httpclient-version>4.5.2</httpclient-version>
     <commons-io-version>2.2</commons-io-version>
     <commons-logging-version>1.1.3</commons-logging-version>
-    <cxf-version>3.0.1</cxf-version>
+    <cxf-version>3.1.5.redhat-630262</cxf-version>
     <dozer-version>5.5.1</dozer-version>
     <exec-maven-plugin-version>1.2.1</exec-maven-plugin-version>
     <felix.gogo.version>0.10.0</felix.gogo.version>
@@ -125,7 +125,7 @@
     <jline.version>2.12.1.redhat-002</jline.version>
     <jolokia-version>1.3.6.redhat-000001</jolokia-version>
     <junit-version>4.11</junit-version>
-    <karaf-version>2.4.0</karaf-version>
+    <karaf-version>2.4.0.redhat-630262</karaf-version>
     <log4j-version>1.2.17.redhat-1</log4j-version>
     <maven-version>3.0.4</maven-version>
     <maven-antrun-plugin-version>1.7</maven-antrun-plugin-version>
@@ -475,7 +475,7 @@
     <profile>
       <id>fuse60</id>
       <properties>
-        <perfectus-number>024</perfectus-number>
+        <perfectus-number>262</perfectus-number>
         <perfectus-build>redhat-60${perfectus-number}</perfectus-build>
       </properties>
       <repositories>
@@ -526,7 +526,7 @@
     <profile>
       <id>camelSnapshot</id>
       <properties>
-        <camel-version>2.15-SNAPSHOT</camel-version>
+        <camel-version>2.17.0.redhat-630262</camel-version>
       </properties>
       <repositories>
       </repositories>
@@ -538,7 +538,7 @@
       <properties>
         <activemq-version>5.11-SNAPSHOT</activemq-version>
         <activemq-leveldb-artifactid>activemq-leveldb-store</activemq-leveldb-artifactid>
-        <camel-version>2.15-SNAPSHOT</camel-version>
+        <camel-version>2.17.0.redhat-630262</camel-version>
         <fabric-version>99-master-SNAPSHOT</fabric-version>
       </properties>
 
